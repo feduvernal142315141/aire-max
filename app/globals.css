@@ -1,0 +1,786 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Premium HVAC color palette - refined cool blues with cyan accents */
+  --background: #f9fcff; /* White with blue tint */
+  --foreground: #111827; /* Soft black */
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  /* Primary: Cool blue gradient #079cfb → #037ecc */
+  --primary: #079cfb;
+  --primary-dark: #037ecc;
+  --primary-foreground: #ffffff;
+
+  /* Secondary: Lighter blue for subtle elements */
+  --secondary: #e0f2fe;
+  --secondary-foreground: #111827;
+
+  /* Muted: Soft gray-blue */
+  --muted: #f1f5f9;
+  --muted-foreground: #6b7280;
+
+  /* Accent: Cyan for freshness and climate */
+  --accent: #00e0ff;
+  --accent-foreground: #111827;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #079cfb;
+
+  /* Glow colors for ambient lighting effects */
+  --glow-primary: rgba(7, 156, 251, 0.15);
+  --glow-accent: rgba(0, 224, 255, 0.1);
+  --glow-white: rgba(255, 255, 255, 0.6);
+
+  --chart-1: #079cfb;
+  --chart-2: #00e0ff;
+  --chart-3: #60a5fa;
+  --chart-4: #3b82f6;
+  --chart-5: #06b6d4;
+
+  --radius: 0.75rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #079cfb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e0f2fe;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #079cfb;
+}
+
+.dark {
+  --background: #0a0f1a;
+  --foreground: #f8fafc;
+
+  --card: #111827;
+  --card-foreground: #f8fafc;
+
+  --popover: #111827;
+  --popover-foreground: #f8fafc;
+
+  --primary: #079cfb;
+  --primary-dark: #037ecc;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  --accent: #00e0ff;
+  --accent-foreground: #0a0f1a;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #079cfb;
+
+  --glow-primary: rgba(7, 156, 251, 0.2);
+  --glow-accent: rgba(0, 224, 255, 0.15);
+  --glow-white: rgba(255, 255, 255, 0.1);
+
+  --chart-1: #079cfb;
+  --chart-2: #00e0ff;
+  --chart-3: #60a5fa;
+  --chart-4: #3b82f6;
+  --chart-5: #06b6d4;
+
+  --sidebar: #111827;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #079cfb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #079cfb;
+}
+
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", "Playfair Display Fallback", serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+/* Added scrollbar-hide utility for mobile horizontal scroll */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Premium animations for sophisticated feel */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Added slide-up animation for mobile hero image */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Added gradient-shift animation for dynamic hero background */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Added gradient-x animation for CTA button */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Added slow shimmer animation for image reflection */
+@keyframes shimmer-slow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Added pulse-slow animation class for icons and ambient effects */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Added light wave animation class for button effects */
+@keyframes light-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+/* Added breathing animation for ambient halo */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Added underline-sweep animation for services title */
+@keyframes underline-sweep {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60%;
+  }
+}
+
+/* Added parallax animation for product images on scroll */
+@keyframes parallax-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Added shine-diagonal animation for title */
+@keyframes shine-diagonal {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+/* Added check-rotate animation for list items on hover */
+@keyframes check-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+/* Added light direction simulation for vitrine effect */
+@keyframes light-direction {
+  0% {
+    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.6) inset;
+  }
+  50% {
+    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.8) inset;
+  }
+  100% {
+    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.6) inset;
+  }
+}
+
+/* Added diagonal reflection animation for product images */
+@keyframes diagonal-reflection {
+  0% {
+    transform: translateX(-150%) translateY(-150%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(150%) translateY(150%) rotate(45deg);
+  }
+}
+
+/* Added hover shadow connect effect for adjacent cards */
+@keyframes shadow-connect {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Added tooltip fade-in animation */
+@keyframes tooltip-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Added icon-breathe animation for trust badges */
+@keyframes icon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Added ripple effect for button tap feedback */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Added close button rotation animation */
+@keyframes close-rotate {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(15deg) scale(1.1);
+  }
+}
+
+/* Added ink-flow animation for FAQ title underline */
+@keyframes ink-flow {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Global transition for smooth interactions */
+.transition-all-smooth {
+  transition: all 300ms ease-in-out;
+}
+
+.animate-underline-sweep {
+  animation: underline-sweep 0.8s ease-out forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out;
+}
+
+.animate-fade-down {
+  animation: fade-down 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out;
+}
+
+.animate-slide-right {
+  animation: slide-right 0.6s ease-out;
+}
+
+/* Added slide-up animation class for mobile */
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Added gradient-shift animation class for hero background */
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Added animation classes */
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-shimmer-slow {
+  animation: shimmer-slow 8s ease-in-out infinite;
+}
+
+/* Added pulse-slow animation class for icons and ambient effects */
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Added light-wave animation class for button effects */
+.animate-light-wave {
+  animation: light-wave 1s ease-out;
+}
+
+.animate-breathe {
+  animation: breathe 10s ease-in-out infinite;
+}
+
+.animate-light-direction {
+  animation: light-direction 10s ease-in-out infinite;
+}
+
+.animate-diagonal-reflection {
+  animation: diagonal-reflection 2s ease-out;
+}
+
+.animate-shadow-connect {
+  animation: shadow-connect 0.3s ease-out;
+}
+
+.animate-tooltip-fade {
+  animation: tooltip-fade 0.2s ease-out;
+}
+
+.animate-icon-breathe {
+  animation: icon-breathe 5s ease-in-out infinite;
+}
+
+/* Added gradient-radial utility for radial gradients */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-dark {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #079cfb 0%, #00e0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium glow effects */
+.glow-primary {
+  box-shadow: 0 0 60px var(--glow-primary);
+}
+
+.glow-accent {
+  box-shadow: 0 0 40px var(--glow-accent);
+}
+
+.glow-white {
+  box-shadow: 0 0 80px var(--glow-white);
+}
+
+/* Animated gradient background */
+.gradient-bg-animated {
+  background: linear-gradient(135deg, #f9fcff 0%, #e0f2fe 50%, #f9fcff 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Underline animation for links */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #079cfb, #00e0ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+.animate-parallax-float {
+  animation: parallax-float 6s ease-in-out infinite;
+}
+
+.animate-shine-diagonal {
+  animation: shine-diagonal 2s ease-out;
+}
+
+/* Added chip hover glow effect */
+.chip-hover-glow:hover {
+  box-shadow: 0 0 8px rgba(7, 156, 251, 0.2);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Added inset shadow for product images */
+.image-inset-shadow {
+  box-shadow: inset 0 -40px 80px rgba(0, 0, 0, 0.05);
+}
+
+/* Added air-flow parallax animation for catalog scroll effect */
+@keyframes air-flow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-air-flow {
+  animation: air-flow 8s ease-in-out infinite;
+}
+
+/* Added skeleton shimmer for loading states */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(7, 156, 251, 0.05) 0%,
+    rgba(7, 156, 251, 0.15) 50%,
+    rgba(7, 156, 251, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+}
+
+/* Added bounce animation for chip selection */
+@keyframes chip-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+}
+
+.animate-chip-bounce {
+  animation: chip-bounce 0.3s ease;
+}
+
+/* Added spring easing for smooth mobile interactions */
+@keyframes spring-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-spring-in {
+  animation: spring-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Added inertia scroll effect for smooth product scrolling */
+.scroll-smooth-inertia {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Added pulse effect for WhatsApp button icon */
+@keyframes pulse-icon {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-icon {
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+/* Added ripple effect for button tap feedback */
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Added close button rotation animation */
+.animate-close-rotate:active {
+  animation: close-rotate 0.2s ease-out;
+}
+
+/* Added delay utilities for staggered animations */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+/* Added counter animation for metrics */
+@keyframes counter-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-counter-up {
+  animation: counter-up 0.3s ease-out;
+}
+
+.animate-ink-flow {
+  animation: ink-flow 0.6s ease-out forwards;
+}
