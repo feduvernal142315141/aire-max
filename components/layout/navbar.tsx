@@ -98,11 +98,11 @@ export function Navbar() {
             {/* MENU MOVIL */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button
+               <Button
                   variant="ghost"
-                  size="icon"
-                  className="hover:bg-primary/10 transition-all duration-300 h-12 w-12 relative"
+                  className="hover:bg-primary/10 transition-all duration-300 h-16 w-16 md:h-12 md:w-12 flex items-center justify-center rounded-xl"
                 >
+
                   {/* ÍCONO MENU */}
                   <motion.div
                     initial={false}
@@ -113,7 +113,7 @@ export function Navbar() {
                     }}
                     className="absolute"
                   >
-                    <Menu className="h-8 w-8" />
+                    <Menu className="h-10 w-10" />
                   </motion.div>
 
                   {/* ÍCONO X */}
