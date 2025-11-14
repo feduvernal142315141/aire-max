@@ -309,7 +309,8 @@ export function ProductFilters({ filters, onFiltersChange, activeFiltersCount }:
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="sticky bottom-0 left-0 right-0 px-3 py-3 bg-white/95 backdrop-blur-xl border-t border-[rgba(7,156,251,0.1)] -mx-6 -mb-6"
+            className="sticky bottom-0 left-0 right-0 px-6 py-4 bg-white/95 backdrop-blur-xl border-t border-[rgba(7,156,251,0.1)]"
+
           >
             <Button
               onClick={() => setIsOpen(false)}
