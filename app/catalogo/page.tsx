@@ -260,26 +260,6 @@ export default function CatalogoPage() {
           </div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 200 }}
-        className="fixed bottom-6 right-6 z-50 lg:hidden"
-      >
-        <Link
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="h-14 px-6 rounded-full bg-gradient-to-r from-[#00d86a] to-[#00a34b] text-white font-semibold shadow-[0_8px_30px_rgba(0,216,106,0.3)] hover:shadow-[0_12px_40px_rgba(0,216,106,0.4)] transition-all duration-300">
-              <MessageCircle className="w-5 h-5 mr-2 animate-pulse-slow" />
-              Cotizar
-            </Button>
-          </motion.div>
-        </Link>
-      </motion.div>
     </div>
   )
 }
