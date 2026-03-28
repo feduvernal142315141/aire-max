@@ -3,10 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
-import { WhatsAppButton } from "@/components/whatsapp-button"
-import { ScrollToTop } from "@/components/scroll-to-top"
+import { AppShell } from "@/components/layout/app-shell"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,11 +37,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
-        <ScrollToTop />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <AppShell>{children}</AppShell>
         <Analytics />
       </body>
     </html>

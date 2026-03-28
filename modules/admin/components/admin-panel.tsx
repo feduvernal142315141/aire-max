@@ -20,6 +20,7 @@ import {
   Search,
   Settings,
   ShoppingCart,
+  Snowflake,
   Sparkles,
   Tags,
   Trash2,
@@ -394,190 +395,308 @@ export function AdminPanel() {
                         <Plus className="mr-2 h-4 w-4" /> Nuevo producto
                       </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
-                      <SheetHeader>
-                        <SheetTitle>{editingId ? "Editar producto" : "Crear producto"}</SheetTitle>
-                      </SheetHeader>
-
-                      <Tabs defaultValue="general" className="mt-6">
-                        <TabsList className="grid grid-cols-5">
-                          <TabsTrigger value="general">General</TabsTrigger>
-                          <TabsTrigger value="pricing">Precio</TabsTrigger>
-                          <TabsTrigger value="specs">Specs</TabsTrigger>
-                          <TabsTrigger value="media">Media</TabsTrigger>
-                          <TabsTrigger value="seo">SEO</TabsTrigger>
-                        </TabsList>
-
-                        <TabsContent value="general" className="space-y-4 mt-4">
-                          <div className="space-y-2">
-                            <Label>Nombre</Label>
-                            <Input value={draft.name} onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value }))} />
-                          </div>
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-2">
-                              <Label>Marca</Label>
-                              <Input value={draft.brand} onChange={(e) => setDraft((p) => ({ ...p, brand: e.target.value }))} />
+                    <SheetContent
+                      side="right"
+                      className="w-full border-l border-white/40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.98),_rgba(241,247,255,0.98)_45%,_rgba(235,244,255,0.98)_100%)] p-0 sm:max-w-[760px]"
+                    >
+                      <div className="flex h-full flex-col">
+                        <div className="border-b border-white/50 bg-gradient-to-r from-blue-600/[0.10] via-cyan-400/[0.08] to-blue-500/[0.06] px-6 py-5 backdrop-blur-xl">
+                          <SheetHeader className="space-y-3 text-left">
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <SheetTitle className="text-2xl font-semibold tracking-tight text-slate-900">
+                                  {editingId ? "Editar producto" : "Crear producto"}
+                                </SheetTitle>
+                                <p className="mt-1 text-sm text-slate-600">
+                                  Formulario premium con edición rápida, specs técnicas y SEO listo para backend.
+                                </p>
+                              </div>
+                              <Badge className="border-blue-200 bg-blue-100/90 text-blue-700">Mock mode</Badge>
                             </div>
-                            <div className="space-y-2">
-                              <Label>Tipo</Label>
-                              <Select
-                                value={draft.type}
-                                onValueChange={(value) => setDraft((p) => ({ ...p, type: value as AdminProduct["type"] }))}
+                          </SheetHeader>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto px-6 pb-28 pt-5">
+                          <Tabs defaultValue="general" className="space-y-5">
+                            <TabsList className="grid h-auto grid-cols-5 rounded-2xl border border-white/70 bg-white/85 p-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur">
+                              <TabsTrigger
+                                value="general"
+                                className="rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
                               >
-                                <SelectTrigger>
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="split">Split</SelectItem>
-                                  <SelectItem value="cassette">Cassette</SelectItem>
-                                  <SelectItem value="piso-techo">Piso-Techo</SelectItem>
-                                  <SelectItem value="ventana">Ventana</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Descripción</Label>
-                            <Textarea value={draft.description} onChange={(e) => setDraft((p) => ({ ...p, description: e.target.value }))} rows={4} />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Tags</Label>
-                            <div className="flex gap-2">
-                              <Input value={tagInput} onChange={(e) => setTagInput(e.target.value)} placeholder="inverter, premium..." />
-                              <Button type="button" variant="outline" onClick={addTag}>
-                                Agregar
-                              </Button>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                              {draft.tags.map((tag) => (
-                                <Badge key={tag} variant="secondary" className="rounded-full">
-                                  {tag}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        </TabsContent>
-
-                        <TabsContent value="pricing" className="space-y-4 mt-4">
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-2">
-                              <Label>Precio base</Label>
-                              <Input
-                                type="number"
-                                value={draft.price}
-                                onChange={(e) => setDraft((p) => ({ ...p, price: Number(e.target.value) }))}
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Precio oferta</Label>
-                              <Input
-                                type="number"
-                                value={draft.salePrice ?? ""}
-                                onChange={(e) => setDraft((p) => ({ ...p, salePrice: Number(e.target.value) || undefined }))}
-                              />
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-2">
-                              <Label>Stock</Label>
-                              <Input
-                                type="number"
-                                value={draft.stock}
-                                onChange={(e) => setDraft((p) => ({ ...p, stock: Number(e.target.value) }))}
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <Label>SKU</Label>
-                              <Input value={draft.sku} onChange={(e) => setDraft((p) => ({ ...p, sku: e.target.value }))} />
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-between rounded-xl border p-3">
-                            <div>
-                              <p className="font-medium">Estado</p>
-                              <p className="text-xs text-muted-foreground">Activar o desactivar visibilidad del producto.</p>
-                            </div>
-                            <Switch
-                              checked={draft.status === "active"}
-                              onCheckedChange={(checked) => setDraft((p) => ({ ...p, status: checked ? "active" : "inactive" }))}
-                            />
-                          </div>
-                        </TabsContent>
-
-                        <TabsContent value="specs" className="space-y-4 mt-4">
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-2">
-                              <Label>BTU</Label>
-                              <Input value={draft.btu} onChange={(e) => setDraft((p) => ({ ...p, btu: e.target.value }))} />
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Energía</Label>
-                              <Select
-                                value={draft.energy}
-                                onValueChange={(value) => setDraft((p) => ({ ...p, energy: value as AdminProduct["energy"] }))}
+                                General
+                              </TabsTrigger>
+                              <TabsTrigger
+                                value="pricing"
+                                className="rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
                               >
-                                <SelectTrigger>
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="A+++">A+++</SelectItem>
-                                  <SelectItem value="A++">A++</SelectItem>
-                                  <SelectItem value="A+">A+</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          </div>
-                          <div className="space-y-2 rounded-xl border p-3">
-                            <div className="flex items-center justify-between">
-                              <span>Inverter</span>
-                              <Switch
-                                checked={draft.inverter}
-                                onCheckedChange={(checked) => setDraft((p) => ({ ...p, inverter: checked }))}
-                              />
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span>WiFi</span>
-                              <Switch checked={draft.wifi} onCheckedChange={(checked) => setDraft((p) => ({ ...p, wifi: checked }))} />
-                            </div>
-                          </div>
-                        </TabsContent>
+                                Precio
+                              </TabsTrigger>
+                              <TabsTrigger
+                                value="specs"
+                                className="rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
+                              >
+                                Specs
+                              </TabsTrigger>
+                              <TabsTrigger
+                                value="media"
+                                className="rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
+                              >
+                                Media
+                              </TabsTrigger>
+                              <TabsTrigger
+                                value="seo"
+                                className="rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
+                              >
+                                SEO
+                              </TabsTrigger>
+                            </TabsList>
 
-                        <TabsContent value="media" className="space-y-4 mt-4">
-                          <div className="space-y-2">
-                            <Label>URL imagen principal</Label>
-                            <Input value={draft.image} onChange={(e) => setDraft((p) => ({ ...p, image: e.target.value }))} />
-                          </div>
-                          <div className="rounded-2xl border border-dashed p-6 text-center text-sm text-muted-foreground">
-                            Drag & drop mock para múltiples imágenes + orden visual (sin integración).
-                          </div>
-                        </TabsContent>
+                            <TabsContent value="general" className="space-y-4">
+                              <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
+                                <div className="space-y-2">
+                                  <Label className="text-slate-700">Nombre</Label>
+                                  <Input
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    value={draft.name}
+                                    onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value }))}
+                                  />
+                                </div>
+                                <div className="mt-4 grid grid-cols-2 gap-3">
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Marca</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      value={draft.brand}
+                                      onChange={(e) => setDraft((p) => ({ ...p, brand: e.target.value }))}
+                                    />
+                                  </div>
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Tipo</Label>
+                                    <Select
+                                      value={draft.type}
+                                      onValueChange={(value) => setDraft((p) => ({ ...p, type: value as AdminProduct["type"] }))}
+                                    >
+                                      <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="split">Split</SelectItem>
+                                        <SelectItem value="cassette">Cassette</SelectItem>
+                                        <SelectItem value="piso-techo">Piso-Techo</SelectItem>
+                                        <SelectItem value="ventana">Ventana</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </div>
+                                <div className="mt-4 space-y-2">
+                                  <div className="flex items-center justify-between">
+                                    <Label className="text-slate-700">Descripción</Label>
+                                    <Button
+                                      type="button"
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-7 rounded-full px-3 text-blue-700 hover:bg-blue-50"
+                                      onClick={() =>
+                                        toast({
+                                          title: "IA mock",
+                                          description: "Próximo paso: generador automático de descripción.",
+                                        })
+                                      }
+                                    >
+                                      <Sparkles className="mr-1 h-3.5 w-3.5" /> Sugerir con IA
+                                    </Button>
+                                  </div>
+                                  <Textarea
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    value={draft.description}
+                                    onChange={(e) => setDraft((p) => ({ ...p, description: e.target.value }))}
+                                    rows={4}
+                                  />
+                                </div>
+                                <div className="mt-4 space-y-2">
+                                  <Label className="text-slate-700">Tags</Label>
+                                  <div className="flex gap-2">
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      value={tagInput}
+                                      onChange={(e) => setTagInput(e.target.value)}
+                                      placeholder="inverter, premium..."
+                                    />
+                                    <Button type="button" variant="outline" className="rounded-xl" onClick={addTag}>
+                                      Agregar
+                                    </Button>
+                                  </div>
+                                  <div className="flex flex-wrap gap-2">
+                                    {draft.tags.map((tag) => (
+                                      <Badge key={tag} variant="secondary" className="rounded-full border-blue-100 bg-blue-50 text-blue-700">
+                                        {tag}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
 
-                        <TabsContent value="seo" className="space-y-4 mt-4">
-                          <div className="space-y-2">
-                            <Label>Slug</Label>
-                            <Input value={draft.slug} onChange={(e) => setDraft((p) => ({ ...p, slug: e.target.value }))} />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Meta title</Label>
-                            <Input value={draft.metaTitle} onChange={(e) => setDraft((p) => ({ ...p, metaTitle: e.target.value }))} />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Meta description</Label>
-                            <Textarea
-                              rows={4}
-                              value={draft.metaDescription}
-                              onChange={(e) => setDraft((p) => ({ ...p, metaDescription: e.target.value }))}
-                            />
-                          </div>
-                        </TabsContent>
-                      </Tabs>
+                            <TabsContent value="pricing" className="space-y-4">
+                              <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
+                                <div className="grid grid-cols-2 gap-3">
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Precio base</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      type="number"
+                                      value={draft.price}
+                                      onChange={(e) => setDraft((p) => ({ ...p, price: Number(e.target.value) }))}
+                                    />
+                                  </div>
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Precio oferta</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      type="number"
+                                      value={draft.salePrice ?? ""}
+                                      onChange={(e) => setDraft((p) => ({ ...p, salePrice: Number(e.target.value) || undefined }))}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="mt-4 grid grid-cols-2 gap-3">
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Stock</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      type="number"
+                                      value={draft.stock}
+                                      onChange={(e) => setDraft((p) => ({ ...p, stock: Number(e.target.value) }))}
+                                    />
+                                  </div>
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">SKU</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      value={draft.sku}
+                                      onChange={(e) => setDraft((p) => ({ ...p, sku: e.target.value }))}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="mt-4 flex items-center justify-between rounded-2xl border border-slate-200/80 bg-slate-50/80 p-3">
+                                  <div>
+                                    <p className="font-medium text-slate-800">Estado</p>
+                                    <p className="text-xs text-muted-foreground">Activar o desactivar visibilidad del producto.</p>
+                                  </div>
+                                  <Switch
+                                    checked={draft.status === "active"}
+                                    onCheckedChange={(checked) => setDraft((p) => ({ ...p, status: checked ? "active" : "inactive" }))}
+                                  />
+                                </div>
+                              </div>
+                            </TabsContent>
 
-                      <div className="sticky bottom-0 mt-6 bg-background/90 backdrop-blur py-4">
-                        <Button
-                          className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-[0_0_22px_rgba(37,99,235,0.35)]"
-                          onClick={saveProduct}
-                        >
-                          Guardar producto
-                        </Button>
+                            <TabsContent value="specs" className="space-y-4">
+                              <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
+                                <div className="grid grid-cols-2 gap-3">
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">BTU</Label>
+                                    <Input
+                                      className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                      value={draft.btu}
+                                      onChange={(e) => setDraft((p) => ({ ...p, btu: e.target.value }))}
+                                    />
+                                  </div>
+                                  <div className="space-y-2">
+                                    <Label className="text-slate-700">Energía</Label>
+                                    <Select
+                                      value={draft.energy}
+                                      onValueChange={(value) => setDraft((p) => ({ ...p, energy: value as AdminProduct["energy"] }))}
+                                    >
+                                      <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="A+++">A+++</SelectItem>
+                                        <SelectItem value="A++">A++</SelectItem>
+                                        <SelectItem value="A+">A+</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </div>
+                                <div className="mt-4 space-y-2 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-3">
+                                  <div className="flex items-center justify-between">
+                                    <span className="font-medium text-slate-700">Inverter</span>
+                                    <Switch
+                                      checked={draft.inverter}
+                                      onCheckedChange={(checked) => setDraft((p) => ({ ...p, inverter: checked }))}
+                                    />
+                                  </div>
+                                  <div className="flex items-center justify-between">
+                                    <span className="font-medium text-slate-700">WiFi</span>
+                                    <Switch checked={draft.wifi} onCheckedChange={(checked) => setDraft((p) => ({ ...p, wifi: checked }))} />
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
+
+                            <TabsContent value="media" className="space-y-4">
+                              <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
+                                <div className="space-y-2">
+                                  <Label className="text-slate-700">URL imagen principal</Label>
+                                  <Input
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    value={draft.image}
+                                    onChange={(e) => setDraft((p) => ({ ...p, image: e.target.value }))}
+                                  />
+                                </div>
+                                <div className="mt-4 rounded-2xl border border-dashed border-blue-300/80 bg-gradient-to-br from-blue-50/80 to-cyan-50/60 p-8 text-center text-sm text-slate-600">
+                                  <p className="font-medium text-slate-700">Drag & drop premium (mock)</p>
+                                  <p className="mt-1 text-xs">Subida, orden y selección de imagen principal en próxima fase.</p>
+                                </div>
+                              </div>
+                            </TabsContent>
+
+                            <TabsContent value="seo" className="space-y-4">
+                              <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
+                                <div className="space-y-2">
+                                  <Label className="text-slate-700">Slug</Label>
+                                  <Input
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    value={draft.slug}
+                                    onChange={(e) => setDraft((p) => ({ ...p, slug: e.target.value }))}
+                                  />
+                                </div>
+                                <div className="mt-4 space-y-2">
+                                  <Label className="text-slate-700">Meta title</Label>
+                                  <Input
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    value={draft.metaTitle}
+                                    onChange={(e) => setDraft((p) => ({ ...p, metaTitle: e.target.value }))}
+                                  />
+                                </div>
+                                <div className="mt-4 space-y-2">
+                                  <Label className="text-slate-700">Meta description</Label>
+                                  <Textarea
+                                    className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+                                    rows={4}
+                                    value={draft.metaDescription}
+                                    onChange={(e) => setDraft((p) => ({ ...p, metaDescription: e.target.value }))}
+                                  />
+                                </div>
+                              </div>
+                            </TabsContent>
+                          </Tabs>
+                        </div>
+
+                        <div className="sticky bottom-0 border-t border-white/60 bg-white/70 px-6 py-4 backdrop-blur-xl">
+                          <div className="flex items-center gap-3">
+                            <Button variant="outline" className="rounded-xl" onClick={() => setDrawerOpen(false)}>
+                              Cancelar
+                            </Button>
+                            <Button
+                              className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.35)] transition-all hover:brightness-110 hover:shadow-[0_12px_30px_rgba(37,99,235,0.42)]"
+                              onClick={saveProduct}
+                            >
+                              Guardar producto
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </SheetContent>
                   </Sheet>
@@ -902,30 +1021,48 @@ export function AdminPanel() {
 
         <main className="flex min-h-screen flex-col">
           <header className="sticky top-0 z-10 border-b border-white/40 bg-white/70 backdrop-blur-xl">
-            <div className="flex flex-wrap items-center justify-between gap-3 p-4">
-              <div className="relative w-full max-w-lg">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
-                <Input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Buscar productos, órdenes, clientes..."
-                  className="pl-10 rounded-xl bg-white/90"
-                />
+            <div className="space-y-3 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50/90 to-cyan-50/80 px-3 py-2 shadow-sm">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]">
+                    <Snowflake className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-[0.18em] text-blue-700">Control Center</p>
+                    <p className="text-sm font-semibold text-slate-900">Aire-Max Panel de Administración</p>
+                  </div>
+                </div>
+
+                <Badge className="border-blue-200 bg-blue-100 text-blue-700">
+                  <Settings className="mr-1 h-3.5 w-3.5" /> Entorno Admin
+                </Badge>
               </div>
 
-              <div className="flex items-center gap-2">
-                <Button variant="outline" className="rounded-xl">
-                  <Bell className="mr-2 h-4 w-4" /> Notificaciones
-                </Button>
-                <Button
-                  onClick={openCreateDrawer}
-                  className="rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-[0_0_22px_rgba(37,99,235,0.35)]"
-                >
-                  <Plus className="mr-2 h-4 w-4" /> Quick action
-                </Button>
-                <Button variant="outline" className="rounded-xl">
-                  <Users className="mr-2 h-4 w-4" /> Admin
-                </Button>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="relative w-full max-w-lg">
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
+                  <Input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Buscar productos, órdenes, clientes..."
+                    className="pl-10 rounded-xl bg-white/90"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" className="rounded-xl">
+                    <Bell className="mr-2 h-4 w-4" /> Notificaciones
+                  </Button>
+                  <Button
+                    onClick={openCreateDrawer}
+                    className="rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-[0_0_22px_rgba(37,99,235,0.35)]"
+                  >
+                    <Plus className="mr-2 h-4 w-4" /> Quick action
+                  </Button>
+                  <Button variant="outline" className="rounded-xl">
+                    <Users className="mr-2 h-4 w-4" /> Admin
+                  </Button>
+                </div>
               </div>
             </div>
           </header>
@@ -934,11 +1071,11 @@ export function AdminPanel() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
               <div>
                 <h1 className="text-2xl font-semibold capitalize tracking-tight">{activeSection}</h1>
-                <p className="text-sm text-slate-600">Panel premium estilo Linear + Stripe + Vercel (mock).</p>
+                <p className="text-sm text-slate-600">Panel de administración de Aire-Max</p>
               </div>
               <div className="flex items-center gap-2">
                 <Badge className="bg-blue-100 text-blue-700 border-blue-200">
-                  <Sparkles className="mr-1 h-3 w-3" /> UX nivel dios
+                  <Sparkles className="mr-1 h-3 w-3" />
                 </Badge>
                 <Badge variant="secondary" className="bg-white/80">
                   {editingId ? "Editando inline" : "Sin edición activa"}
