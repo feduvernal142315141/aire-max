@@ -5,31 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Award, Users, MapPin, Phone, Shield, Star, TrendingUp, Zap, Heart, Wrench } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useAnimatedStats } from "@/hooks/use-animated-stats"
 
 export default function NosotrosPage() {
-  const [counts, setCounts] = useState({ years: 0, clients: 0, satisfaction: 0, equipment: 0 })
-
-  useEffect(() => {
-    const targets = { years: 15, clients: 5000, satisfaction: 98, equipment: 10000 }
-    const duration = 2000
-    const steps = 60
-    const interval = duration / steps
-
-    let step = 0
-    const timer = setInterval(() => {
-      step++
-      setCounts({
-        years: Math.min(Math.floor((targets.years * step) / steps), targets.years),
-        clients: Math.min(Math.floor((targets.clients * step) / steps), targets.clients),
-        satisfaction: Math.min(Math.floor((targets.satisfaction * step) / steps), targets.satisfaction),
-        equipment: Math.min(Math.floor((targets.equipment * step) / steps), targets.equipment),
-      })
-      if (step >= steps) clearInterval(timer)
-    }, interval)
-
-    return () => clearInterval(timer)
-  }, [])
+  const counts = useAnimatedStats()
 
   return (
     <div className="flex flex-col pt-16 md:pt-20">

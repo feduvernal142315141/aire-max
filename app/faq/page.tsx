@@ -1,12 +1,9 @@
-"use client"
-
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MessageCircle, HelpCircle, ShoppingCart, Wrench, Settings, Shield, Snowflake } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
 
 const faqs = [
   {
@@ -80,8 +77,6 @@ const faqs = [
 ]
 
 export default function FAQPage() {
-  const [openCategory, setOpenCategory] = useState<string | null>(null)
-
   return (
     <div className="flex flex-col pt-16 md:pt-20">
       <section className="relative py-10 md:py-16 overflow-hidden bg-[#f3f9ff]">
@@ -141,8 +136,6 @@ export default function FAQPage() {
                         type="single"
                         collapsible
                         className="space-y-3"
-                        value={openCategory}
-                        onValueChange={setOpenCategory}
                       >
                         {category.questions.map((faq, faqIndex) => (
                           <AccordionItem

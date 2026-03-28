@@ -18,15 +18,7 @@ import {
 } from "@/lib/products"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { DialogTitle } from "@radix-ui/react-dialog"
-
-export interface FilterState {
-  brands: ProductBrand[]
-  categories: ProductCategory[]
-  capacities: ProductCapacity[]
-  priceRange: [number, number]
-  inverter: boolean | null
-  wifi: boolean | null
-}
+import type { FilterState } from "@/hooks/use-products"
 
 interface ProductFiltersProps {
   filters: FilterState

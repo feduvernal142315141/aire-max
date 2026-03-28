@@ -8,6 +8,7 @@ import type { Product } from "@/lib/products"
 
 interface ProductCardProps {
   product: Product
+  viewMode?: "grid" | "list"
 }
 
 export function ProductCard({ product }: ProductCardProps) {
