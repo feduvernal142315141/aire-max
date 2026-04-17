@@ -18,10 +18,20 @@ export const PRODUCT_BRAND = {
   MITSUBISHI: "Mitsubishi",
   CARRIER: "Carrier",
   PANASONIC: "Panasonic",
+  MIDEA: "Midea",
 } as const;
 
 export type ProductBrand =
   (typeof PRODUCT_BRAND)[keyof typeof PRODUCT_BRAND];
+
+// ─── Product Status ──────────────────────────────────────────────────────────
+export const PRODUCT_STATUS = {
+  ACTIVE: "active",
+  INACTIVE: "inactive",
+} as const;
+
+export type ProductStatus =
+  (typeof PRODUCT_STATUS)[keyof typeof PRODUCT_STATUS];
 
 // ─── Product Capacity ────────────────────────────────────────────────────────
 export const PRODUCT_CAPACITY = {
@@ -61,6 +71,9 @@ export type SortOption =
   (typeof SORT_OPTION)[keyof typeof SORT_OPTION];
 
 // ─── Product ─────────────────────────────────────────────────────────────────
+// Modelo canónico — usado tanto por la landing pública como por el admin panel.
+// Los campos opcionales del bloque "admin" se completan al editar/crear desde
+// el panel; la landing los ignora.
 export interface Product {
   id: string;
   name: string;
@@ -78,7 +91,19 @@ export interface Product {
   nuevo?: boolean;
   oferta?: boolean;
   description: string;
+  // ── Admin-only (opcionales) ────────────────────────────────────────────────
+  stock?: number;
+  status?: ProductStatus;
+  rating?: number;
+  sku?: string;
+  tags?: string[];
+  slug?: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
+
+// Alias semántico para el admin panel — mismo shape que Product, expresa intención.
+export type ProductAdminView = Product;
 
 // ─── Filter State ────────────────────────────────────────────────────────────
 export interface ProductFilterState {

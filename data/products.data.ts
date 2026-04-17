@@ -6,6 +6,8 @@ import type {
 } from "@/types";
 
 // ─── Products — Single Source of Truth ───────────────────────────────────────
+// Modelo canónico unificado: la landing usa los campos públicos, el admin
+// completa stock/status/sku/tags/slug/SEO. Todos viven acá.
 export const productsData: Product[] = [
   {
     id: "lg-split-12000",
@@ -24,6 +26,15 @@ export const productsData: Product[] = [
     oferta: true,
     description:
       "Aire acondicionado split con tecnología inverter para máximo ahorro energético.",
+    stock: 21,
+    status: "active",
+    rating: 4.8,
+    sku: "LG-INV-12K",
+    tags: ["inverter", "wifi", "best-seller"],
+    slug: "lg-split-inverter-dual-cool-12000",
+    metaTitle: "LG Split Inverter Dual Cool 12000 BTU | Aire-Max",
+    metaDescription:
+      "Aire acondicionado LG inverter 12000 BTU con WiFi y alta eficiencia energética.",
   },
   {
     id: "samsung-split-18000",
@@ -41,6 +52,15 @@ export const productsData: Product[] = [
     nuevo: true,
     description:
       "Tecnología WindFree para climatización sin corrientes de aire directas.",
+    stock: 7,
+    status: "active",
+    rating: 4.6,
+    sku: "SAM-WF-18K",
+    tags: ["windfree", "premium"],
+    slug: "samsung-split-windfree-elite-18000",
+    metaTitle: "Samsung WindFree Elite 18000 BTU | Aire-Max",
+    metaDescription:
+      "Confort premium WindFree con tecnología inverter y control WiFi.",
   },
   {
     id: "daikin-split-24000",
@@ -57,6 +77,15 @@ export const productsData: Product[] = [
     popular: true,
     description:
       "Sistema de climatización premium con purificador de aire integrado.",
+    stock: 12,
+    status: "active",
+    rating: 4.7,
+    sku: "DAI-INV-24K",
+    tags: ["premium", "purificador"],
+    slug: "daikin-split-inverter-premium-24000",
+    metaTitle: "Daikin Split Premium 24000 BTU | Aire-Max",
+    metaDescription:
+      "Split Daikin premium con purificador integrado y control inteligente.",
   },
   {
     id: "mitsubishi-split-12000",
@@ -72,6 +101,15 @@ export const productsData: Product[] = [
     wifi: true,
     description:
       "Sensor 3D que detecta la temperatura en diferentes zonas de la habitación.",
+    stock: 9,
+    status: "active",
+    rating: 4.5,
+    sku: "MIT-MSZ-12K",
+    tags: ["sensor", "premium"],
+    slug: "mitsubishi-split-msz-ap-12000",
+    metaTitle: "Mitsubishi MSZ-AP 12000 BTU | Aire-Max",
+    metaDescription:
+      "Mitsubishi MSZ-AP con sensor 3D i-see y filtro Plasma Quad Plus.",
   },
   {
     id: "carrier-cassette-36000",
@@ -87,6 +125,15 @@ export const productsData: Product[] = [
     wifi: false,
     description:
       "Ideal para espacios comerciales, distribución uniforme del aire en 4 direcciones.",
+    stock: 5,
+    status: "active",
+    rating: 4.4,
+    sku: "CAR-CAS-36K",
+    tags: ["comercial", "cassette"],
+    slug: "carrier-cassette-4-vias-36000",
+    metaTitle: "Carrier Cassette 36000 BTU | Aire-Max",
+    metaDescription:
+      "Cassette comercial Carrier 4 vías con tecnología inverter.",
   },
   {
     id: "lg-cassette-48000",
@@ -108,6 +155,15 @@ export const productsData: Product[] = [
     nuevo: true,
     description:
       "Potente sistema cassette para grandes espacios comerciales.",
+    stock: 4,
+    status: "active",
+    rating: 4.6,
+    sku: "LG-CAS-48K",
+    tags: ["comercial", "wifi"],
+    slug: "lg-cassette-inverter-comercial-48000",
+    metaTitle: "LG Cassette Comercial 48000 BTU | Aire-Max",
+    metaDescription:
+      "Cassette LG inverter para grandes espacios con control WiFi.",
   },
   {
     id: "daikin-piso-techo-36000",
@@ -128,6 +184,15 @@ export const productsData: Product[] = [
     wifi: false,
     description:
       "Versátil sistema que puede instalarse en piso o techo según necesidad.",
+    stock: 6,
+    status: "active",
+    rating: 4.3,
+    sku: "DAI-PT-36K",
+    tags: ["piso-techo", "versátil"],
+    slug: "daikin-piso-techo-inverter-36000",
+    metaTitle: "Daikin Piso Techo 36000 BTU | Aire-Max",
+    metaDescription:
+      "Equipo piso-techo Daikin con instalación versátil e inverter.",
   },
   {
     id: "panasonic-split-9000",
@@ -145,6 +210,15 @@ export const productsData: Product[] = [
     oferta: true,
     description:
       "Perfecto para habitaciones pequeñas con máxima eficiencia energética.",
+    stock: 14,
+    status: "active",
+    rating: 4.5,
+    sku: "PAN-CMP-9K",
+    tags: ["compacto", "oferta"],
+    slug: "panasonic-split-compact-inverter-9000",
+    metaTitle: "Panasonic Compact 9000 BTU | Aire-Max",
+    metaDescription:
+      "Panasonic compacto con tecnología Nanoe-G para habitaciones pequeñas.",
   },
   {
     id: "samsung-split-24000",
@@ -166,6 +240,15 @@ export const productsData: Product[] = [
     nuevo: true,
     description:
       "Inteligencia artificial que aprende tus preferencias de climatización.",
+    stock: 8,
+    status: "active",
+    rating: 4.8,
+    sku: "SAM-WF-24K",
+    tags: ["ai", "windfree", "premium"],
+    slug: "samsung-split-windfree-pro-24000",
+    metaTitle: "Samsung WindFree Pro 24000 BTU | Aire-Max",
+    metaDescription:
+      "Samsung WindFree Pro con IA Auto Cooling y SmartThings.",
   },
   {
     id: "carrier-split-18000",
@@ -186,6 +269,15 @@ export const productsData: Product[] = [
     wifi: true,
     description:
       "Tecnología Greenspeed para máximo confort y eficiencia.",
+    stock: 11,
+    status: "active",
+    rating: 4.4,
+    sku: "CAR-INF-18K",
+    tags: ["greenspeed", "silencioso"],
+    slug: "carrier-split-infinity-18000",
+    metaTitle: "Carrier Infinity 18000 BTU | Aire-Max",
+    metaDescription:
+      "Carrier Infinity con Greenspeed y control inteligente.",
   },
   {
     id: "mitsubishi-cassette-36000",
@@ -206,6 +298,15 @@ export const productsData: Product[] = [
     wifi: true,
     description:
       "Sistema cassette con filtro enzimático para purificación del aire.",
+    stock: 3,
+    status: "active",
+    rating: 4.5,
+    sku: "MIT-PLA-36K",
+    tags: ["enzimático", "wifi"],
+    slug: "mitsubishi-cassette-pla-36000",
+    metaTitle: "Mitsubishi Cassette PLA 36000 BTU | Aire-Max",
+    metaDescription:
+      "Mitsubishi PLA cassette con filtro enzimático y control WiFi.",
   },
   {
     id: "lg-piso-techo-48000",
@@ -225,6 +326,65 @@ export const productsData: Product[] = [
     inverter: true,
     wifi: false,
     description: "Ideal para oficinas y comercios con techos altos.",
+    stock: 5,
+    status: "active",
+    rating: 4.3,
+    sku: "LG-PT-48K",
+    tags: ["comercial", "doble-flujo"],
+    slug: "lg-piso-techo-comercial-48000",
+    metaTitle: "LG Piso Techo Comercial 48000 BTU | Aire-Max",
+    metaDescription:
+      "LG piso-techo comercial con doble flujo para techos altos.",
+  },
+  // ── Productos sumados desde el mock del admin ─────────────────────────────
+  {
+    id: "daikin-cassette-24000",
+    name: "Daikin Smart Cassette",
+    brand: "Daikin",
+    category: "cassette",
+    capacity: "24000",
+    energyRating: "A+++",
+    price: 1099.99,
+    originalPrice: 1199.99,
+    image: "/daikin-split-air-conditioner-premium.jpg",
+    features: ["Inverter", "Smart Control", "Distribución uniforme", "Bajo ruido"],
+    inverter: true,
+    wifi: false,
+    oferta: true,
+    description:
+      "Solución comercial con distribución uniforme de aire.",
+    stock: 3,
+    status: "active",
+    rating: 4.9,
+    sku: "DAI-CAS-24K",
+    tags: ["comercial", "cassette"],
+    slug: "daikin-smart-cassette-24000-btu",
+    metaTitle: "Daikin Cassette 24000 BTU | Aire-Max",
+    metaDescription:
+      "Cassette comercial Daikin 24000 BTU para espacios de alto tráfico.",
+  },
+  {
+    id: "midea-ventana-9000",
+    name: "Midea Ventana Eco",
+    brand: "Midea",
+    category: "ventana",
+    capacity: "9000",
+    energyRating: "A+",
+    price: 399.99,
+    image: "/modern-air-conditioning-unit-installation-professi.jpg",
+    features: ["Compacto", "Bajo consumo", "Control remoto"],
+    inverter: false,
+    wifi: false,
+    description: "Opción económica para espacios reducidos.",
+    stock: 0,
+    status: "inactive",
+    rating: 4.2,
+    sku: "MID-VEN-9K",
+    tags: ["entry-level"],
+    slug: "midea-ventana-eco-9000-btu",
+    metaTitle: "Midea Ventana 9000 BTU | Aire-Max",
+    metaDescription:
+      "Equipo de ventana económico y compacto para uso residencial.",
   },
 ];
 
@@ -236,6 +396,7 @@ export const brandsData: ProductBrand[] = [
   "Mitsubishi",
   "Carrier",
   "Panasonic",
+  "Midea",
 ];
 
 // ─── Category Options ────────────────────────────────────────────────────────

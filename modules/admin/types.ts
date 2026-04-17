@@ -1,3 +1,5 @@
+import type { PriceRange, ProductBrand, ProductCategory, ProductStatus } from "@/types"
+
 export type AdminSection =
   | "dashboard"
   | "productos"
@@ -9,39 +11,18 @@ export type AdminSection =
   | "analytics"
   | "configuracion"
 
-export type ProductStatus = "active" | "inactive"
-export type ProductType = "split" | "cassette" | "piso-techo" | "ventana"
+// Re-export para evitar imports cruzados desde @/types en consumidores admin.
+export type { ProductStatus } from "@/types"
+
+// Salud de stock — cálculo derivado, propio del admin.
 export type StockHealth = "low" | "medium" | "high"
 
-export interface AdminProduct {
-  id: string
-  image: string
-  name: string
-  brand: string
-  type: ProductType
-  btu: string
-  price: number
-  salePrice?: number
-  stock: number
-  status: ProductStatus
-  rating: number
-  sku: string
-  inverter: boolean
-  wifi: boolean
-  energy: "A+++" | "A++" | "A+"
-  description: string
-  tags: string[]
-  slug: string
-  metaTitle: string
-  metaDescription: string
-}
-
 export interface ProductFilters {
-  brands: string[]
-  types: ProductType[]
-  btu: string[]
+  brands: ProductBrand[]
+  categories: ProductCategory[]
+  capacities: string[]
   status: ProductStatus | "all"
-  priceRange: [number, number]
+  priceRange: PriceRange
 }
 
 export interface AdminOrder {

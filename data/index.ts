@@ -6,6 +6,9 @@ export {
   capacitiesData,
 } from "./products.data";
 
+// ─── Orders Data (admin mock) ────────────────────────────────────────────────
+export { ordersData } from "./orders.data";
+
 // ─── Plan Data ───────────────────────────────────────────────────────────────
 export {
   maintenancePlansData,
