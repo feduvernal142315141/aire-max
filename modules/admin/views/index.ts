@@ -1,0 +1,5 @@
+export { DashboardView } from "./dashboard-view"
+export { InventoryView } from "./inventory-view"
+export { OrdersView } from "./orders-view"
+export { PlaceholderView } from "./placeholder-view"
+export { LoadingView } from "./loading-view"
