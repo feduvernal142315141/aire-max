@@ -1,22 +1,19 @@
-import type { ContactFormData } from "@/types";
+import type { ContactFormData } from "@/types"
 
 export interface ContactSubmitResult {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
 }
 
-export async function submitContactForm(
-  data: ContactFormData,
-): Promise<ContactSubmitResult> {
+export async function submitContactForm(data: ContactFormData): Promise<ContactSubmitResult> {
   // TODO: Replace with actual API call when backend is ready
   // return apiClient.post<ContactSubmitResult>("/contact", data);
 
   // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  console.log("Contact form submitted:", data);
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  console.warn("[contact.service] submission (mock):", data)
   return {
     success: true,
-    message:
-      "Mensaje enviado correctamente. Nos pondremos en contacto pronto.",
-  };
+    message: "Mensaje enviado correctamente. Nos pondremos en contacto pronto.",
+  }
 }

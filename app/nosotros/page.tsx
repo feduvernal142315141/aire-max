@@ -3,8 +3,20 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Award, Users, MapPin, Phone, Shield, Star, TrendingUp, Zap, Heart, Wrench } from "lucide-react"
+import {
+  Award,
+  Users,
+  MapPin,
+  Phone,
+  Shield,
+  Star,
+  TrendingUp,
+  Zap,
+  Heart,
+  Wrench,
+} from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useAnimatedStats } from "@/hooks/use-animated-stats"
 
 export default function NosotrosPage() {
@@ -12,21 +24,21 @@ export default function NosotrosPage() {
 
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative overflow-hidden py-16 md:py-24">
         <div className="absolute inset-0 bg-gradient-to-br from-[#eaf7ff] via-[#f9fcff] to-[#ffffff]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#079cfb] opacity-[0.08] blur-[120px] rounded-full animate-breathe" />
+        <div className="animate-breathe absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#079cfb] opacity-[0.08] blur-[120px]" />
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="relative z-10 container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center mb-16 space-y-6"
+            className="mb-16 space-y-6 text-center"
           >
-            <Badge className="w-fit mx-auto bg-white/80 backdrop-blur-sm border border-primary/20 text-primary">
+            <Badge className="border-primary/20 text-primary mx-auto w-fit border bg-white/80 backdrop-blur-sm">
               Sobre Nosotros
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#0f172a]">
+            <h1 className="font-serif text-4xl font-bold text-[#0f172a] md:text-5xl lg:text-6xl">
               Expertos en{" "}
               <span className="relative inline-block">
                 <span className="gradient-text">Climatización</span>
@@ -38,18 +50,28 @@ export default function NosotrosPage() {
                 />
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 max-w-[620px] mx-auto leading-relaxed opacity-90">
-              Más de 15 años brindando soluciones de climatización profesional con compromiso, calidad y excelencia en
-              el servicio
+            <p className="mx-auto max-w-[620px] text-lg leading-relaxed text-slate-600 opacity-90 md:text-xl">
+              Más de 15 años brindando soluciones de climatización profesional con compromiso,
+              calidad y excelencia en el servicio
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Award, value: counts.years, suffix: "+", label: "Años de Experiencia" },
               { icon: Users, value: counts.clients, suffix: "+", label: "Clientes Satisfechos" },
-              { icon: Shield, value: counts.satisfaction, suffix: "%", label: "Tasa de Satisfacción" },
-              { icon: TrendingUp, value: counts.equipment, suffix: "+", label: "Equipos Instalados" },
+              {
+                icon: Shield,
+                value: counts.satisfaction,
+                suffix: "%",
+                label: "Tasa de Satisfacción",
+              },
+              {
+                icon: TrendingUp,
+                value: counts.equipment,
+                suffix: "+",
+                label: "Equipos Instalados",
+              },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -57,19 +79,19 @@ export default function NosotrosPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
               >
-                <Card className="bg-white/50 backdrop-blur-lg border border-[rgba(7,156,251,0.08)] shadow-[0_8px_40px_rgba(3,126,204,0.1)] hover:shadow-[0_12px_50px_rgba(3,126,204,0.15)] hover:-translate-y-2 transition-all duration-300 group">
-                  <CardContent className="pt-8 pb-6 space-y-4 text-center">
+                <Card className="group border border-[rgba(7,156,251,0.08)] bg-white/50 shadow-[0_8px_40px_rgba(3,126,204,0.1)] backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_50px_rgba(3,126,204,0.15)]">
+                  <CardContent className="space-y-4 pt-8 pb-6 text-center">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="w-16 h-16 rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(7,156,251,0.15)] group-hover:shadow-[0_0_30px_rgba(7,156,251,0.3)] transition-all duration-300"
+                      className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10 shadow-[0_0_20px_rgba(7,156,251,0.15)] transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(7,156,251,0.3)]"
                     >
-                      <stat.icon className="w-8 h-8 text-[#037ecc] animate-icon-breathe" />
+                      <stat.icon className="animate-icon-breathe h-8 w-8 text-[#037ecc]" />
                     </motion.div>
                     <motion.div
                       key={stat.value}
                       initial={{ scale: 1.05 }}
                       animate={{ scale: 1 }}
-                      className="text-4xl font-bold text-[#037ecc] group-hover:scale-105 transition-transform duration-300"
+                      className="text-4xl font-bold text-[#037ecc] transition-transform duration-300 group-hover:scale-105"
                     >
                       {stat.value}
                       {stat.suffix}
@@ -86,14 +108,16 @@ export default function NosotrosPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-6xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-6xl"
           >
-            <Card className="overflow-hidden border-2 border-transparent hover:border-primary/20 transition-all bg-gradient-to-br from-[#e0f2fe] via-white to-white">
+            <Card className="hover:border-primary/20 overflow-hidden border-2 border-transparent bg-gradient-to-br from-[#e0f2fe] via-white to-white transition-all">
               <CardContent className="p-0">
-                <div className="grid md:grid-cols-2 gap-0">
-                  <div className="p-8 md:p-10 space-y-6">
+                <div className="grid gap-0 md:grid-cols-2">
+                  <div className="space-y-6 p-8 md:p-10">
                     <div className="relative inline-block">
-                      <h2 className="text-3xl font-serif font-bold text-[#0f172a]">Nuestra Historia</h2>
+                      <h2 className="font-serif text-3xl font-bold text-[#0f172a]">
+                        Nuestra Historia
+                      </h2>
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: "60%" }}
@@ -102,13 +126,13 @@ export default function NosotrosPage() {
                         className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-[#079cfb] to-[#00e0ff]"
                       />
                     </div>
-                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    <div className="text-muted-foreground space-y-4 leading-relaxed">
                       <p>
-                        Aire-Max nació en 2008 con la visión de transformar la industria de la climatización en México.
-                        Comenzamos como un pequeño taller familiar y hoy somos líderes en soluciones HVAC para hogares y
-                        empresas.
+                        Aire-Max nació en 2008 con la visión de transformar la industria de la
+                        climatización en México. Comenzamos como un pequeño taller familiar y hoy
+                        somos líderes en soluciones HVAC para hogares y empresas.
                       </p>
-                      <p className="text-[#037ecc] font-semibold italic">
+                      <p className="font-semibold text-[#037ecc] italic">
                         "Cada instalación es una promesa de confort y confianza."
                       </p>
                     </div>
@@ -119,8 +143,8 @@ export default function NosotrosPage() {
                         { icon: Wrench, text: "Garantía Certificada" },
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10 flex items-center justify-center">
-                            <item.icon className="w-5 h-5 text-[#037ecc]" />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10">
+                            <item.icon className="h-5 w-5 text-[#037ecc]" />
                           </div>
                           <span className="text-sm font-medium text-[#0f172a]">{item.text}</span>
                         </div>
@@ -128,11 +152,13 @@ export default function NosotrosPage() {
                     </div>
                   </div>
                   <div className="relative h-64 md:h-auto">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#079cfb]/20 to-transparent" />
-                    <img
+                    <div className="absolute inset-0 z-10 bg-gradient-to-br from-[#079cfb]/20 to-transparent" />
+                    <Image
                       src="/modern-air-conditioning-unit-installation-professi.jpg"
                       alt="Instalación profesional"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
                 </div>
@@ -145,12 +171,14 @@ export default function NosotrosPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-6xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-6xl"
           >
-            <Card className="border-2 border-transparent hover:border-primary/20 transition-all bg-gradient-to-b from-[#f8fbff] to-[#ffffff]">
-              <CardContent className="p-8 md:p-10 space-y-6">
-                <h2 className="text-3xl font-serif font-bold text-[#0f172a] text-center">Certificaciones y Alianzas</h2>
-                <div className="grid md:grid-cols-3 gap-4">
+            <Card className="hover:border-primary/20 border-2 border-transparent bg-gradient-to-b from-[#f8fbff] to-[#ffffff] transition-all">
+              <CardContent className="space-y-6 p-8 md:p-10">
+                <h2 className="text-center font-serif text-3xl font-bold text-[#0f172a]">
+                  Certificaciones y Alianzas
+                </h2>
+                <div className="grid gap-4 md:grid-cols-3">
                   {[
                     "Certificación EPA 608",
                     "Partner Oficial Daikin",
@@ -166,9 +194,9 @@ export default function NosotrosPage() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
                       whileHover={{ scale: 1.02, borderColor: "rgba(7,156,251,0.3)" }}
-                      className="flex items-center gap-3 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-[rgba(7,156,251,0.08)] hover:border-[#079cfb] hover:shadow-[0_0_20px_rgba(7,156,251,0.15)] transition-all duration-300"
+                      className="flex items-center gap-3 rounded-xl border border-[rgba(7,156,251,0.08)] bg-white/60 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#079cfb] hover:shadow-[0_0_20px_rgba(7,156,251,0.15)]"
                     >
-                      <Star className="w-5 h-5 text-[#037ecc] flex-shrink-0" />
+                      <Star className="h-5 w-5 flex-shrink-0 text-[#037ecc]" />
                       <span className="text-sm font-medium text-[#0f172a]">{cert}</span>
                     </motion.div>
                   ))}
@@ -182,27 +210,34 @@ export default function NosotrosPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-6xl mx-auto"
+            className="mx-auto max-w-6xl"
           >
-            <Card className="border-2 border-transparent hover:border-primary/20 transition-all relative overflow-hidden">
+            <Card className="hover:border-primary/20 relative overflow-hidden border-2 border-transparent transition-all">
               <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-[#079cfb] animate-pulse-slow" />
-                <div className="absolute top-1/2 right-1/3 w-3 h-3 rounded-full bg-[#079cfb] animate-pulse-slow delay-100" />
-                <div className="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-[#079cfb] animate-pulse-slow delay-200" />
+                <div className="animate-pulse-slow absolute top-1/4 left-1/4 h-3 w-3 rounded-full bg-[#079cfb]" />
+                <div className="animate-pulse-slow absolute top-1/2 right-1/3 h-3 w-3 rounded-full bg-[#079cfb] delay-100" />
+                <div className="animate-pulse-slow absolute bottom-1/3 left-1/2 h-3 w-3 rounded-full bg-[#079cfb] delay-200" />
               </div>
-              <CardContent className="p-8 md:p-10 space-y-6 relative z-10">
-                <h2 className="text-3xl font-serif font-bold text-[#0f172a] text-center">Cobertura Nacional</h2>
+              <CardContent className="relative z-10 space-y-6 p-8 md:p-10">
+                <h2 className="text-center font-serif text-3xl font-bold text-[#0f172a]">
+                  Cobertura Nacional
+                </h2>
                 <div className="flex flex-col items-center gap-6">
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    transition={{
+                      duration: 3,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                    }}
                   >
-                    <MapPin className="w-12 h-12 text-[#037ecc]" />
+                    <MapPin className="h-12 w-12 text-[#037ecc]" />
                   </motion.div>
-                  <p className="text-center text-muted-foreground leading-relaxed max-w-2xl">
-                    Brindamos servicio en toda la República Mexicana con tiempos de respuesta garantizados
+                  <p className="text-muted-foreground max-w-2xl text-center leading-relaxed">
+                    Brindamos servicio en toda la República Mexicana con tiempos de respuesta
+                    garantizados
                   </p>
-                  <div className="grid md:grid-cols-3 gap-6 w-full">
+                  <div className="grid w-full gap-6 md:grid-cols-3">
                     {[
                       { zone: "Zona Metropolitana", time: "24h" },
                       { zone: "Ciudades principales", time: "48h" },
@@ -214,9 +249,9 @@ export default function NosotrosPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: i * 0.1 }}
-                        className="text-center p-6 rounded-xl bg-gradient-to-br from-[#079cfb]/5 to-[#00e0ff]/5 border border-[rgba(7,156,251,0.1)]"
+                        className="rounded-xl border border-[rgba(7,156,251,0.1)] bg-gradient-to-br from-[#079cfb]/5 to-[#00e0ff]/5 p-6 text-center"
                       >
-                        <div className="text-sm text-muted-foreground mb-2">{item.zone}</div>
+                        <div className="text-muted-foreground mb-2 text-sm">{item.zone}</div>
                         <div className="text-2xl font-bold text-[#037ecc]">{item.time}</div>
                       </motion.div>
                     ))}
@@ -228,7 +263,7 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white">
+      <section className="bg-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -236,35 +271,38 @@ export default function NosotrosPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="bg-gradient-to-br from-[#037ecc] to-[#00baff] text-primary-foreground border-0 overflow-hidden relative">
+            <Card className="text-primary-foreground relative overflow-hidden border-0 bg-gradient-to-br from-[#037ecc] to-[#00baff]">
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')]" />
+                <div className="absolute top-0 left-0 h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')]" />
               </div>
-              <CardContent className="relative py-12 md:py-16 text-center space-y-6">
-                <div className="flex justify-center gap-8 mb-4">
+              <CardContent className="relative space-y-6 py-12 text-center md:py-16">
+                <div className="mb-4 flex justify-center gap-8">
                   {[
                     { icon: Shield, text: "Garantía 24h" },
                     { icon: Award, text: "Técnicos certificados" },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <item.icon className="w-5 h-5" />
+                      <item.icon className="h-5 w-5" />
                       <span className="text-sm font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold">¿Listo para trabajar con nosotros?</h2>
-                <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                  Únete a miles de clientes satisfechos que confían en Aire-Max para sus necesidades de climatización
+                <h2 className="font-serif text-3xl font-bold md:text-4xl">
+                  ¿Listo para trabajar con nosotros?
+                </h2>
+                <p className="mx-auto max-w-2xl text-lg opacity-90">
+                  Únete a miles de clientes satisfechos que confían en Aire-Max para sus necesidades
+                  de climatización
                 </p>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <Button
                     size="lg"
                     variant="secondary"
                     asChild
-                    className="bg-white text-[#037ecc] hover:bg-white/90 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    className="group bg-white text-[#037ecc] shadow-lg transition-all duration-300 hover:bg-white/90 hover:shadow-xl"
                   >
                     <Link href="/contacto">
-                      <Phone className="mr-2 h-5 w-5 group-hover:animate-pulse-icon" />
+                      <Phone className="group-hover:animate-pulse-icon mr-2 h-5 w-5" />
                       Contactar Ahora
                     </Link>
                   </Button>

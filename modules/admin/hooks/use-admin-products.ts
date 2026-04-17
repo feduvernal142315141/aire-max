@@ -58,7 +58,7 @@ export function useAdminProducts(): UseAdminProductsResult {
   const { toast } = useToast()
 
   const [products, setProducts] = useState<ProductAdminView[]>(productsData)
-  const [filters, setFilters] = useState<ProductFilters>(defaultFilters)
+  const [filters, setFilters] = useState<ProductFilters>(readPersistedFilters)
   const [search, setSearch] = useState("")
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
@@ -67,13 +67,7 @@ export function useAdminProducts(): UseAdminProductsResult {
   const [draft, setDraft] = useState<ProductAdminView>(initialDraft)
   const [tagInput, setTagInput] = useState("")
 
-  useEffect(() => {
-    const saved = window.localStorage.getItem(FILTERS_KEY)
-    if (saved) {
-      setFilters(JSON.parse(saved) as ProductFilters)
-    }
-  }, [])
-
+  // Persistencia: solo escritura en efecto (no hay setState aquí — el read vive en lazy initializer).
   useEffect(() => {
     window.localStorage.setItem(FILTERS_KEY, JSON.stringify(filters))
   }, [filters])
@@ -92,16 +86,26 @@ export function useAdminProducts(): UseAdminProductsResult {
 
     return products.filter((product) => {
       if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) return false
-      if (filters.categories.length > 0 && !filters.categories.includes(product.category)) return false
-      if (filters.capacities.length > 0 && !filters.capacities.includes(product.capacity)) return false
+      if (filters.categories.length > 0 && !filters.categories.includes(product.category))
+        return false
+      if (filters.capacities.length > 0 && !filters.capacities.includes(product.capacity))
+        return false
       if (filters.status !== "all" && product.status !== filters.status) return false
 
-      if (product.price < filters.priceRange.min || product.price > filters.priceRange.max) return false
+      if (product.price < filters.priceRange.min || product.price > filters.priceRange.max)
+        return false
 
       if (!query) return true
 
       const tagsPart = product.tags?.join(" ") ?? ""
-      return [product.name, product.brand, product.category, product.capacity, product.sku ?? "", tagsPart]
+      return [
+        product.name,
+        product.brand,
+        product.category,
+        product.capacity,
+        product.sku ?? "",
+        tagsPart,
+      ]
         .join(" ")
         .toLowerCase()
         .includes(query)
@@ -132,7 +136,9 @@ export function useAdminProducts(): UseAdminProductsResult {
   }
 
   function toggleSelect(id: string) {
-    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    )
   }
 
   function toggleAllVisible() {
@@ -200,7 +206,10 @@ export function useAdminProducts(): UseAdminProductsResult {
 
     if (editingId) {
       setProducts((prev) => prev.map((p) => (p.id === editingId ? draft : p)))
-      toast({ title: "Producto actualizado", description: `${draft.name} se guardó correctamente.` })
+      toast({
+        title: "Producto actualizado",
+        description: `${draft.name} se guardó correctamente.`,
+      })
     } else {
       setProducts((prev) => [draft, ...prev])
       toast({ title: "Producto creado", description: `${draft.name} se agregó al catálogo.` })
@@ -211,7 +220,10 @@ export function useAdminProducts(): UseAdminProductsResult {
 
   function removeProduct(id: string) {
     setProducts((prev) => prev.filter((p) => p.id !== id))
-    toast({ title: "Producto eliminado", description: "El producto mock fue eliminado del listado." })
+    toast({
+      title: "Producto eliminado",
+      description: "El producto mock fue eliminado del listado.",
+    })
   }
 
   function addTag() {
@@ -262,5 +274,21 @@ export function useAdminProducts(): UseAdminProductsResult {
     removeProduct,
     addTag,
     quickAdjustStock,
+  }
+}
+
+/**
+ * Lee los filtros persistidos de localStorage.
+ * Implementado como lazy initializer para evitar el anti-patrón de `setState` dentro
+ * de `useEffect` en la primera carga (React Compiler v7 lo flaggea como cascading render).
+ */
+function readPersistedFilters(): ProductFilters {
+  if (typeof window === "undefined") return defaultFilters
+  try {
+    const saved = window.localStorage.getItem(FILTERS_KEY)
+    if (!saved) return defaultFilters
+    return JSON.parse(saved) as ProductFilters
+  } catch {
+    return defaultFilters
   }
 }
