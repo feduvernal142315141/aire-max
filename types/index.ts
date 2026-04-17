@@ -61,3 +61,14 @@ export type {
   HomeService,
   HomePopularProduct,
 } from "./content.types"
+
+// ─── Currency & Settings Types ───────────────────────────────────────────────
+export { CURRENCY_CODE, SUPPORTED_CURRENCIES } from "./currency.types"
+export type { CurrencyCode, CurrencyInfo } from "./currency.types"
+
+export { DEFAULT_SETTINGS } from "./settings.types"
+export type { AppSettings } from "./settings.types"
+
+// ─── Additional Domain Types (Supabase) ──────────────────────────────────────
+export type { Customer } from "./customer.types"
+export type { ContactSubmission, ContactSubmissionStatus } from "./contact-submission.types"

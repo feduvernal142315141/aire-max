@@ -94,6 +94,7 @@ export interface Product {
   slug?: string
   metaTitle?: string
   metaDescription?: string
+  currencyCode?: string
 }
 
 // Alias semántico para el admin panel — mismo shape que Product, expresa intención.
