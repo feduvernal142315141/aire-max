@@ -6,7 +6,7 @@ export {
   PRODUCT_STATUS,
   ENERGY_RATING,
   SORT_OPTION,
-} from "./product.types";
+} from "./product.types"
 export type {
   ProductCategory,
   ProductBrand,
@@ -20,34 +20,25 @@ export type {
   PriceRange,
   CategoryOption,
   CapacityOption,
-} from "./product.types";
+} from "./product.types"
 
 // ─── Plan Types ──────────────────────────────────────────────────────────────
-export { PLAN_TIER, PLAN_PERIOD } from "./plan.types";
-export type {
-  PlanTier,
-  PlanPeriod,
-  MaintenancePlan,
-  InstallationPlan,
-} from "./plan.types";
+export { PLAN_TIER, PLAN_PERIOD } from "./plan.types"
+export type { PlanTier, PlanPeriod, MaintenancePlan, InstallationPlan } from "./plan.types"
 
 // ─── Service Types ───────────────────────────────────────────────────────────
-export { SERVICE_TYPE } from "./service.types";
+export { SERVICE_TYPE } from "./service.types"
 export type {
   ServiceType,
   Service,
   InstallationStep,
   MaintenanceSection,
   MaintenanceBenefit,
-} from "./service.types";
+} from "./service.types"
 
 // ─── Contact Types ───────────────────────────────────────────────────────────
-export { SERVICE_INTEREST } from "./contact.types";
-export type {
-  ServiceInterest,
-  ContactFormData,
-  ContactInfo,
-} from "./contact.types";
+export { SERVICE_INTEREST } from "./contact.types"
+export type { ServiceInterest, ContactFormData, ContactInfo } from "./contact.types"
 
 // ─── Company Types ───────────────────────────────────────────────────────────
 export type {
@@ -59,7 +50,7 @@ export type {
   CoverageZone,
   CompanyStat,
   CompanyStats,
-} from "./company.types";
+} from "./company.types"
 
 // ─── Content Types ───────────────────────────────────────────────────────────
 export type {
@@ -69,4 +60,4 @@ export type {
   HomeBenefit,
   HomeService,
   HomePopularProduct,
-} from "./content.types";
+} from "./content.types"

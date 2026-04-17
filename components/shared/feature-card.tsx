@@ -1,12 +1,12 @@
-import { cn } from "@/lib/utils";
-import { IconResolver } from "./icon-resolver";
+import { cn } from "@/lib/utils"
+import { IconResolver } from "./icon-resolver"
 
 interface FeatureCardProps {
-  icon: string;
-  title: string;
-  description: string;
-  className?: string;
-  variant?: "default" | "compact";
+  icon: string
+  title: string
+  description: string
+  className?: string
+  variant?: "default" | "compact"
 }
 
 export function FeatureCard({
@@ -19,28 +19,25 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        "group relative bg-white/70 backdrop-blur-lg border border-[#079cfb]/8 rounded-2xl shadow-[0_4px_40px_rgba(7,156,251,0.05)] hover:shadow-[0_8px_50px_rgba(7,156,251,0.12)] transition-all duration-500 hover:-translate-y-2",
+        "group relative rounded-2xl border border-[#079cfb]/8 bg-white/70 shadow-[0_4px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_50px_rgba(7,156,251,0.12)]",
         variant === "default" ? "p-8" : "p-6",
         className,
       )}
     >
       {/* Hover glow */}
-      <div className="absolute top-0 left-0 w-32 h-32 bg-[#00baff] opacity-0 group-hover:opacity-20 blur-3xl rounded-full transition-opacity duration-500" />
+      <div className="absolute top-0 left-0 h-32 w-32 rounded-full bg-[#00baff] opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-20" />
 
       {/* Icon */}
       <div className={cn("relative", variant === "default" ? "mb-6" : "mb-4")}>
         <div
           className={cn(
-            "rounded-full bg-[#079cfb]/8 backdrop-blur-sm border border-white/60 flex items-center justify-center shadow-[0_0_20px_rgba(7,156,251,0.2)] group-hover:scale-110 transition-transform duration-300",
-            variant === "default" ? "w-[60px] h-[60px]" : "w-12 h-12",
+            "flex items-center justify-center rounded-full border border-white/60 bg-[#079cfb]/8 shadow-[0_0_20px_rgba(7,156,251,0.2)] backdrop-blur-sm transition-transform duration-300 group-hover:scale-110",
+            variant === "default" ? "h-[60px] w-[60px]" : "h-12 w-12",
           )}
         >
           <IconResolver
             name={icon}
-            className={cn(
-              "text-[#037ecc]",
-              variant === "default" ? "w-7 h-7" : "w-6 h-6",
-            )}
+            className={cn("text-[#037ecc]", variant === "default" ? "h-7 w-7" : "h-6 w-6")}
           />
         </div>
       </div>
@@ -57,7 +54,7 @@ export function FeatureCard({
         </h3>
         <p
           className={cn(
-            "text-[#475569] leading-relaxed",
+            "leading-relaxed text-[#475569]",
             variant === "default" ? "text-[15px]" : "text-sm",
           )}
         >
@@ -66,7 +63,7 @@ export function FeatureCard({
       </div>
 
       {/* Hover border */}
-      <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#079cfb]/20 transition-colors duration-500" />
+      <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-colors duration-500 group-hover:border-[#079cfb]/20" />
     </div>
-  );
+  )
 }

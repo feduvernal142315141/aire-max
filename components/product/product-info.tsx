@@ -19,7 +19,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       <div className="flex flex-wrap gap-2">
         {product.popular && (
           <Badge className="bg-accent text-accent-foreground">
-            <Star className="w-3 h-3 mr-1 fill-current" />
+            <Star className="mr-1 h-3 w-3 fill-current" />
             Popular
           </Badge>
         )}
@@ -31,24 +31,27 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* Title and Brand */}
       <div>
         <p className="text-muted-foreground mb-1">{product.brand}</p>
-        <h1 className="text-3xl md:text-4xl font-serif font-bold text-balance">{product.name}</h1>
+        <h1 className="font-serif text-3xl font-bold text-balance md:text-4xl">{product.name}</h1>
       </div>
 
       {/* Price */}
       <div className="space-y-2">
         {product.originalPrice && (
           <div className="flex items-center gap-3">
-            <p className="text-lg text-muted-foreground line-through">${product.originalPrice.toFixed(2)}</p>
+            <p className="text-muted-foreground text-lg line-through">
+              ${product.originalPrice.toFixed(2)}
+            </p>
             <Badge variant="destructive">
               Ahorra ${(product.originalPrice - product.price).toFixed(2)} (
-              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%)
+              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}
+              %)
             </Badge>
           </div>
         )}
         <div className="flex items-baseline gap-2">
-          <p className="text-4xl font-bold text-primary">${product.price.toFixed(2)}</p>
+          <p className="text-primary text-4xl font-bold">${product.price.toFixed(2)}</p>
         </div>
-        <p className="text-sm text-muted-foreground">Instalación profesional incluida</p>
+        <p className="text-muted-foreground text-sm">Instalación profesional incluida</p>
       </div>
 
       <Separator />
@@ -56,19 +59,19 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* Quick Info */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="text-sm text-muted-foreground">Capacidad</p>
+          <p className="text-muted-foreground text-sm">Capacidad</p>
           <p className="font-semibold">{product.capacity} BTU</p>
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">Tipo</p>
+          <p className="text-muted-foreground text-sm">Tipo</p>
           <p className="font-semibold capitalize">{product.category.replace("-", " ")}</p>
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">Eficiencia</p>
+          <p className="text-muted-foreground text-sm">Eficiencia</p>
           <p className="font-semibold">{product.energyRating}</p>
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">Tecnología</p>
+          <p className="text-muted-foreground text-sm">Tecnología</p>
           <p className="font-semibold">{product.inverter ? "Inverter" : "On/Off"}</p>
         </div>
       </div>
@@ -77,17 +80,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Features */}
       <div>
-        <h3 className="font-semibold mb-3">Características principales</h3>
+        <h3 className="mb-3 font-semibold">Características principales</h3>
         <div className="flex flex-wrap gap-2">
           {product.inverter && (
             <Badge variant="outline" className="text-sm">
-              <Zap className="w-4 h-4 mr-1" />
+              <Zap className="mr-1 h-4 w-4" />
               Inverter
             </Badge>
           )}
           {product.wifi && (
             <Badge variant="outline" className="text-sm">
-              <Wifi className="w-4 h-4 mr-1" />
+              <Wifi className="mr-1 h-4 w-4" />
               Control WiFi
             </Badge>
           )}
@@ -103,7 +106,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Description */}
       <div>
-        <h3 className="font-semibold mb-2">Descripción</h3>
+        <h3 className="mb-2 font-semibold">Descripción</h3>
         <p className="text-muted-foreground leading-relaxed">{product.description}</p>
       </div>
 
@@ -115,7 +118,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             Solicitar Cotización
           </Link>
         </Button>
-        <Button size="lg" variant="outline" className="w-full text-lg bg-transparent" asChild>
+        <Button size="lg" variant="outline" className="w-full bg-transparent text-lg" asChild>
           <Link href="/contacto">
             <Phone className="mr-2 h-5 w-5" />
             Contactar Asesor
@@ -125,26 +128,26 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Benefits */}
       <Card className="bg-muted/50 border-0">
-        <CardContent className="pt-6 space-y-3">
+        <CardContent className="space-y-3 pt-6">
           <div className="flex items-start gap-3">
-            <Shield className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <Shield className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
             <div>
-              <p className="font-semibold text-sm">Garantía extendida</p>
-              <p className="text-sm text-muted-foreground">Hasta 5 años en equipo e instalación</p>
+              <p className="text-sm font-semibold">Garantía extendida</p>
+              <p className="text-muted-foreground text-sm">Hasta 5 años en equipo e instalación</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <Truck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <Truck className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
             <div>
-              <p className="font-semibold text-sm">Instalación en 24-48h</p>
-              <p className="text-sm text-muted-foreground">Servicio rápido y profesional</p>
+              <p className="text-sm font-semibold">Instalación en 24-48h</p>
+              <p className="text-muted-foreground text-sm">Servicio rápido y profesional</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <Phone className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
             <div>
-              <p className="font-semibold text-sm">Soporte 24/7</p>
-              <p className="text-sm text-muted-foreground">Asistencia técnica siempre disponible</p>
+              <p className="text-sm font-semibold">Soporte 24/7</p>
+              <p className="text-muted-foreground text-sm">Asistencia técnica siempre disponible</p>
             </div>
           </div>
         </CardContent>

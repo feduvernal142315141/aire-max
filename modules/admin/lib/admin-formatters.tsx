@@ -21,14 +21,18 @@ export function stockHealthBadge(stock: number) {
   const health = getStockHealth(stock)
 
   if (health === "low") {
-    return <Badge className="bg-red-500/15 text-red-700 border-red-300">🔴 Bajo stock</Badge>
+    return <Badge className="border-red-300 bg-red-500/15 text-red-700">🔴 Bajo stock</Badge>
   }
 
   if (health === "medium") {
-    return <Badge className="bg-yellow-500/15 text-yellow-700 border-yellow-300">🟡 Stock medio</Badge>
+    return (
+      <Badge className="border-yellow-300 bg-yellow-500/15 text-yellow-700">🟡 Stock medio</Badge>
+    )
   }
 
-  return <Badge className="bg-emerald-500/15 text-emerald-700 border-emerald-300">🟢 Disponible</Badge>
+  return (
+    <Badge className="border-emerald-300 bg-emerald-500/15 text-emerald-700">🟢 Disponible</Badge>
+  )
 }
 
 /**

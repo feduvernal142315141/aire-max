@@ -1,19 +1,11 @@
 // ─── Product Data ────────────────────────────────────────────────────────────
-export {
-  productsData,
-  brandsData,
-  categoriesData,
-  capacitiesData,
-} from "./products.data";
+export { productsData, brandsData, categoriesData, capacitiesData } from "./products.data"
 
 // ─── Orders Data (admin mock) ────────────────────────────────────────────────
-export { ordersData } from "./orders.data";
+export { ordersData } from "./orders.data"
 
 // ─── Plan Data ───────────────────────────────────────────────────────────────
-export {
-  maintenancePlansData,
-  installationPlansData,
-} from "./plans.data";
+export { maintenancePlansData, installationPlansData } from "./plans.data"
 
 // ─── Service Data ────────────────────────────────────────────────────────────
 export {
@@ -22,7 +14,7 @@ export {
   installationIncludesData,
   maintenanceSectionsData,
   maintenanceBenefitsData,
-} from "./services.data";
+} from "./services.data"
 
 // ─── Company Data ────────────────────────────────────────────────────────────
 export {
@@ -34,7 +26,7 @@ export {
   certificationsData,
   coverageZonesData,
   companyStatsData,
-} from "./company.data";
+} from "./company.data"
 
 // ─── Content Data ────────────────────────────────────────────────────────────
 export {
@@ -43,4 +35,4 @@ export {
   homeBenefitsData,
   homeServicesData,
   homePopularProductsData,
-} from "./content.data";
+} from "./content.data"

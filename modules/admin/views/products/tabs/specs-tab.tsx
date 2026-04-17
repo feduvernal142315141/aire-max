@@ -1,7 +1,13 @@
 "use client"
 
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { ENERGY_OPTIONS } from "@/modules/admin/lib/admin-constants"
 import type { EnergyRating, ProductAdminView, ProductCapacity } from "@/types"
@@ -20,7 +26,9 @@ export function SpecsTab({ draft, setDraft, capacities }: SpecsTabProps) {
           <Label className="text-slate-700">Capacidad (BTU)</Label>
           <Select
             value={draft.capacity}
-            onValueChange={(value) => setDraft((p) => ({ ...p, capacity: value as ProductCapacity }))}
+            onValueChange={(value) =>
+              setDraft((p) => ({ ...p, capacity: value as ProductCapacity }))
+            }
           >
             <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
               <SelectValue />
@@ -38,7 +46,9 @@ export function SpecsTab({ draft, setDraft, capacities }: SpecsTabProps) {
           <Label className="text-slate-700">Energía</Label>
           <Select
             value={draft.energyRating}
-            onValueChange={(value) => setDraft((p) => ({ ...p, energyRating: value as EnergyRating }))}
+            onValueChange={(value) =>
+              setDraft((p) => ({ ...p, energyRating: value as EnergyRating }))
+            }
           >
             <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
               <SelectValue />

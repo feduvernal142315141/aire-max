@@ -1,9 +1,4 @@
-import type {
-  Service,
-  InstallationStep,
-  MaintenanceSection,
-  MaintenanceBenefit,
-} from "@/types";
+import type { Service, InstallationStep, MaintenanceSection, MaintenanceBenefit } from "@/types"
 
 // ─── Main Services ───────────────────────────────────────────────────────────
 // From servicios/page.tsx
@@ -39,8 +34,7 @@ export const servicesData: Service[] = [
   {
     id: "reparacion",
     name: "Reparación",
-    description:
-      "Servicio técnico especializado para todo tipo de aires acondicionados y marcas.",
+    description: "Servicio técnico especializado para todo tipo de aires acondicionados y marcas.",
     features: [
       "Diagnóstico gratuito",
       "Respuesta en 24 horas",
@@ -50,7 +44,7 @@ export const servicesData: Service[] = [
     link: "/servicios/reparacion",
     icon: "Snowflake",
   },
-];
+]
 
 // ─── Installation Steps ──────────────────────────────────────────────────────
 // From instalacion/page.tsx
@@ -64,22 +58,19 @@ export const installationStepsData: InstallationStep[] = [
   {
     step: "02",
     title: "Planificación",
-    description:
-      "Diseñamos el plan de instalación y coordinamos fecha y hora contigo.",
+    description: "Diseñamos el plan de instalación y coordinamos fecha y hora contigo.",
   },
   {
     step: "03",
     title: "Instalación",
-    description:
-      "Nuestros técnicos instalan el equipo siguiendo normas de seguridad.",
+    description: "Nuestros técnicos instalan el equipo siguiendo normas de seguridad.",
   },
   {
     step: "04",
     title: "Pruebas",
-    description:
-      "Realizamos pruebas completas y te enseñamos a usar tu nuevo equipo.",
+    description: "Realizamos pruebas completas y te enseñamos a usar tu nuevo equipo.",
   },
-];
+]
 
 // ─── Installation Includes ───────────────────────────────────────────────────
 // From instalacion/page.tsx
@@ -96,7 +87,7 @@ export const installationIncludesData: string[] = [
   "Garantía de instalación por 2 años",
   "Certificado de instalación",
   "Soporte post-instalación",
-];
+]
 
 // ─── Maintenance Sections ────────────────────────────────────────────────────
 // From mantenimiento/page.tsx
@@ -107,23 +98,13 @@ export const maintenanceSectionsData: MaintenanceSection[] = [
   },
   {
     title: "Revisión Técnica",
-    items: [
-      "Nivel de refrigerante",
-      "Presión del sistema",
-      "Conexiones eléctricas",
-      "Termostato",
-    ],
+    items: ["Nivel de refrigerante", "Presión del sistema", "Conexiones eléctricas", "Termostato"],
   },
   {
     title: "Optimización",
-    items: [
-      "Ajuste de temperatura",
-      "Calibración",
-      "Lubricación",
-      "Pruebas de rendimiento",
-    ],
+    items: ["Ajuste de temperatura", "Calibración", "Lubricación", "Pruebas de rendimiento"],
   },
-];
+]
 
 // ─── Maintenance Benefits ────────────────────────────────────────────────────
 // From mantenimiento/page.tsx
@@ -148,4 +129,4 @@ export const maintenanceBenefitsData: MaintenanceBenefit[] = [
     description: "Previene reparaciones costosas",
     stat: "80%",
   },
-];
+]

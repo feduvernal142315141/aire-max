@@ -9,19 +9,21 @@ export default function MantenimientoPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-accent/5 via-background to-primary/5 py-16 md:py-24">
+      <section className="from-accent/5 via-background to-primary/5 bg-gradient-to-br py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="space-y-6">
-              <Badge className="w-fit bg-accent text-accent-foreground">Mantenimiento Preventivo</Badge>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+              <Badge className="bg-accent text-accent-foreground w-fit">
+                Mantenimiento Preventivo
+              </Badge>
+              <h1 className="font-serif text-4xl font-bold text-balance md:text-5xl">
                 Mantén tu Equipo en Óptimas Condiciones
               </h1>
-              <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-                El mantenimiento regular extiende la vida útil de tu aire acondicionado, mejora su eficiencia y reduce
-                costos de energía.
+              <p className="text-muted-foreground text-lg leading-relaxed text-pretty">
+                El mantenimiento regular extiende la vida útil de tu aire acondicionado, mejora su
+                eficiencia y reduce costos de energía.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col gap-4 pt-4 sm:flex-row">
                 <Button size="lg" asChild>
                   <Link href="/cotizacion">
                     <Calendar className="mr-2 h-5 w-5" />
@@ -41,7 +43,7 @@ export default function MantenimientoPage() {
                 src="/technician-maintaining-air-conditioner.jpg"
                 alt="Técnico realizando mantenimiento"
                 fill
-                className="object-cover rounded-2xl shadow-2xl"
+                className="rounded-2xl object-cover shadow-2xl"
               />
             </div>
           </div>
@@ -51,13 +53,13 @@ export default function MantenimientoPage() {
       {/* Maintenance Plans */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">Planes de Mantenimiento</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">Planes de Mantenimiento</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-pretty">
               Elige el plan que mejor se adapte a tus necesidades
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
             {[
               {
                 title: "Plan Básico",
@@ -114,27 +116,29 @@ export default function MantenimientoPage() {
               <Card key={index} className={plan.popular ? "border-primary border-2 shadow-lg" : ""}>
                 <CardHeader>
                   {plan.popular && (
-                    <Badge className="w-fit mb-2 bg-primary text-primary-foreground">
-                      <Star className="w-3 h-3 mr-1 fill-current" />
+                    <Badge className="bg-primary text-primary-foreground mb-2 w-fit">
+                      <Star className="mr-1 h-3 w-3 fill-current" />
                       Más Popular
                     </Badge>
                   )}
                   <CardTitle className="text-2xl">{plan.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
+                  <p className="text-muted-foreground text-sm">{plan.subtitle}</p>
                   <div className="pt-4">
                     <div className="flex items-baseline gap-1">
-                      {plan.price !== "Personalizado" && <span className="text-2xl font-bold">$</span>}
-                      <span className="text-4xl font-bold text-primary">{plan.price}</span>
+                      {plan.price !== "Personalizado" && (
+                        <span className="text-2xl font-bold">$</span>
+                      )}
+                      <span className="text-primary text-4xl font-bold">{plan.price}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{plan.period}</p>
+                    <p className="text-muted-foreground text-sm">{plan.period}</p>
                   </div>
-                  <p className="text-sm pt-2">{plan.description}</p>
+                  <p className="pt-2 text-sm">{plan.description}</p>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-3">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="text-primary mt-0.5 h-4 w-4 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -150,12 +154,14 @@ export default function MantenimientoPage() {
       </section>
 
       {/* What's Included */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">¿Qué incluye el mantenimiento?</h2>
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">
+              ¿Qué incluye el mantenimiento?
+            </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 title: "Limpieza Completa",
@@ -163,11 +169,21 @@ export default function MantenimientoPage() {
               },
               {
                 title: "Revisión Técnica",
-                items: ["Nivel de refrigerante", "Presión del sistema", "Conexiones eléctricas", "Termostato"],
+                items: [
+                  "Nivel de refrigerante",
+                  "Presión del sistema",
+                  "Conexiones eléctricas",
+                  "Termostato",
+                ],
               },
               {
                 title: "Optimización",
-                items: ["Ajuste de temperatura", "Calibración", "Lubricación", "Pruebas de rendimiento"],
+                items: [
+                  "Ajuste de temperatura",
+                  "Calibración",
+                  "Lubricación",
+                  "Pruebas de rendimiento",
+                ],
               },
             ].map((section, index) => (
               <Card key={index}>
@@ -178,7 +194,7 @@ export default function MantenimientoPage() {
                   <ul className="space-y-2">
                     {section.items.map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                        <CheckCircle2 className="text-primary h-4 w-4 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -193,10 +209,12 @@ export default function MantenimientoPage() {
       {/* Benefits */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">Beneficios del Mantenimiento Regular</h2>
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">
+              Beneficios del Mantenimiento Regular
+            </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Ahorro Energético",
@@ -220,10 +238,10 @@ export default function MantenimientoPage() {
               },
             ].map((benefit, index) => (
               <Card key={index} className="text-center">
-                <CardContent className="pt-6 space-y-3">
-                  <div className="text-4xl font-bold text-primary">{benefit.stat}</div>
-                  <h3 className="font-semibold text-lg">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                <CardContent className="space-y-3 pt-6">
+                  <div className="text-primary text-4xl font-bold">{benefit.stat}</div>
+                  <h3 className="text-lg font-semibold">{benefit.title}</h3>
+                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
                 </CardContent>
               </Card>
             ))}

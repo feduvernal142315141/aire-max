@@ -3,7 +3,13 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { tupleToRange } from "@/lib/range"
 import { formatCurrency } from "@/modules/admin/lib/admin-formatters"
@@ -139,7 +145,8 @@ export function ProductsFilters({
 
       <div className="space-y-2">
         <Label>
-          Precio ({formatCurrency(filters.priceRange.min)} - {formatCurrency(filters.priceRange.max)})
+          Precio ({formatCurrency(filters.priceRange.min)} -{" "}
+          {formatCurrency(filters.priceRange.max)})
         </Label>
         <Slider
           min={0}

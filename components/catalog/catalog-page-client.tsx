@@ -30,12 +30,12 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
   } = useProducts(initialProducts)
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 bg-gradient-to-b from-[#f9fcff] via-[#eaf6ff] to-[#d9f0ff] -z-10" />
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[#f9fcff] via-[#eaf6ff] to-[#d9f0ff]" />
 
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <motion.div
-          className="absolute top-20 left-10 w-96 h-96 bg-[#00baff]/5 rounded-full blur-3xl"
+          className="absolute top-20 left-10 h-96 w-96 rounded-full bg-[#00baff]/5 blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -48,7 +48,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-[#079cfb]/5 rounded-full blur-3xl"
+          className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-[#079cfb]/5 blur-3xl"
           animate={{
             x: [0, -50, 0],
             y: [0, -30, 0],
@@ -67,22 +67,28 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-center mb-6 md:mb-12"
+          className="mb-6 text-center md:mb-12"
         >
-          <div className="absolute left-1/2 -translate-x-1/2 w-[600px] h-32 bg-[rgba(7,156,251,0.08)] rounded-full blur-3xl -z-10" />
+          <div className="absolute left-1/2 -z-10 h-32 w-[600px] -translate-x-1/2 rounded-full bg-[rgba(7,156,251,0.08)] blur-3xl" />
 
-          <h1 className="text-2xl md:text-[44px] font-serif font-bold text-[#0f172a] mb-2 md:mb-3 tracking-tight">
+          <h1 className="mb-2 font-serif text-2xl font-bold tracking-tight text-[#0f172a] md:mb-3 md:text-[44px]">
             Catálogo de Equipos{" "}
-            <span className="bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-transparent">Aire-Max</span>
+            <span className="bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-transparent">
+              Aire-Max
+            </span>
           </h1>
-          <p className="text-sm md:text-lg text-[#475569] opacity-90 max-w-2xl mx-auto px-4">
+          <p className="mx-auto max-w-2xl px-4 text-sm text-[#475569] opacity-90 md:text-lg">
             Encuentra el sistema ideal para tu espacio
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[320px_1fr] gap-8">
+        <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
           <aside>
-            <ProductFilters filters={filters} onFiltersChange={setFilters} activeFiltersCount={activeFiltersCount} />
+            <ProductFilters
+              filters={filters}
+              onFiltersChange={setFilters}
+              activeFiltersCount={activeFiltersCount}
+            />
           </aside>
 
           <div className="space-y-6">
@@ -90,11 +96,12 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 md:p-5 rounded-2xl bg-white/70 backdrop-blur-lg border border-[rgba(7,156,251,0.08)] shadow-[0_10px_40px_rgba(7,156,251,0.05)]"
+              className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgba(7,156,251,0.08)] bg-white/70 p-4 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg sm:flex-row sm:items-center md:p-5"
             >
-              <div className="flex items-center gap-3 flex-wrap">
-                <p className="text-sm md:text-base font-semibold text-[#0f172a]">
-                  {filteredProducts.length} {filteredProducts.length === 1 ? "producto" : "productos"}
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-sm font-semibold text-[#0f172a] md:text-base">
+                  {filteredProducts.length}{" "}
+                  {filteredProducts.length === 1 ? "producto" : "productos"}
                 </p>
                 {activeFiltersCount > 0 && (
                   <motion.div
@@ -102,15 +109,15 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   >
-                    <Badge className="bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white border-0 shadow-[0_0_10px_rgba(7,156,251,0.3)]">
+                    <Badge className="border-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_0_10px_rgba(7,156,251,0.3)]">
                       {activeFiltersCount} {activeFiltersCount === 1 ? "filtro" : "filtros"}
                     </Badge>
                   </motion.div>
                 )}
               </div>
 
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <div className="flex items-center gap-1 p-1 rounded-lg bg-white/60 border border-[rgba(7,156,251,0.08)]">
+              <div className="flex w-full items-center gap-3 sm:w-auto">
+                <div className="flex items-center gap-1 rounded-lg border border-[rgba(7,156,251,0.08)] bg-white/60 p-1">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -121,7 +128,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                         : ""
                     }`}
                   >
-                    <Grid3x3 className="w-4 h-4" />
+                    <Grid3x3 className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="ghost"
@@ -133,7 +140,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                         : ""
                     }`}
                   >
-                    <List className="w-4 h-4" />
+                    <List className="h-4 w-4" />
                   </Button>
                 </div>
 
@@ -150,7 +157,9 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   className={`grid gap-6 md:gap-10 ${
-                    viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
+                    viewMode === "grid"
+                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                      : "grid-cols-1"
                   }`}
                 >
                   {filteredProducts.map((product, index) => (
@@ -175,14 +184,14 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="text-center py-16 md:py-20 px-4"
+                  className="px-4 py-16 text-center md:py-20"
                 >
-                  <div className="max-w-md mx-auto p-8 md:p-10 rounded-2xl bg-white/70 backdrop-blur-lg border border-[rgba(7,156,251,0.08)] shadow-[0_10px_40px_rgba(7,156,251,0.05)]">
-                    <div className="text-6xl mb-4 opacity-20">❄️</div>
-                    <p className="text-lg font-semibold text-[#0f172a] mb-2">
+                  <div className="mx-auto max-w-md rounded-2xl border border-[rgba(7,156,251,0.08)] bg-white/70 p-8 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg md:p-10">
+                    <div className="mb-4 text-6xl opacity-20">❄️</div>
+                    <p className="mb-2 text-lg font-semibold text-[#0f172a]">
                       No encontramos equipos con esas características
                     </p>
-                    <p className="text-sm text-[#475569] opacity-85 mb-6">
+                    <p className="mb-6 text-sm text-[#475569] opacity-85">
                       Intenta ajustar los filtros para ver más resultados
                     </p>
                     <Link
@@ -190,8 +199,8 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button className="bg-gradient-to-r from-[#00d86a] to-[#00a34b] text-white hover:shadow-[0_8px_30px_rgba(0,216,106,0.3)] transition-all duration-300">
-                        <MessageCircle className="w-4 h-4 mr-2 animate-pulse-slow" />
+                      <Button className="bg-gradient-to-r from-[#00d86a] to-[#00a34b] text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,216,106,0.3)]">
+                        <MessageCircle className="animate-pulse-slow mr-2 h-4 w-4" />
                         Habla con un asesor
                       </Button>
                     </Link>

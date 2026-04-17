@@ -9,19 +9,19 @@ export default function InstalacionPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 md:py-24">
+      <section className="from-primary/5 via-background to-accent/5 bg-gradient-to-br py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="space-y-6">
               <Badge className="w-fit">Instalación Profesional</Badge>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+              <h1 className="font-serif text-4xl font-bold text-balance md:text-5xl">
                 Instalación Certificada con Garantía
               </h1>
-              <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-                Nuestros técnicos certificados instalan tu aire acondicionado siguiendo las mejores prácticas y normas
-                de seguridad.
+              <p className="text-muted-foreground text-lg leading-relaxed text-pretty">
+                Nuestros técnicos certificados instalan tu aire acondicionado siguiendo las mejores
+                prácticas y normas de seguridad.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col gap-4 pt-4 sm:flex-row">
                 <Button size="lg" asChild>
                   <Link href="/cotizacion">
                     <Calendar className="mr-2 h-5 w-5" />
@@ -41,7 +41,7 @@ export default function InstalacionPage() {
                 src="/technician-installing-air-conditioner.jpg"
                 alt="Técnico instalando aire acondicionado"
                 fill
-                className="object-cover rounded-2xl shadow-2xl"
+                className="rounded-2xl object-cover shadow-2xl"
               />
             </div>
           </div>
@@ -51,18 +51,19 @@ export default function InstalacionPage() {
       {/* Process */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">Proceso de Instalación</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">Proceso de Instalación</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-pretty">
               Un proceso simple y profesional en 4 pasos
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 step: "01",
                 title: "Evaluación",
-                description: "Visitamos tu espacio para evaluar las necesidades y determinar la mejor ubicación.",
+                description:
+                  "Visitamos tu espacio para evaluar las necesidades y determinar la mejor ubicación.",
               },
               {
                 step: "02",
@@ -81,10 +82,12 @@ export default function InstalacionPage() {
               },
             ].map((item, index) => (
               <Card key={index}>
-                <CardContent className="pt-6 space-y-4">
-                  <div className="text-4xl font-bold text-primary/20">{item.step}</div>
+                <CardContent className="space-y-4 pt-6">
+                  <div className="text-primary/20 text-4xl font-bold">{item.step}</div>
                   <h3 className="text-xl font-semibold">{item.title}</h3>
-                  <p className="text-muted-foreground text-pretty leading-relaxed">{item.description}</p>
+                  <p className="text-muted-foreground leading-relaxed text-pretty">
+                    {item.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -93,13 +96,15 @@ export default function InstalacionPage() {
       </section>
 
       {/* What's Included */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold">¿Qué incluye la instalación?</h2>
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12 space-y-4 text-center">
+              <h2 className="font-serif text-3xl font-bold md:text-4xl">
+                ¿Qué incluye la instalación?
+              </h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               {[
                 "Visita técnica previa sin costo",
                 "Instalación de unidad interior y exterior",
@@ -114,8 +119,8 @@ export default function InstalacionPage() {
                 "Certificado de instalación",
                 "Soporte post-instalación",
               ].map((item, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-background">
-                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div key={index} className="bg-background flex items-start gap-3 rounded-lg p-4">
+                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -127,48 +132,67 @@ export default function InstalacionPage() {
       {/* Pricing */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">Precios de Instalación</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">Precios de Instalación</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-pretty">
               Precios transparentes sin sorpresas
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
             {[
               {
                 title: "Split Básico",
                 price: "Incluido",
                 description: "Con la compra del equipo",
-                features: ["Hasta 18,000 BTU", "Tubería hasta 3m", "1 perforación", "Garantía 2 años"],
+                features: [
+                  "Hasta 18,000 BTU",
+                  "Tubería hasta 3m",
+                  "1 perforación",
+                  "Garantía 2 años",
+                ],
               },
               {
                 title: "Split Premium",
                 price: "$150",
                 description: "Instalación adicional",
-                features: ["24,000 - 36,000 BTU", "Tubería hasta 5m", "2 perforaciones", "Garantía 3 años"],
+                features: [
+                  "24,000 - 36,000 BTU",
+                  "Tubería hasta 5m",
+                  "2 perforaciones",
+                  "Garantía 3 años",
+                ],
                 popular: true,
               },
               {
                 title: "Cassette/Piso-Techo",
                 price: "$350",
                 description: "Instalación especializada",
-                features: ["Cualquier capacidad", "Instalación compleja", "Múltiples perforaciones", "Garantía 5 años"],
+                features: [
+                  "Cualquier capacidad",
+                  "Instalación compleja",
+                  "Múltiples perforaciones",
+                  "Garantía 5 años",
+                ],
               },
             ].map((plan, index) => (
               <Card key={index} className={plan.popular ? "border-primary border-2" : ""}>
                 <CardHeader>
-                  {plan.popular && <Badge className="w-fit mb-2 bg-primary text-primary-foreground">Más Popular</Badge>}
+                  {plan.popular && (
+                    <Badge className="bg-primary text-primary-foreground mb-2 w-fit">
+                      Más Popular
+                    </Badge>
+                  )}
                   <CardTitle className="text-2xl">{plan.title}</CardTitle>
                   <div className="pt-4">
-                    <div className="text-3xl font-bold text-primary">{plan.price}</div>
-                    <p className="text-sm text-muted-foreground">{plan.description}</p>
+                    <div className="text-primary text-3xl font-bold">{plan.price}</div>
+                    <p className="text-muted-foreground text-sm">{plan.description}</p>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-2">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                        <CheckCircle2 className="text-primary h-4 w-4 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}

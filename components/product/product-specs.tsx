@@ -32,7 +32,7 @@ export function ProductSpecs({ product }: ProductSpecsProps) {
           <TableBody>
             {specs.map((spec, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium w-1/3">{spec.label}</TableCell>
+                <TableCell className="w-1/3 font-medium">{spec.label}</TableCell>
                 <TableCell className="capitalize">{spec.value}</TableCell>
               </TableRow>
             ))}

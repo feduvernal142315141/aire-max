@@ -1,4 +1,4 @@
-import type { MaintenancePlan, InstallationPlan } from "@/types";
+import type { MaintenancePlan, InstallationPlan } from "@/types"
 
 // ─── Maintenance Plans — Single Source of Truth ──────────────────────────────
 // Canonical pricing from planes/page.tsx (customer-facing marketing page).
@@ -60,7 +60,7 @@ export const maintenancePlansData: MaintenancePlan[] = [
     popular: false,
     visitsPerYear: "unlimited",
   },
-];
+]
 
 // ─── Installation Plans — Single Source of Truth ─────────────────────────────
 // From instalacion/page.tsx
@@ -70,12 +70,7 @@ export const installationPlansData: InstallationPlan[] = [
     title: "Split Básico",
     price: "Incluido",
     description: "Con la compra del equipo",
-    features: [
-      "Hasta 18,000 BTU",
-      "Tubería hasta 3m",
-      "1 perforación",
-      "Garantía 2 años",
-    ],
+    features: ["Hasta 18,000 BTU", "Tubería hasta 3m", "1 perforación", "Garantía 2 años"],
     popular: false,
   },
   {
@@ -83,12 +78,7 @@ export const installationPlansData: InstallationPlan[] = [
     title: "Split Premium",
     price: "$150",
     description: "Instalación adicional",
-    features: [
-      "24,000 - 36,000 BTU",
-      "Tubería hasta 5m",
-      "2 perforaciones",
-      "Garantía 3 años",
-    ],
+    features: ["24,000 - 36,000 BTU", "Tubería hasta 5m", "2 perforaciones", "Garantía 3 años"],
     popular: true,
   },
   {
@@ -104,4 +94,4 @@ export const installationPlansData: InstallationPlan[] = [
     ],
     popular: false,
   },
-];
+]

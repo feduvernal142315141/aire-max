@@ -57,7 +57,9 @@ export function PricingTab({ draft, setDraft }: PricingTabProps) {
       <div className="mt-4 flex items-center justify-between rounded-2xl border border-slate-200/80 bg-slate-50/80 p-3">
         <div>
           <p className="font-medium text-slate-800">Estado</p>
-          <p className="text-xs text-muted-foreground">Activar o desactivar visibilidad del producto.</p>
+          <p className="text-muted-foreground text-xs">
+            Activar o desactivar visibilidad del producto.
+          </p>
         </div>
         <Switch
           checked={draft.status === "active"}

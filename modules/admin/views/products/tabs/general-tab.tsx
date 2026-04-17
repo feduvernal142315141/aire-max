@@ -6,7 +6,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { CATEGORY_OPTIONS } from "@/modules/admin/lib/admin-constants"
 import type { ProductAdminView, ProductBrand, ProductCategory } from "@/types"
@@ -63,7 +69,9 @@ export function GeneralTab({
           <Label className="text-slate-700">Categoría</Label>
           <Select
             value={draft.category}
-            onValueChange={(value) => setDraft((p) => ({ ...p, category: value as ProductCategory }))}
+            onValueChange={(value) =>
+              setDraft((p) => ({ ...p, category: value as ProductCategory }))
+            }
           >
             <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
               <SelectValue />

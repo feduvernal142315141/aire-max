@@ -10,7 +10,7 @@ interface InventoryViewProps {
 
 export function InventoryView({ products, onAdjustStock }: InventoryViewProps) {
   return (
-    <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+    <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
       <CardHeader>
         <CardTitle>Inventario</CardTitle>
         <CardDescription>Alertas por salud de stock + ajustes rápidos.</CardDescription>
@@ -23,7 +23,7 @@ export function InventoryView({ products, onAdjustStock }: InventoryViewProps) {
           >
             <div>
               <p className="font-medium">{product.name}</p>
-              <p className="text-sm text-muted-foreground">Stock actual: {product.stock ?? 0}</p>
+              <p className="text-muted-foreground text-sm">Stock actual: {product.stock ?? 0}</p>
             </div>
             <div className="flex items-center gap-2">
               {stockHealthBadge(product.stock ?? 0)}

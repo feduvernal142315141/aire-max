@@ -1,5 +1,6 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { products } from "@/lib/products"
+import { getProductById, getProducts, getRelatedProducts } from "@/services"
 import { ProductGallery } from "@/components/product/product-gallery"
 import { ProductInfo } from "@/components/product/product-info"
 import { ProductSpecs } from "@/components/product/product-specs"
@@ -14,28 +15,57 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-export function generateStaticParams() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const product = await getProductById(id)
+
+  if (!product) {
+    return { title: "Producto no encontrado | Aire-Max" }
+  }
+
+  const description = product.description.slice(0, 160)
+
+  return {
+    title: `${product.name} | Aire-Max`,
+    description,
+    openGraph: {
+      title: `${product.name} — Aire-Max`,
+      description,
+      images: [product.image],
+      type: "website",
+    },
+  }
+}
+
+export async function generateStaticParams() {
+  const products = await getProducts()
   return products.map((product) => ({
     id: product.id,
   }))
 }
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id)
+interface ProductPageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params
+  const product = await getProductById(id)
 
   if (!product) {
     notFound()
   }
 
-  // Find related products (same category or brand)
-  const relatedProducts = products
-    .filter((p) => p.id !== product.id && (p.category === product.category || p.brand === product.brand))
-    .slice(0, 4)
+  const relatedProducts = await getRelatedProducts(product, 4)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Breadcrumb */}
-      <div className="border-b bg-muted/30">
+      <div className="bg-muted/30 border-b">
         <div className="container mx-auto px-4 py-4">
           <Breadcrumb>
             <BreadcrumbList>
@@ -57,7 +87,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
       {/* Product Details */}
       <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+        <div className="mb-16 grid gap-8 lg:grid-cols-2 lg:gap-12">
           <ProductGallery product={product} />
           <ProductInfo product={product} />
         </div>

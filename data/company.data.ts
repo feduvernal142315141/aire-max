@@ -6,14 +6,13 @@ import type {
   TrustBadge,
   CoverageZone,
   CompanyStats,
-} from "@/types";
+} from "@/types"
 
 // ─── WhatsApp Config — Single Source of Truth ────────────────────────────────
 export const whatsappConfig: WhatsAppConfig = {
   number: "1234567890",
-  defaultMessage:
-    "Hola, me gustaría obtener más información sobre sus servicios de climatización.",
-};
+  defaultMessage: "Hola, me gustaría obtener más información sobre sus servicios de climatización.",
+}
 
 // ─── Company Info — Single Source of Truth ───────────────────────────────────
 export const companyInfo: CompanyInfo = {
@@ -27,7 +26,7 @@ export const companyInfo: CompanyInfo = {
   unitsInstalled: 10000,
   clientsSatisfied: 5000,
   satisfactionRate: 98,
-};
+}
 
 // ─── Navigation Links ────────────────────────────────────────────────────────
 export const navLinksData: NavLink[] = [
@@ -39,7 +38,7 @@ export const navLinksData: NavLink[] = [
   { name: "Nosotros", href: "/nosotros" },
   { name: "FAQ", href: "/faq" },
   { name: "Contacto", href: "/contacto" },
-];
+]
 
 // ─── Footer Links ────────────────────────────────────────────────────────────
 export const footerLinksData: FooterLinks = {
@@ -55,14 +54,14 @@ export const footerLinksData: FooterLinks = {
     { name: "Reparación", href: "/servicios#reparacion" },
     { name: "Planes de Mantenimiento", href: "/planes" },
   ],
-};
+}
 
 // ─── Trust Badges ────────────────────────────────────────────────────────────
 export const trustBadgesData: TrustBadge[] = [
   { icon: "Shield", text: "Garantía 5 años" },
   { icon: "Headphones", text: "Soporte 24h" },
   { icon: "Award", text: "Técnicos certificados" },
-];
+]
 
 // ─── Certifications ──────────────────────────────────────────────────────────
 export const certificationsData: string[] = [
@@ -72,14 +71,14 @@ export const certificationsData: string[] = [
   "Certificación AHRI",
   "Partner Samsung HVAC",
   "ISO 9001:2015",
-];
+]
 
 // ─── Coverage Zones ──────────────────────────────────────────────────────────
 export const coverageZonesData: CoverageZone[] = [
   { zone: "Zona Metropolitana", responseTime: "24h" },
   { zone: "Ciudades principales", responseTime: "48h" },
   { zone: "Resto del país", responseTime: "72h" },
-];
+]
 
 // ─── Company Stats (display-ready for nosotros page) ─────────────────────────
 export const companyStatsData: CompanyStats = {
@@ -107,4 +106,4 @@ export const companyStatsData: CompanyStats = {
     suffix: "+",
     label: "Equipos Instalados",
   },
-};
+}

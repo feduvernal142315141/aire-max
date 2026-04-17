@@ -4,7 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react"
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from "@/lib/constants"
 
@@ -13,29 +19,29 @@ export default function ContactoPage() {
 
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff] gradient-bg-animated" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#00e0ff] opacity-[0.06] blur-[100px] rounded-full" />
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="gradient-bg-animated absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff]" />
+        <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-[#00e0ff] opacity-[0.06] blur-[100px]" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 space-y-6 animate-fade-up">
-            <Badge className="w-fit mx-auto bg-white/80 backdrop-blur-sm border border-primary/20 text-primary">
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="animate-fade-up mb-16 space-y-6 text-center">
+            <Badge className="border-primary/20 text-primary mx-auto w-fit border bg-white/80 backdrop-blur-sm">
               Contacto
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold">
+            <h1 className="font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Hablemos de tu <span className="gradient-text">Proyecto</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed md:text-xl">
               Estamos listos para ayudarte a encontrar la solución perfecta de climatización
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <Card className="border-2 border-transparent hover:border-primary/20 transition-all">
+              <Card className="hover:border-primary/20 border-2 border-transparent transition-all">
                 <CardContent className="p-6 md:p-8">
                   <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid gap-6 md:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name">Nombre completo</Label>
                         <Input id="name" placeholder="Juan Pérez" />
@@ -51,7 +57,7 @@ export default function ContactoPage() {
                       <Input id="email" type="email" placeholder="correo@ejemplo.com" />
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid gap-6 md:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="service">Servicio de interés</Label>
                         <Select>
@@ -86,7 +92,7 @@ export default function ContactoPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-gradient-to-r from-primary to-accent text-white shadow-lg hover:shadow-xl transition-all"
+                      className="from-primary to-accent w-full bg-gradient-to-r text-white shadow-lg transition-all hover:shadow-xl"
                     >
                       Enviar Mensaje
                     </Button>
@@ -96,76 +102,78 @@ export default function ContactoPage() {
             </div>
 
             <div className="space-y-6">
-              <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5">
-                <CardContent className="p-6 space-y-6">
-                  <h3 className="text-xl font-serif font-bold">Contacto Directo</h3>
+              <Card className="border-primary/20 from-primary/5 to-accent/5 border-2 bg-gradient-to-br">
+                <CardContent className="space-y-6 p-6">
+                  <h3 className="font-serif text-xl font-bold">Contacto Directo</h3>
 
                   <div className="space-y-4">
                     <a
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-start gap-4 p-4 rounded-xl bg-white hover:bg-primary/5 transition-colors group"
+                      className="hover:bg-primary/5 group flex items-start gap-4 rounded-xl bg-white p-4 transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-[#25D366] flex items-center justify-center flex-shrink-0">
-                        <MessageCircle className="w-5 h-5 text-white" />
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[#25D366]">
+                        <MessageCircle className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <p className="font-semibold group-hover:text-primary transition-colors">WhatsApp</p>
-                        <p className="text-sm text-muted-foreground">Respuesta inmediata</p>
+                        <p className="group-hover:text-primary font-semibold transition-colors">
+                          WhatsApp
+                        </p>
+                        <p className="text-muted-foreground text-sm">Respuesta inmediata</p>
                       </div>
                     </a>
 
-                    <div className="flex items-start gap-4 p-4 rounded-xl bg-white">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Phone className="w-5 h-5 text-primary" />
+                    <div className="flex items-start gap-4 rounded-xl bg-white p-4">
+                      <div className="bg-primary/10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                        <Phone className="text-primary h-5 w-5" />
                       </div>
                       <div>
                         <p className="font-semibold">Teléfono</p>
-                        <p className="text-sm text-muted-foreground">+52 123 456 7890</p>
+                        <p className="text-muted-foreground text-sm">+52 123 456 7890</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4 p-4 rounded-xl bg-white">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Mail className="w-5 h-5 text-primary" />
+                    <div className="flex items-start gap-4 rounded-xl bg-white p-4">
+                      <div className="bg-primary/10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                        <Mail className="text-primary h-5 w-5" />
                       </div>
                       <div>
                         <p className="font-semibold">Email</p>
-                        <p className="text-sm text-muted-foreground">contacto@aire-max.com</p>
+                        <p className="text-muted-foreground text-sm">contacto@aire-max.com</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4 p-4 rounded-xl bg-white">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <MapPin className="w-5 h-5 text-primary" />
+                    <div className="flex items-start gap-4 rounded-xl bg-white p-4">
+                      <div className="bg-primary/10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                        <MapPin className="text-primary h-5 w-5" />
                       </div>
                       <div>
                         <p className="font-semibold">Ubicación</p>
-                        <p className="text-sm text-muted-foreground">Ciudad de México, México</p>
+                        <p className="text-muted-foreground text-sm">Ciudad de México, México</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4 p-4 rounded-xl bg-white">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Clock className="w-5 h-5 text-primary" />
+                    <div className="flex items-start gap-4 rounded-xl bg-white p-4">
+                      <div className="bg-primary/10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                        <Clock className="text-primary h-5 w-5" />
                       </div>
                       <div>
                         <p className="font-semibold">Horario</p>
-                        <p className="text-sm text-muted-foreground">Lun - Vie: 8:00 - 18:00</p>
-                        <p className="text-sm text-muted-foreground">Sáb: 9:00 - 14:00</p>
+                        <p className="text-muted-foreground text-sm">Lun - Vie: 8:00 - 18:00</p>
+                        <p className="text-muted-foreground text-sm">Sáb: 9:00 - 14:00</p>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-transparent hover:border-primary/20 transition-all">
-                <CardContent className="p-6 space-y-4">
+              <Card className="hover:border-primary/20 border-2 border-transparent transition-all">
+                <CardContent className="space-y-4 p-6">
                   <h3 className="text-lg font-semibold">Tiempo de Respuesta</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Respondemos todos los mensajes en menos de 2 horas durante horario laboral. Para emergencias,
-                    contáctanos por WhatsApp.
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Respondemos todos los mensajes en menos de 2 horas durante horario laboral. Para
+                    emergencias, contáctanos por WhatsApp.
                   </p>
                 </CardContent>
               </Card>

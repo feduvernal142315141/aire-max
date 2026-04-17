@@ -74,7 +74,7 @@ export function ProductDrawer({
             </SheetHeader>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-6 pb-28 pt-5">
+          <div className="flex-1 overflow-y-auto px-6 pt-5 pb-28">
             <Tabs defaultValue="general" className="space-y-5">
               <TabsList className="grid h-auto grid-cols-5 rounded-2xl border border-white/70 bg-white/85 p-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur">
                 <TabsTrigger value="general" className={TAB_TRIGGER_CLASS}>
@@ -130,7 +130,7 @@ export function ProductDrawer({
                 Cancelar
               </Button>
               <Button
-                className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.35)] transition-all hover:brightness-110 hover:shadow-[0_12px_30px_rgba(37,99,235,0.42)]"
+                className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.35)] transition-all hover:shadow-[0_12px_30px_rgba(37,99,235,0.42)] hover:brightness-110"
                 onClick={onSave}
               >
                 Guardar producto

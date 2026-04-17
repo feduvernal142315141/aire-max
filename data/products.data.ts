@@ -1,9 +1,4 @@
-import type {
-  Product,
-  ProductBrand,
-  CategoryOption,
-  CapacityOption,
-} from "@/types";
+import type { Product, ProductBrand, CategoryOption, CapacityOption } from "@/types"
 
 // ─── Products — Single Source of Truth ───────────────────────────────────────
 // Modelo canónico unificado: la landing usa los campos públicos, el admin
@@ -24,8 +19,7 @@ export const productsData: Product[] = [
     wifi: true,
     popular: true,
     oferta: true,
-    description:
-      "Aire acondicionado split con tecnología inverter para máximo ahorro energético.",
+    description: "Aire acondicionado split con tecnología inverter para máximo ahorro energético.",
     stock: 21,
     status: "active",
     rating: 4.8,
@@ -50,8 +44,7 @@ export const productsData: Product[] = [
     wifi: true,
     popular: true,
     nuevo: true,
-    description:
-      "Tecnología WindFree para climatización sin corrientes de aire directas.",
+    description: "Tecnología WindFree para climatización sin corrientes de aire directas.",
     stock: 7,
     status: "active",
     rating: 4.6,
@@ -59,8 +52,7 @@ export const productsData: Product[] = [
     tags: ["windfree", "premium"],
     slug: "samsung-split-windfree-elite-18000",
     metaTitle: "Samsung WindFree Elite 18000 BTU | Aire-Max",
-    metaDescription:
-      "Confort premium WindFree con tecnología inverter y control WiFi.",
+    metaDescription: "Confort premium WindFree con tecnología inverter y control WiFi.",
   },
   {
     id: "daikin-split-24000",
@@ -75,8 +67,7 @@ export const productsData: Product[] = [
     inverter: true,
     wifi: true,
     popular: true,
-    description:
-      "Sistema de climatización premium con purificador de aire integrado.",
+    description: "Sistema de climatización premium con purificador de aire integrado.",
     stock: 12,
     status: "active",
     rating: 4.7,
@@ -84,8 +75,7 @@ export const productsData: Product[] = [
     tags: ["premium", "purificador"],
     slug: "daikin-split-inverter-premium-24000",
     metaTitle: "Daikin Split Premium 24000 BTU | Aire-Max",
-    metaDescription:
-      "Split Daikin premium con purificador integrado y control inteligente.",
+    metaDescription: "Split Daikin premium con purificador integrado y control inteligente.",
   },
   {
     id: "mitsubishi-split-12000",
@@ -99,8 +89,7 @@ export const productsData: Product[] = [
     features: ["Inverter", "3D i-see Sensor", "WiFi", "Plasma Quad Plus"],
     inverter: true,
     wifi: true,
-    description:
-      "Sensor 3D que detecta la temperatura en diferentes zonas de la habitación.",
+    description: "Sensor 3D que detecta la temperatura en diferentes zonas de la habitación.",
     stock: 9,
     status: "active",
     rating: 4.5,
@@ -108,8 +97,7 @@ export const productsData: Product[] = [
     tags: ["sensor", "premium"],
     slug: "mitsubishi-split-msz-ap-12000",
     metaTitle: "Mitsubishi MSZ-AP 12000 BTU | Aire-Max",
-    metaDescription:
-      "Mitsubishi MSZ-AP con sensor 3D i-see y filtro Plasma Quad Plus.",
+    metaDescription: "Mitsubishi MSZ-AP con sensor 3D i-see y filtro Plasma Quad Plus.",
   },
   {
     id: "carrier-cassette-36000",
@@ -132,8 +120,7 @@ export const productsData: Product[] = [
     tags: ["comercial", "cassette"],
     slug: "carrier-cassette-4-vias-36000",
     metaTitle: "Carrier Cassette 36000 BTU | Aire-Max",
-    metaDescription:
-      "Cassette comercial Carrier 4 vías con tecnología inverter.",
+    metaDescription: "Cassette comercial Carrier 4 vías con tecnología inverter.",
   },
   {
     id: "lg-cassette-48000",
@@ -144,17 +131,11 @@ export const productsData: Product[] = [
     energyRating: "A+",
     price: 1899.99,
     image: "/lg-cassette-commercial-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "Auto limpieza",
-      "Control WiFi",
-      "Bajo nivel sonoro",
-    ],
+    features: ["Inverter", "Auto limpieza", "Control WiFi", "Bajo nivel sonoro"],
     inverter: true,
     wifi: true,
     nuevo: true,
-    description:
-      "Potente sistema cassette para grandes espacios comerciales.",
+    description: "Potente sistema cassette para grandes espacios comerciales.",
     stock: 4,
     status: "active",
     rating: 4.6,
@@ -162,8 +143,7 @@ export const productsData: Product[] = [
     tags: ["comercial", "wifi"],
     slug: "lg-cassette-inverter-comercial-48000",
     metaTitle: "LG Cassette Comercial 48000 BTU | Aire-Max",
-    metaDescription:
-      "Cassette LG inverter para grandes espacios con control WiFi.",
+    metaDescription: "Cassette LG inverter para grandes espacios con control WiFi.",
   },
   {
     id: "daikin-piso-techo-36000",
@@ -174,16 +154,10 @@ export const productsData: Product[] = [
     energyRating: "A++",
     price: 1399.99,
     image: "/daikin-floor-ceiling-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "Instalación versátil",
-      "Control remoto",
-      "Modo silencioso",
-    ],
+    features: ["Inverter", "Instalación versátil", "Control remoto", "Modo silencioso"],
     inverter: true,
     wifi: false,
-    description:
-      "Versátil sistema que puede instalarse en piso o techo según necesidad.",
+    description: "Versátil sistema que puede instalarse en piso o techo según necesidad.",
     stock: 6,
     status: "active",
     rating: 4.3,
@@ -191,8 +165,7 @@ export const productsData: Product[] = [
     tags: ["piso-techo", "versátil"],
     slug: "daikin-piso-techo-inverter-36000",
     metaTitle: "Daikin Piso Techo 36000 BTU | Aire-Max",
-    metaDescription:
-      "Equipo piso-techo Daikin con instalación versátil e inverter.",
+    metaDescription: "Equipo piso-techo Daikin con instalación versátil e inverter.",
   },
   {
     id: "panasonic-split-9000",
@@ -208,8 +181,7 @@ export const productsData: Product[] = [
     inverter: true,
     wifi: true,
     oferta: true,
-    description:
-      "Perfecto para habitaciones pequeñas con máxima eficiencia energética.",
+    description: "Perfecto para habitaciones pequeñas con máxima eficiencia energética.",
     stock: 14,
     status: "active",
     rating: 4.5,
@@ -217,8 +189,7 @@ export const productsData: Product[] = [
     tags: ["compacto", "oferta"],
     slug: "panasonic-split-compact-inverter-9000",
     metaTitle: "Panasonic Compact 9000 BTU | Aire-Max",
-    metaDescription:
-      "Panasonic compacto con tecnología Nanoe-G para habitaciones pequeñas.",
+    metaDescription: "Panasonic compacto con tecnología Nanoe-G para habitaciones pequeñas.",
   },
   {
     id: "samsung-split-24000",
@@ -229,17 +200,11 @@ export const productsData: Product[] = [
     energyRating: "A+++",
     price: 999.99,
     image: "/samsung-windfree-pro-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "WindFree",
-      "SmartThings",
-      "AI Auto Cooling",
-    ],
+    features: ["Inverter", "WindFree", "SmartThings", "AI Auto Cooling"],
     inverter: true,
     wifi: true,
     nuevo: true,
-    description:
-      "Inteligencia artificial que aprende tus preferencias de climatización.",
+    description: "Inteligencia artificial que aprende tus preferencias de climatización.",
     stock: 8,
     status: "active",
     rating: 4.8,
@@ -247,8 +212,7 @@ export const productsData: Product[] = [
     tags: ["ai", "windfree", "premium"],
     slug: "samsung-split-windfree-pro-24000",
     metaTitle: "Samsung WindFree Pro 24000 BTU | Aire-Max",
-    metaDescription:
-      "Samsung WindFree Pro con IA Auto Cooling y SmartThings.",
+    metaDescription: "Samsung WindFree Pro con IA Auto Cooling y SmartThings.",
   },
   {
     id: "carrier-split-18000",
@@ -259,16 +223,10 @@ export const productsData: Product[] = [
     energyRating: "A++",
     price: 749.99,
     image: "/carrier-infinity-split-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "Greenspeed",
-      "Control inteligente",
-      "Ultra silencioso",
-    ],
+    features: ["Inverter", "Greenspeed", "Control inteligente", "Ultra silencioso"],
     inverter: true,
     wifi: true,
-    description:
-      "Tecnología Greenspeed para máximo confort y eficiencia.",
+    description: "Tecnología Greenspeed para máximo confort y eficiencia.",
     stock: 11,
     status: "active",
     rating: 4.4,
@@ -276,8 +234,7 @@ export const productsData: Product[] = [
     tags: ["greenspeed", "silencioso"],
     slug: "carrier-split-infinity-18000",
     metaTitle: "Carrier Infinity 18000 BTU | Aire-Max",
-    metaDescription:
-      "Carrier Infinity con Greenspeed y control inteligente.",
+    metaDescription: "Carrier Infinity con Greenspeed y control inteligente.",
   },
   {
     id: "mitsubishi-cassette-36000",
@@ -288,16 +245,10 @@ export const productsData: Product[] = [
     energyRating: "A++",
     price: 1699.99,
     image: "/mitsubishi-pla-cassette-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "4 vías",
-      "Control WiFi",
-      "Filtro enzimático",
-    ],
+    features: ["Inverter", "4 vías", "Control WiFi", "Filtro enzimático"],
     inverter: true,
     wifi: true,
-    description:
-      "Sistema cassette con filtro enzimático para purificación del aire.",
+    description: "Sistema cassette con filtro enzimático para purificación del aire.",
     stock: 3,
     status: "active",
     rating: 4.5,
@@ -305,8 +256,7 @@ export const productsData: Product[] = [
     tags: ["enzimático", "wifi"],
     slug: "mitsubishi-cassette-pla-36000",
     metaTitle: "Mitsubishi Cassette PLA 36000 BTU | Aire-Max",
-    metaDescription:
-      "Mitsubishi PLA cassette con filtro enzimático y control WiFi.",
+    metaDescription: "Mitsubishi PLA cassette con filtro enzimático y control WiFi.",
   },
   {
     id: "lg-piso-techo-48000",
@@ -317,12 +267,7 @@ export const productsData: Product[] = [
     energyRating: "A+",
     price: 1799.99,
     image: "/lg-floor-ceiling-commercial-air-conditioner.jpg",
-    features: [
-      "Inverter",
-      "Doble flujo",
-      "Control remoto",
-      "Instalación flexible",
-    ],
+    features: ["Inverter", "Doble flujo", "Control remoto", "Instalación flexible"],
     inverter: true,
     wifi: false,
     description: "Ideal para oficinas y comercios con techos altos.",
@@ -333,8 +278,7 @@ export const productsData: Product[] = [
     tags: ["comercial", "doble-flujo"],
     slug: "lg-piso-techo-comercial-48000",
     metaTitle: "LG Piso Techo Comercial 48000 BTU | Aire-Max",
-    metaDescription:
-      "LG piso-techo comercial con doble flujo para techos altos.",
+    metaDescription: "LG piso-techo comercial con doble flujo para techos altos.",
   },
   // ── Productos sumados desde el mock del admin ─────────────────────────────
   {
@@ -351,8 +295,7 @@ export const productsData: Product[] = [
     inverter: true,
     wifi: false,
     oferta: true,
-    description:
-      "Solución comercial con distribución uniforme de aire.",
+    description: "Solución comercial con distribución uniforme de aire.",
     stock: 3,
     status: "active",
     rating: 4.9,
@@ -360,8 +303,7 @@ export const productsData: Product[] = [
     tags: ["comercial", "cassette"],
     slug: "daikin-smart-cassette-24000-btu",
     metaTitle: "Daikin Cassette 24000 BTU | Aire-Max",
-    metaDescription:
-      "Cassette comercial Daikin 24000 BTU para espacios de alto tráfico.",
+    metaDescription: "Cassette comercial Daikin 24000 BTU para espacios de alto tráfico.",
   },
   {
     id: "midea-ventana-9000",
@@ -383,10 +325,9 @@ export const productsData: Product[] = [
     tags: ["entry-level"],
     slug: "midea-ventana-eco-9000-btu",
     metaTitle: "Midea Ventana 9000 BTU | Aire-Max",
-    metaDescription:
-      "Equipo de ventana económico y compacto para uso residencial.",
+    metaDescription: "Equipo de ventana económico y compacto para uso residencial.",
   },
-];
+]
 
 // ─── Brands ──────────────────────────────────────────────────────────────────
 export const brandsData: ProductBrand[] = [
@@ -397,7 +338,7 @@ export const brandsData: ProductBrand[] = [
   "Carrier",
   "Panasonic",
   "Midea",
-];
+]
 
 // ─── Category Options ────────────────────────────────────────────────────────
 export const categoriesData: CategoryOption[] = [
@@ -406,7 +347,7 @@ export const categoriesData: CategoryOption[] = [
   { value: "piso-techo", label: "Piso Techo" },
   { value: "ventana", label: "Ventana" },
   { value: "portatil", label: "Portátil" },
-];
+]
 
 // ─── Capacity Options ────────────────────────────────────────────────────────
 export const capacitiesData: CapacityOption[] = [
@@ -416,4 +357,4 @@ export const capacitiesData: CapacityOption[] = [
   { value: "24000", label: "24,000 BTU" },
   { value: "36000", label: "36,000 BTU" },
   { value: "48000", label: "48,000 BTU" },
-];
+]

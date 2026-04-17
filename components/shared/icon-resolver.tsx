@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react"
 import {
   Shield,
   Clock,
@@ -27,7 +27,7 @@ import {
   MessageCircle,
   Sparkles,
   Wind,
-} from "lucide-react";
+} from "lucide-react"
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Shield,
@@ -57,30 +57,26 @@ const ICON_MAP: Record<string, LucideIcon> = {
   MessageCircle,
   Sparkles,
   Wind,
-};
-
-interface IconResolverProps {
-  name: string;
-  className?: string;
-  fallback?: LucideIcon;
 }
 
-export function IconResolver({
-  name,
-  className,
-  fallback: Fallback,
-}: IconResolverProps) {
-  const Icon = ICON_MAP[name];
+interface IconResolverProps {
+  name: string
+  className?: string
+  fallback?: LucideIcon
+}
+
+export function IconResolver({ name, className, fallback: Fallback }: IconResolverProps) {
+  const Icon = ICON_MAP[name]
 
   if (!Icon) {
-    if (Fallback) return <Fallback className={className} />;
-    return null;
+    if (Fallback) return <Fallback className={className} />
+    return null
   }
 
-  return <Icon className={className} />;
+  return <Icon className={className} />
 }
 
 /** Get the icon component reference by name — useful when you need the component itself, not JSX */
 export function getIcon(name: string): LucideIcon | undefined {
-  return ICON_MAP[name];
+  return ICON_MAP[name]
 }

@@ -1,58 +1,41 @@
-import type { ReactNode } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import type { ReactNode } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 interface CTAAction {
-  text: string;
-  href: string;
-  icon?: ReactNode;
-  variant?: "default" | "secondary" | "outline";
+  text: string
+  href: string
+  icon?: ReactNode
+  variant?: "default" | "secondary" | "outline"
 }
 
 interface CTASectionProps {
-  title: string;
-  subtitle?: string;
-  icon?: ReactNode;
-  actions: CTAAction[];
-  className?: string;
+  title: string
+  subtitle?: string
+  icon?: ReactNode
+  actions: CTAAction[]
+  className?: string
 }
 
-export function CTASection({
-  title,
-  subtitle,
-  icon,
-  actions,
-  className,
-}: CTASectionProps) {
+export function CTASection({ title, subtitle, icon, actions, className }: CTASectionProps) {
   return (
-    <section className={cn("py-16 md:py-24 bg-white", className)}>
+    <section className={cn("bg-white py-16 md:py-24", className)}>
       <div className="container mx-auto px-4">
-        <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0 overflow-hidden relative">
-          <div className="absolute inset-0 bg-grid-white/10" />
-          <CardContent className="relative py-12 md:py-16 text-center space-y-6">
+        <Card className="from-primary to-primary/80 text-primary-foreground relative overflow-hidden border-0 bg-gradient-to-br">
+          <div className="bg-grid-white/10 absolute inset-0" />
+          <CardContent className="relative space-y-6 py-12 text-center md:py-16">
             {icon && <div className="flex justify-center">{icon}</div>}
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">
-              {title}
-            </h2>
-            {subtitle && (
-              <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                {subtitle}
-              </p>
-            )}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">{title}</h2>
+            {subtitle && <p className="mx-auto max-w-2xl text-lg opacity-90">{subtitle}</p>}
+            <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
               {actions.map((action, index) => (
                 <Button
                   key={index}
                   size="lg"
-                  variant={
-                    action.variant ?? (index === 0 ? "secondary" : "outline")
-                  }
-                  className={cn(
-                    index > 0 &&
-                      "bg-white/10 hover:bg-white/20 border-white/20",
-                  )}
+                  variant={action.variant ?? (index === 0 ? "secondary" : "outline")}
+                  className={cn(index > 0 && "border-white/20 bg-white/10 hover:bg-white/20")}
                   asChild
                 >
                   <Link href={action.href}>
@@ -66,5 +49,5 @@ export function CTASection({
         </Card>
       </div>
     </section>
-  );
+  )
 }

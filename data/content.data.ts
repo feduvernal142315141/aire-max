@@ -1,10 +1,4 @@
-import type {
-  FAQCategory,
-  Project,
-  HomeBenefit,
-  HomeService,
-  HomePopularProduct,
-} from "@/types";
+import type { FAQCategory, Project, HomeBenefit, HomeService, HomePopularProduct } from "@/types"
 
 // ─── FAQ Categories ──────────────────────────────────────────────────────────
 // Copied EXACTLY from faq/page.tsx
@@ -77,7 +71,7 @@ export const faqCategoriesData: FAQCategory[] = [
       },
     ],
   },
-];
+]
 
 // ─── Projects ────────────────────────────────────────────────────────────────
 // Copied EXACTLY from proyectos/page.tsx
@@ -86,8 +80,7 @@ export const projectsData: Project[] = [
     title: "Climatización Oficinas Corporativas",
     category: "Comercial",
     location: "Ciudad de México",
-    description:
-      "Instalación de 15 equipos cassette inverter para oficinas de 500m²",
+    description: "Instalación de 15 equipos cassette inverter para oficinas de 500m²",
     image: "/lg-cassette-commercial-air-conditioner.jpg",
     results: [
       "40% reducción en consumo energético",
@@ -100,8 +93,7 @@ export const projectsData: Project[] = [
     title: "Residencia Familiar Premium",
     category: "Residencial",
     location: "Monterrey",
-    description:
-      "Sistema multi-split para casa de 300m² con 6 zonas independientes",
+    description: "Sistema multi-split para casa de 300m² con 6 zonas independientes",
     image: "/daikin-split-air-conditioner-premium.jpg",
     results: [
       "Control individual por habitación",
@@ -114,17 +106,12 @@ export const projectsData: Project[] = [
     title: "Planta Industrial",
     category: "Industrial",
     location: "Guadalajara",
-    description:
-      "Climatización de nave industrial de 1000m² con equipos de alta capacidad",
+    description: "Climatización de nave industrial de 1000m² con equipos de alta capacidad",
     image: "/carrier-cassette-air-conditioner.jpg",
-    results: [
-      "Ambiente controlado 24/7",
-      "Mantenimiento preventivo incluido",
-      "ROI en 18 meses",
-    ],
+    results: ["Ambiente controlado 24/7", "Mantenimiento preventivo incluido", "ROI en 18 meses"],
     icon: "Factory",
   },
-];
+]
 
 // ─── Home Benefits ───────────────────────────────────────────────────────────
 // From page.tsx "¿Por qué elegir Aire-Max?" section
@@ -132,28 +119,24 @@ export const homeBenefitsData: HomeBenefit[] = [
   {
     icon: "Shield",
     title: "Garantía Extendida",
-    description:
-      "Hasta 5 años de garantía en equipos e instalación profesional certificada",
+    description: "Hasta 5 años de garantía en equipos e instalación profesional certificada",
   },
   {
     icon: "Clock",
     title: "Respuesta 24h",
-    description:
-      "Servicio técnico disponible todos los días del año sin excepción",
+    description: "Servicio técnico disponible todos los días del año sin excepción",
   },
   {
     icon: "Star",
     title: "Técnicos Certificados",
-    description:
-      "Personal capacitado con certificaciones oficiales y experiencia comprobada",
+    description: "Personal capacitado con certificaciones oficiales y experiencia comprobada",
   },
   {
     icon: "Zap",
     title: "Eficiencia Energética",
-    description:
-      "Equipos con tecnología inverter para máximo ahorro en tu factura",
+    description: "Equipos con tecnología inverter para máximo ahorro en tu factura",
   },
-];
+]
 
 // ─── Home Services ───────────────────────────────────────────────────────────
 // From page.tsx "Nuestros Servicios" section
@@ -194,7 +177,7 @@ export const homeServicesData: HomeService[] = [
     ],
     link: "/servicios/mantenimiento",
   },
-];
+]
 
 // ─── Home Popular Products ───────────────────────────────────────────────────
 // From page.tsx "Equipos Más Populares" section
@@ -236,4 +219,4 @@ export const homePopularProductsData: HomePopularProduct[] = [
     badgeColor: "from-[#079cfb] to-[#037ecc]",
     energyBadge: "A+++",
   },
-];
+]

@@ -20,15 +20,16 @@ export default function ServiciosPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 md:py-24">
+      <section className="from-primary/5 via-background to-accent/5 bg-gradient-to-br py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
+          <div className="mx-auto max-w-3xl space-y-6 text-center">
             <Badge className="mx-auto w-fit">Servicios Profesionales</Badge>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+            <h1 className="font-serif text-4xl font-bold text-balance md:text-5xl">
               Soluciones Completas en Climatización
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground text-pretty leading-relaxed">
-              Desde la instalación hasta el mantenimiento, te acompañamos en cada etapa para garantizar tu confort
+            <p className="text-muted-foreground text-lg leading-relaxed text-pretty md:text-xl">
+              Desde la instalación hasta el mantenimiento, te acompañamos en cada etapa para
+              garantizar tu confort
             </p>
           </div>
         </div>
@@ -37,7 +38,7 @@ export default function ServiciosPage() {
       {/* Main Services */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             {[
               {
                 icon: Wrench,
@@ -56,7 +57,8 @@ export default function ServiciosPage() {
               {
                 icon: ThermometerSun,
                 title: "Mantenimiento",
-                description: "Planes de mantenimiento preventivo y correctivo para alargar la vida útil de tu equipo.",
+                description:
+                  "Planes de mantenimiento preventivo y correctivo para alargar la vida útil de tu equipo.",
                 features: [
                   "Planes mensuales y anuales",
                   "Revisión completa del sistema",
@@ -69,7 +71,8 @@ export default function ServiciosPage() {
               {
                 icon: Snowflake,
                 title: "Reparación",
-                description: "Servicio técnico especializado para todo tipo de aires acondicionados y marcas.",
+                description:
+                  "Servicio técnico especializado para todo tipo de aires acondicionados y marcas.",
                 features: [
                   "Diagnóstico gratuito",
                   "Respuesta en 24 horas",
@@ -80,12 +83,12 @@ export default function ServiciosPage() {
                 color: "from-primary/70 to-accent/70",
               },
             ].map((service, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all">
+              <Card key={index} className="group transition-all hover:shadow-xl">
                 <CardHeader>
                   <div
-                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform mb-4`}
+                    className={`h-16 w-16 rounded-xl bg-gradient-to-br ${service.color} mb-4 flex items-center justify-center transition-transform group-hover:scale-110`}
                   >
-                    <service.icon className="w-8 h-8 text-white" />
+                    <service.icon className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl">{service.title}</CardTitle>
                 </CardHeader>
@@ -94,7 +97,7 @@ export default function ServiciosPage() {
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                        <CheckCircle2 className="text-primary h-4 w-4 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -113,15 +116,15 @@ export default function ServiciosPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">¿Por qué elegirnos?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">¿Por qué elegirnos?</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-pretty">
               Más de 15 años de experiencia nos respaldan
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 icon: Users,
@@ -145,12 +148,12 @@ export default function ServiciosPage() {
               },
             ].map((item, index) => (
               <Card key={index} className="text-center">
-                <CardContent className="pt-6 space-y-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mx-auto">
-                    <item.icon className="w-6 h-6 text-primary" />
+                <CardContent className="space-y-3 pt-6">
+                  <div className="bg-primary/10 mx-auto flex h-12 w-12 items-center justify-center rounded-lg">
+                    <item.icon className="text-primary h-6 w-6" />
                   </div>
                   <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground text-pretty">{item.description}</p>
+                  <p className="text-muted-foreground text-sm text-pretty">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -161,15 +164,15 @@ export default function ServiciosPage() {
       {/* CTA Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0">
-            <CardContent className="py-12 md:py-16 text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-balance">
+          <Card className="from-primary to-primary/80 text-primary-foreground border-0 bg-gradient-to-br">
+            <CardContent className="space-y-6 py-12 text-center md:py-16">
+              <h2 className="font-serif text-3xl font-bold text-balance md:text-4xl">
                 ¿Necesitas un servicio técnico?
               </h2>
-              <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto text-pretty">
+              <p className="mx-auto max-w-2xl text-lg text-pretty opacity-90 md:text-xl">
                 Agenda tu cita ahora y recibe atención personalizada
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
                 <Button size="lg" variant="secondary" className="text-lg" asChild>
                   <Link href="/contacto">
                     <Phone className="mr-2 h-5 w-5" />
@@ -179,7 +182,7 @@ export default function ServiciosPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-lg bg-white/10 hover:bg-white/20 border-white/20"
+                  className="border-white/20 bg-white/10 text-lg hover:bg-white/20"
                   asChild
                 >
                   <Link href="/cotizacion">

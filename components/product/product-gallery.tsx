@@ -27,25 +27,30 @@ export function ProductGallery({ product }: ProductGalleryProps) {
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <Card className="relative aspect-square overflow-hidden bg-muted">
-        <Image src={images[currentImage] || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
+      <Card className="bg-muted relative aspect-square overflow-hidden">
+        <Image
+          src={images[currentImage] || "/placeholder.svg"}
+          alt={product.name}
+          fill
+          className="object-cover"
+        />
         {images.length > 1 && (
           <>
             <Button
               variant="secondary"
               size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2"
+              className="absolute top-1/2 left-4 -translate-y-1/2"
               onClick={prevImage}
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
               variant="secondary"
               size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2"
+              className="absolute top-1/2 right-4 -translate-y-1/2"
               onClick={nextImage}
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="h-4 w-4" />
             </Button>
           </>
         )}
@@ -58,8 +63,10 @@ export function ProductGallery({ product }: ProductGalleryProps) {
             <button
               key={index}
               onClick={() => setCurrentImage(index)}
-              className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                currentImage === index ? "border-primary" : "border-transparent hover:border-muted-foreground/20"
+              className={`relative aspect-square overflow-hidden rounded-lg border-2 transition-all ${
+                currentImage === index
+                  ? "border-primary"
+                  : "hover:border-muted-foreground/20 border-transparent"
               }`}
             >
               <Image

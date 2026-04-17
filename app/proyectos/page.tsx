@@ -12,7 +12,11 @@ const projects = [
     location: "Ciudad de México",
     description: "Instalación de 15 equipos cassette inverter para oficinas de 500m²",
     image: "/lg-cassette-commercial-air-conditioner.jpg",
-    results: ["40% reducción en consumo energético", "Temperatura uniforme en todas las áreas", "Sistema centralizado"],
+    results: [
+      "40% reducción en consumo energético",
+      "Temperatura uniforme en todas las áreas",
+      "Sistema centralizado",
+    ],
     icon: Building2,
   },
   {
@@ -21,7 +25,11 @@ const projects = [
     location: "Monterrey",
     description: "Sistema multi-split para casa de 300m² con 6 zonas independientes",
     image: "/daikin-split-air-conditioner-premium.jpg",
-    results: ["Control individual por habitación", "Ahorro del 35% en electricidad", "Instalación en 48 horas"],
+    results: [
+      "Control individual por habitación",
+      "Ahorro del 35% en electricidad",
+      "Instalación en 48 horas",
+    ],
     icon: Home,
   },
   {
@@ -38,71 +46,75 @@ const projects = [
 export default function ProyectosPage() {
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff] gradient-bg-animated" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#00e0ff] opacity-[0.06] blur-[100px] rounded-full" />
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="gradient-bg-animated absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff]" />
+        <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-[#00e0ff] opacity-[0.06] blur-[100px]" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 space-y-6 animate-fade-up">
-            <Badge className="w-fit mx-auto bg-white/80 backdrop-blur-sm border border-primary/20 text-primary">
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="animate-fade-up mb-16 space-y-6 text-center">
+            <Badge className="border-primary/20 text-primary mx-auto w-fit border bg-white/80 backdrop-blur-sm">
               Casos de Éxito
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold">
+            <h1 className="font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Proyectos que <span className="gradient-text">Transforman Espacios</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed md:text-xl">
               Descubre cómo hemos ayudado a empresas y hogares a lograr el confort perfecto
             </p>
           </div>
 
-          <div className="space-y-12 max-w-6xl mx-auto">
+          <div className="mx-auto max-w-6xl space-y-12">
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="overflow-hidden border-2 border-transparent hover:border-primary/30 transition-all duration-300 hover:shadow-2xl group"
+                className="hover:border-primary/30 group overflow-hidden border-2 border-transparent transition-all duration-300 hover:shadow-2xl"
               >
-                <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative h-64 md:h-full overflow-hidden">
+                <div className="grid gap-0 md:grid-cols-2">
+                  <div className="relative h-64 overflow-hidden md:h-full">
                     <Image
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <Badge className="absolute top-4 left-4 bg-white/90 text-foreground">{project.category}</Badge>
+                    <Badge className="text-foreground absolute top-4 left-4 bg-white/90">
+                      {project.category}
+                    </Badge>
                   </div>
 
-                  <CardContent className="p-8 md:p-10 flex flex-col justify-center space-y-6">
+                  <CardContent className="flex flex-col justify-center space-y-6 p-8 md:p-10">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                          <project.icon className="w-6 h-6 text-primary" />
+                        <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-xl">
+                          <project.icon className="text-primary h-6 w-6" />
                         </div>
                         <div>
-                          <h3 className="text-2xl font-serif font-bold">{project.title}</h3>
-                          <p className="text-sm text-muted-foreground">{project.location}</p>
+                          <h3 className="font-serif text-2xl font-bold">{project.title}</h3>
+                          <p className="text-muted-foreground text-sm">{project.location}</p>
                         </div>
                       </div>
                       <p className="text-muted-foreground leading-relaxed">{project.description}</p>
                     </div>
 
                     <div className="space-y-3">
-                      <h4 className="font-semibold text-sm uppercase tracking-wide text-primary">Resultados</h4>
+                      <h4 className="text-primary text-sm font-semibold tracking-wide uppercase">
+                        Resultados
+                      </h4>
                       <ul className="space-y-2">
                         {project.results.map((result, idx) => (
                           <li key={idx} className="flex items-center gap-2 text-sm">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                            <div className="bg-primary h-1.5 w-1.5 rounded-full" />
                             <span>{result}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <Button variant="outline" className="w-fit bg-transparent group/btn" asChild>
+                    <Button variant="outline" className="group/btn w-fit bg-transparent" asChild>
                       <Link href="/contacto">
                         Ver más detalles
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </Button>
                   </CardContent>
@@ -112,7 +124,11 @@ export default function ProyectosPage() {
           </div>
 
           <div className="mt-16 text-center">
-            <Button size="lg" asChild className="bg-gradient-to-r from-primary to-accent text-white shadow-lg">
+            <Button
+              size="lg"
+              asChild
+              className="from-primary to-accent bg-gradient-to-r text-white shadow-lg"
+            >
               <Link href="/contacto">
                 Solicita tu Proyecto
                 <ArrowRight className="ml-2 h-5 w-5" />

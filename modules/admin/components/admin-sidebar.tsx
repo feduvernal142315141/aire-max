@@ -20,7 +20,7 @@ export function AdminSidebar({
   onToggleCollapsed,
 }: AdminSidebarProps) {
   return (
-    <aside className="border-r border-white/40 bg-white/65 backdrop-blur-xl shadow-[inset_-1px_0_0_rgba(255,255,255,0.65)]">
+    <aside className="border-r border-white/40 bg-white/65 shadow-[inset_-1px_0_0_rgba(255,255,255,0.65)] backdrop-blur-xl">
       <div className="flex h-full flex-col p-4">
         <div className="mb-6 flex items-center justify-between rounded-2xl border border-white/40 bg-white/70 px-3 py-2 shadow-sm">
           {!collapsed && (

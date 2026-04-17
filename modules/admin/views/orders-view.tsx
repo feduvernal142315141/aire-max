@@ -1,12 +1,19 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { ordersData } from "@/data"
 import { formatCurrency } from "@/modules/admin/lib/admin-formatters"
 
 export function OrdersView() {
   return (
-    <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+    <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
       <CardHeader>
         <CardTitle>Órdenes</CardTitle>
         <CardDescription>Tabla avanzada mock con estados y timeline.</CardDescription>

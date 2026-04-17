@@ -1,26 +1,23 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? ""
 
 interface RequestOptions extends RequestInit {
-  params?: Record<string, string>;
+  params?: Record<string, string>
 }
 
 interface ApiResponse<T> {
-  data: T;
-  status: number;
-  ok: boolean;
+  data: T
+  status: number
+  ok: boolean
 }
 
-async function request<T>(
-  endpoint: string,
-  options?: RequestOptions,
-): Promise<ApiResponse<T>> {
-  const { params, ...fetchOptions } = options ?? {};
+async function request<T>(endpoint: string, options?: RequestOptions): Promise<ApiResponse<T>> {
+  const { params, ...fetchOptions } = options ?? {}
 
-  let url = `${API_BASE_URL}${endpoint}`;
+  let url = `${API_BASE_URL}${endpoint}`
 
   if (params) {
-    const searchParams = new URLSearchParams(params);
-    url += `?${searchParams.toString()}`;
+    const searchParams = new URLSearchParams(params)
+    url += `?${searchParams.toString()}`
   }
 
   const response = await fetch(url, {
@@ -28,15 +25,15 @@ async function request<T>(
     headers: {
       ...fetchOptions.headers,
     },
-  });
+  })
 
-  const data = (await response.json()) as T;
+  const data = (await response.json()) as T
 
   return {
     data,
     status: response.status,
     ok: response.ok,
-  };
+  }
 }
 
 export const apiClient = {
@@ -67,4 +64,4 @@ export const apiClient = {
 
   delete: <T>(endpoint: string, options?: RequestOptions) =>
     request<T>(endpoint, { ...options, method: "DELETE" }),
-};
+}

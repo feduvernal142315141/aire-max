@@ -41,7 +41,10 @@ export function useAnimatedStats(options: UseAnimatedStatsOptions = {}) {
       setStats({
         years: Math.min(Math.floor((targets.years * step) / steps), targets.years),
         clients: Math.min(Math.floor((targets.clients * step) / steps), targets.clients),
-        satisfaction: Math.min(Math.floor((targets.satisfaction * step) / steps), targets.satisfaction),
+        satisfaction: Math.min(
+          Math.floor((targets.satisfaction * step) / steps),
+          targets.satisfaction,
+        ),
         equipment: Math.min(Math.floor((targets.equipment * step) / steps), targets.equipment),
       })
 

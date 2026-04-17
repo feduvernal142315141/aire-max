@@ -1,8 +1,20 @@
 "use client"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
-export type SortOption = "relevance" | "price-asc" | "price-desc" | "capacity-asc" | "capacity-desc" | "newest"
+export type SortOption =
+  | "relevance"
+  | "price-asc"
+  | "price-desc"
+  | "capacity-asc"
+  | "capacity-desc"
+  | "newest"
 
 interface ProductSortProps {
   value: SortOption

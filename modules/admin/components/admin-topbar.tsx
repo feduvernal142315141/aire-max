@@ -22,8 +22,12 @@ export function AdminTopbar({ search, onSearchChange, onQuickAction }: AdminTopb
               <Snowflake className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-blue-700">Control Center</p>
-              <p className="text-sm font-semibold text-slate-900">Aire-Max Panel de Administración</p>
+              <p className="text-xs font-medium tracking-[0.18em] text-blue-700 uppercase">
+                Control Center
+              </p>
+              <p className="text-sm font-semibold text-slate-900">
+                Aire-Max Panel de Administración
+              </p>
             </div>
           </div>
 
@@ -34,12 +38,12 @@ export function AdminTopbar({ search, onSearchChange, onQuickAction }: AdminTopb
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="relative w-full max-w-lg">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
+            <Search className="absolute top-2.5 left-3 h-4 w-4 text-slate-500" />
             <Input
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Buscar productos, órdenes, clientes..."
-              className="pl-10 rounded-xl bg-white/90"
+              className="rounded-xl bg-white/90 pl-10"
             />
           </div>
 

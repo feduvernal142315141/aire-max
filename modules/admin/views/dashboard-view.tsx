@@ -15,25 +15,25 @@ export function DashboardView({ dashboardData }: DashboardViewProps) {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+        <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
           <CardHeader>
             <CardDescription>💰 Ventas hoy</CardDescription>
             <CardTitle>{formatCurrency(dashboardData.todaySales)}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+        <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
           <CardHeader>
             <CardDescription>📦 Productos vendidos</CardDescription>
             <CardTitle>{dashboardData.soldToday}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+        <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
           <CardHeader>
             <CardDescription>📉 Sin stock</CardDescription>
             <CardTitle>{dashboardData.noStock}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+        <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
           <CardHeader>
             <CardDescription>🔥 Top producto</CardDescription>
             <CardTitle className="text-base">{dashboardData.top[0]?.name ?? "-"}</CardTitle>
@@ -41,7 +41,7 @@ export function DashboardView({ dashboardData }: DashboardViewProps) {
         </Card>
       </div>
 
-      <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+      <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
         <CardHeader>
           <CardTitle>Ventas por día (mock)</CardTitle>
         </CardHeader>
@@ -52,7 +52,7 @@ export function DashboardView({ dashboardData }: DashboardViewProps) {
                 <span>Día {index + 1}</span>
                 <span>{value}%</span>
               </div>
-              <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+              <div className="h-2 overflow-hidden rounded-full bg-slate-100">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400"
                   style={{ width: `${value}%` }}

@@ -22,7 +22,9 @@ export function MediaTab({ draft, setDraft }: MediaTabProps) {
       </div>
       <div className="mt-4 rounded-2xl border border-dashed border-blue-300/80 bg-gradient-to-br from-blue-50/80 to-cyan-50/60 p-8 text-center text-sm text-slate-600">
         <p className="font-medium text-slate-700">Drag & drop premium (mock)</p>
-        <p className="mt-1 text-xs">Subida, orden y selección de imagen principal en próxima fase.</p>
+        <p className="mt-1 text-xs">
+          Subida, orden y selección de imagen principal en próxima fase.
+        </p>
       </div>
     </div>
   )

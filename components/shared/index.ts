@@ -1,10 +1,10 @@
-export { IconResolver, getIcon } from "./icon-resolver";
-export { SectionHeader } from "./section-header";
-export { FeatureCard } from "./feature-card";
-export { ResponsiveGrid } from "./responsive-grid";
-export { PlanCard } from "./plan-card";
-export { CTASection } from "./cta-section";
-export { PriceDisplay } from "./price-display";
-export { StatsCounter } from "./stats-counter";
-export { CheckList } from "./check-list";
-export { ServiceCard } from "./service-card";
+export { IconResolver, getIcon } from "./icon-resolver"
+export { SectionHeader } from "./section-header"
+export { FeatureCard } from "./feature-card"
+export { ResponsiveGrid } from "./responsive-grid"
+export { PlanCard } from "./plan-card"
+export { CTASection } from "./cta-section"
+export { PriceDisplay } from "./price-display"
+export { StatsCounter } from "./stats-counter"
+export { CheckList } from "./check-list"
+export { ServiceCard } from "./service-card"

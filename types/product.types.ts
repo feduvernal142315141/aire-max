@@ -5,10 +5,9 @@ export const PRODUCT_CATEGORY = {
   PISO_TECHO: "piso-techo",
   VENTANA: "ventana",
   PORTATIL: "portatil",
-} as const;
+} as const
 
-export type ProductCategory =
-  (typeof PRODUCT_CATEGORY)[keyof typeof PRODUCT_CATEGORY];
+export type ProductCategory = (typeof PRODUCT_CATEGORY)[keyof typeof PRODUCT_CATEGORY]
 
 // ─── Product Brand ───────────────────────────────────────────────────────────
 export const PRODUCT_BRAND = {
@@ -19,19 +18,17 @@ export const PRODUCT_BRAND = {
   CARRIER: "Carrier",
   PANASONIC: "Panasonic",
   MIDEA: "Midea",
-} as const;
+} as const
 
-export type ProductBrand =
-  (typeof PRODUCT_BRAND)[keyof typeof PRODUCT_BRAND];
+export type ProductBrand = (typeof PRODUCT_BRAND)[keyof typeof PRODUCT_BRAND]
 
 // ─── Product Status ──────────────────────────────────────────────────────────
 export const PRODUCT_STATUS = {
   ACTIVE: "active",
   INACTIVE: "inactive",
-} as const;
+} as const
 
-export type ProductStatus =
-  (typeof PRODUCT_STATUS)[keyof typeof PRODUCT_STATUS];
+export type ProductStatus = (typeof PRODUCT_STATUS)[keyof typeof PRODUCT_STATUS]
 
 // ─── Product Capacity ────────────────────────────────────────────────────────
 export const PRODUCT_CAPACITY = {
@@ -41,10 +38,9 @@ export const PRODUCT_CAPACITY = {
   BTU_24000: "24000",
   BTU_36000: "36000",
   BTU_48000: "48000",
-} as const;
+} as const
 
-export type ProductCapacity =
-  (typeof PRODUCT_CAPACITY)[keyof typeof PRODUCT_CAPACITY];
+export type ProductCapacity = (typeof PRODUCT_CAPACITY)[keyof typeof PRODUCT_CAPACITY]
 
 // ─── Energy Rating ───────────────────────────────────────────────────────────
 export const ENERGY_RATING = {
@@ -52,10 +48,9 @@ export const ENERGY_RATING = {
   A_DOUBLE_PLUS: "A++",
   A_PLUS: "A+",
   A: "A",
-} as const;
+} as const
 
-export type EnergyRating =
-  (typeof ENERGY_RATING)[keyof typeof ENERGY_RATING];
+export type EnergyRating = (typeof ENERGY_RATING)[keyof typeof ENERGY_RATING]
 
 // ─── Sort Option ─────────────────────────────────────────────────────────────
 export const SORT_OPTION = {
@@ -65,68 +60,67 @@ export const SORT_OPTION = {
   CAPACITY_ASC: "capacity-asc",
   CAPACITY_DESC: "capacity-desc",
   NEWEST: "newest",
-} as const;
+} as const
 
-export type SortOption =
-  (typeof SORT_OPTION)[keyof typeof SORT_OPTION];
+export type SortOption = (typeof SORT_OPTION)[keyof typeof SORT_OPTION]
 
 // ─── Product ─────────────────────────────────────────────────────────────────
 // Modelo canónico — usado tanto por la landing pública como por el admin panel.
 // Los campos opcionales del bloque "admin" se completan al editar/crear desde
 // el panel; la landing los ignora.
 export interface Product {
-  id: string;
-  name: string;
-  brand: ProductBrand;
-  category: ProductCategory;
-  capacity: ProductCapacity;
-  energyRating: EnergyRating;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  features: string[];
-  inverter: boolean;
-  wifi: boolean;
-  popular?: boolean;
-  nuevo?: boolean;
-  oferta?: boolean;
-  description: string;
+  id: string
+  name: string
+  brand: ProductBrand
+  category: ProductCategory
+  capacity: ProductCapacity
+  energyRating: EnergyRating
+  price: number
+  originalPrice?: number
+  image: string
+  features: string[]
+  inverter: boolean
+  wifi: boolean
+  popular?: boolean
+  nuevo?: boolean
+  oferta?: boolean
+  description: string
   // ── Admin-only (opcionales) ────────────────────────────────────────────────
-  stock?: number;
-  status?: ProductStatus;
-  rating?: number;
-  sku?: string;
-  tags?: string[];
-  slug?: string;
-  metaTitle?: string;
-  metaDescription?: string;
+  stock?: number
+  status?: ProductStatus
+  rating?: number
+  sku?: string
+  tags?: string[]
+  slug?: string
+  metaTitle?: string
+  metaDescription?: string
 }
 
 // Alias semántico para el admin panel — mismo shape que Product, expresa intención.
-export type ProductAdminView = Product;
+export type ProductAdminView = Product
 
 // ─── Filter State ────────────────────────────────────────────────────────────
 export interface ProductFilterState {
-  brands: ProductBrand[];
-  categories: ProductCategory[];
-  capacities: ProductCapacity[];
-  priceRange: PriceRange;
-  inverter: boolean | null;
-  wifi: boolean | null;
+  brands: ProductBrand[]
+  categories: ProductCategory[]
+  capacities: ProductCapacity[]
+  priceRange: PriceRange
+  inverter: boolean | null
+  wifi: boolean | null
 }
 
 export interface PriceRange {
-  min: number;
-  max: number;
+  min: number
+  max: number
 }
 
 // ─── Select Options ──────────────────────────────────────────────────────────
 export interface CategoryOption {
-  value: ProductCategory;
-  label: string;
+  value: ProductCategory
+  label: string
 }
 
 export interface CapacityOption {
-  value: ProductCapacity;
-  label: string;
+  value: ProductCapacity
+  label: string
 }

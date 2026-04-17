@@ -1,8 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { MessageCircle, HelpCircle, ShoppingCart, Wrench, Settings, Shield, Snowflake } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import {
+  MessageCircle,
+  HelpCircle,
+  ShoppingCart,
+  Wrench,
+  Settings,
+  Shield,
+  Snowflake,
+} from "lucide-react"
 import Link from "next/link"
 
 const faqs = [
@@ -79,39 +92,39 @@ const faqs = [
 export default function FAQPage() {
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative py-10 md:py-16 overflow-hidden bg-[#f3f9ff]">
-        <div className="absolute inset-0 bg-gradient-radial from-[#e8f6ff] via-white to-[#f8fcff]" />
+      <section className="relative overflow-hidden bg-[#f3f9ff] py-10 md:py-16">
+        <div className="bg-gradient-radial absolute inset-0 from-[#e8f6ff] via-white to-[#f8fcff]" />
 
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#079cfb] opacity-[0.06] blur-[120px] rounded-full animate-breathe" />
+        <div className="animate-breathe absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px]" />
 
         <div className="absolute top-20 left-10 opacity-5">
-          <Snowflake className="w-24 h-24 text-[#037ecc]" />
+          <Snowflake className="h-24 w-24 text-[#037ecc]" />
         </div>
-        <div className="absolute bottom-20 right-10 opacity-5">
-          <Snowflake className="w-32 h-32 text-[#037ecc]" />
+        <div className="absolute right-10 bottom-20 opacity-5">
+          <Snowflake className="h-32 w-32 text-[#037ecc]" />
         </div>
 
-        <div className="container mx-auto px-5 md:px-4 relative z-10">
-          <div className="text-center mb-12 md:mb-16 space-y-4 md:space-y-6">
-            <Badge className="w-fit mx-auto bg-blue-50 text-blue-700 border-blue-200 rounded-full px-3 py-1 text-sm font-medium animate-fade-down">
-              <HelpCircle className="w-4 h-4 mr-2" />
+        <div className="relative z-10 container mx-auto px-5 md:px-4">
+          <div className="mb-12 space-y-4 text-center md:mb-16 md:space-y-6">
+            <Badge className="animate-fade-down mx-auto w-fit rounded-full border-blue-200 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+              <HelpCircle className="mr-2 h-4 w-4" />
               Preguntas Frecuentes
             </Badge>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold animate-fade-down delay-100">
+            <h1 className="animate-fade-down font-serif text-3xl font-bold delay-100 md:text-5xl lg:text-6xl">
               <span className="text-[#1e2b39]">¿Tienes </span>
               <span className="relative inline-block">
                 <span className="gradient-text">Dudas?</span>
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r from-[#037ecc] to-[#00baff] rounded-full animate-underline-sweep" />
+                <span className="animate-underline-sweep absolute -bottom-2 left-1/2 h-1 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff]" />
               </span>
             </h1>
 
-            <p className="text-base md:text-lg text-[#5f6b7a] max-w-[520px] mx-auto leading-relaxed animate-fade-down delay-200">
+            <p className="animate-fade-down mx-auto max-w-[520px] text-base leading-relaxed text-[#5f6b7a] delay-200 md:text-lg">
               Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y productos
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6 md:space-y-10">
+          <div className="mx-auto max-w-4xl space-y-6 md:space-y-10">
             {faqs.map((category, categoryIndex) => {
               const Icon = category.icon
               return (
@@ -120,34 +133,30 @@ export default function FAQPage() {
                   className="animate-fade-up"
                   style={{ animationDelay: `${categoryIndex * 100}ms` }}
                 >
-                  <Card className="bg-white/70 backdrop-blur-lg border border-[#e6f3fb] rounded-2xl shadow-[0_8px_30px_rgba(3,126,204,0.08)] hover:shadow-[0_12px_40px_rgba(3,126,204,0.12)] transition-all duration-300">
+                  <Card className="rounded-2xl border border-[#e6f3fb] bg-white/70 shadow-[0_8px_30px_rgba(3,126,204,0.08)] backdrop-blur-lg transition-all duration-300 hover:shadow-[0_12px_40px_rgba(3,126,204,0.12)]">
                     <CardContent className="p-5 md:p-8">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2 rounded-lg bg-[#037ecc]/10">
-                          <Icon className="w-5 h-5 text-[#037ecc]" />
+                      <div className="mb-6 flex items-center gap-3">
+                        <div className="rounded-lg bg-[#037ecc]/10 p-2">
+                          <Icon className="h-5 w-5 text-[#037ecc]" />
                         </div>
-                        <h2 className="text-xl md:text-2xl font-semibold text-[#037ecc] relative">
+                        <h2 className="relative text-xl font-semibold text-[#037ecc] md:text-2xl">
                           {category.category}
                           <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
                         </h2>
                       </div>
 
-                      <Accordion
-                        type="single"
-                        collapsible
-                        className="space-y-3"
-                      >
+                      <Accordion type="single" collapsible className="space-y-3">
                         {category.questions.map((faq, faqIndex) => (
                           <AccordionItem
                             key={faqIndex}
                             value={`item-${categoryIndex}-${faqIndex}`}
-                            className="border-b border-[#e6f3fb] last:border-0 group"
+                            className="group border-b border-[#e6f3fb] last:border-0"
                           >
-                            <AccordionTrigger className="text-left text-[15px] md:text-base hover:text-[#037ecc] transition-colors py-4 hover:shadow-[0_0_20px_rgba(7,156,251,0.08)] rounded-lg px-2 -mx-2">
+                            <AccordionTrigger className="-mx-2 rounded-lg px-2 py-4 text-left text-[15px] transition-colors hover:text-[#037ecc] hover:shadow-[0_0_20px_rgba(7,156,251,0.08)] md:text-base">
                               {faq.q}
                             </AccordionTrigger>
 
-                            <AccordionContent className="text-[#4a5568] text-[15px] leading-relaxed pt-2 pb-4 px-2 bg-gradient-to-b from-[#f9fcff] to-[#ffffff] rounded-lg animate-fade-down">
+                            <AccordionContent className="animate-fade-down rounded-lg bg-gradient-to-b from-[#f9fcff] to-[#ffffff] px-2 pt-2 pb-4 text-[15px] leading-relaxed text-[#4a5568]">
                               {faq.a}
                             </AccordionContent>
                           </AccordionItem>
@@ -157,32 +166,32 @@ export default function FAQPage() {
                   </Card>
 
                   {categoryIndex < faqs.length - 1 && (
-                    <div className="h-px bg-gradient-to-r from-transparent via-blue-200/40 to-transparent my-6 md:my-10" />
+                    <div className="my-6 h-px bg-gradient-to-r from-transparent via-blue-200/40 to-transparent md:my-10" />
                   )}
                 </div>
               )
             })}
           </div>
 
-          <div className="mt-12 md:mt-16 text-center animate-fade-up">
-            <Card className="max-w-2xl mx-auto bg-gradient-radial from-[#eaf7ff] via-[#ffffff] to-[#f8fcff] border border-[#d4edff]/40 rounded-3xl shadow-[0_12px_40px_rgba(3,126,204,0.1)]">
-              <CardContent className="p-6 md:p-10 space-y-5">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[#037ecc]/10 flex items-center justify-center shadow-[0_0_20px_rgba(7,156,251,0.15)]">
-                  <MessageCircle className="w-8 h-8 text-[#037ecc]" />
+          <div className="animate-fade-up mt-12 text-center md:mt-16">
+            <Card className="bg-gradient-radial mx-auto max-w-2xl rounded-3xl border border-[#d4edff]/40 from-[#eaf7ff] via-[#ffffff] to-[#f8fcff] shadow-[0_12px_40px_rgba(3,126,204,0.1)]">
+              <CardContent className="space-y-5 p-6 md:p-10">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#037ecc]/10 shadow-[0_0_20px_rgba(7,156,251,0.15)]">
+                  <MessageCircle className="h-8 w-8 text-[#037ecc]" />
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#002c5f]">
+                <h3 className="font-serif text-2xl font-bold text-[#002c5f] md:text-3xl">
                   ¿No encontraste tu respuesta?
                 </h3>
 
-                <p className="text-[#5f6b7a] text-base md:text-lg max-w-md mx-auto">
+                <p className="mx-auto max-w-md text-base text-[#5f6b7a] md:text-lg">
                   Nuestro equipo está disponible todos los días para ayudarte con cualquier consulta
                 </p>
 
                 <Button
                   size="lg"
                   asChild
-                  className="bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white rounded-full px-6 py-3 shadow-[0_6px_20px_rgba(7,156,251,0.25)] hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)] hover:scale-105 transition-all duration-300"
+                  className="rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff] px-6 py-3 text-white shadow-[0_6px_20px_rgba(7,156,251,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)]"
                 >
                   <Link href="/contacto">Contactar Soporte</Link>
                 </Button>

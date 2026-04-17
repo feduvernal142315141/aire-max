@@ -1,9 +1,4 @@
-import {
-  HeroSection,
-  BenefitsSection,
-  ServicesPreview,
-  ProductsPreview,
-} from "@/components/home";
+import { HeroSection, BenefitsSection, ServicesPreview, ProductsPreview } from "@/components/home"
 
 export default function HomePage() {
   return (
@@ -13,5 +8,5 @@ export default function HomePage() {
       <ServicesPreview />
       <ProductsPreview />
     </div>
-  );
+  )
 }

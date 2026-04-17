@@ -7,11 +7,12 @@ interface PlaceholderViewProps {
 
 export function PlaceholderView({ section }: PlaceholderViewProps) {
   return (
-    <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+    <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
       <CardHeader>
         <CardTitle className="capitalize">{section}</CardTitle>
         <CardDescription>
-          Módulo preparado en estructura admin. Seguimos con detalles específicos en la próxima iteración.
+          Módulo preparado en estructura admin. Seguimos con detalles específicos en la próxima
+          iteración.
         </CardDescription>
       </CardHeader>
     </Card>

@@ -46,12 +46,7 @@ export function AdminPanel() {
       case "productos":
         return <ProductsView admin={admin} />
       case "inventario":
-        return (
-          <InventoryView
-            products={admin.products}
-            onAdjustStock={admin.quickAdjustStock}
-          />
-        )
+        return <InventoryView products={admin.products} onAdjustStock={admin.quickAdjustStock} />
       case "ordenes":
         return <OrdersView />
       default:

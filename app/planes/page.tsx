@@ -58,44 +58,46 @@ const plans = [
 export default function PlanesPage() {
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff] gradient-bg-animated" />
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#079cfb] opacity-[0.06] blur-[100px] rounded-full" />
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="gradient-bg-animated absolute inset-0 bg-gradient-to-br from-[#f9fcff] via-[#e0f2fe] to-[#f9fcff]" />
+        <div className="absolute top-0 left-0 h-[500px] w-[500px] rounded-full bg-[#079cfb] opacity-[0.06] blur-[100px]" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 space-y-6 animate-fade-up">
-            <Badge className="w-fit mx-auto bg-white/80 backdrop-blur-sm border border-primary/20 text-primary">
-              <Shield className="w-4 h-4 mr-2" />
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="animate-fade-up mb-16 space-y-6 text-center">
+            <Badge className="border-primary/20 text-primary mx-auto w-fit border bg-white/80 backdrop-blur-sm">
+              <Shield className="mr-2 h-4 w-4" />
               Planes de Mantenimiento
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold">
+            <h1 className="font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Mantén tu Equipo en <span className="gradient-text">Óptimas Condiciones</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Elige el plan de mantenimiento que mejor se adapte a tus necesidades y disfruta de un aire acondicionado
-              eficiente todo el año
+            <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed md:text-xl">
+              Elige el plan de mantenimiento que mejor se adapte a tus necesidades y disfruta de un
+              aire acondicionado eficiente todo el año
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3">
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
-                  plan.popular ? "border-2 border-primary shadow-xl scale-105" : "border-2 border-transparent"
+                className={`relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+                  plan.popular
+                    ? "border-primary scale-105 border-2 shadow-xl"
+                    : "border-2 border-transparent"
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 text-sm font-semibold rounded-bl-lg">
+                  <div className="from-primary to-accent absolute top-0 right-0 rounded-bl-lg bg-gradient-to-r px-4 py-1 text-sm font-semibold text-white">
                     Más Popular
                   </div>
                 )}
-                <CardHeader className="text-center pb-8 pt-8">
-                  <CardTitle className="text-2xl font-serif mb-2">{plan.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground mb-6">{plan.description}</p>
+                <CardHeader className="pt-8 pb-8 text-center">
+                  <CardTitle className="mb-2 font-serif text-2xl">{plan.name}</CardTitle>
+                  <p className="text-muted-foreground mb-6 text-sm">{plan.description}</p>
                   <div className="space-y-2">
                     <div className="flex items-baseline justify-center gap-2">
-                      <span className="text-5xl font-bold text-primary">${plan.price}</span>
+                      <span className="text-primary text-5xl font-bold">${plan.price}</span>
                       <span className="text-muted-foreground">/{plan.period}</span>
                     </div>
                   </div>
@@ -104,7 +106,7 @@ export default function PlanesPage() {
                   <ul className="space-y-3">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
                         <span className="text-sm leading-relaxed">{feature}</span>
                       </li>
                     ))}
@@ -112,7 +114,7 @@ export default function PlanesPage() {
                   <Button
                     className={`w-full ${
                       plan.popular
-                        ? "bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg"
+                        ? "from-primary to-accent hover:from-primary/90 hover:to-accent/90 bg-gradient-to-r text-white shadow-lg"
                         : "bg-transparent"
                     }`}
                     variant={plan.popular ? "default" : "outline"}
@@ -126,8 +128,8 @@ export default function PlanesPage() {
             ))}
           </div>
 
-          <div className="mt-16 text-center space-y-6">
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="mt-16 space-y-6 text-center">
+            <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
               {[
                 {
                   icon: Clock,
@@ -145,12 +147,12 @@ export default function PlanesPage() {
                   description: "Personal especializado y capacitado",
                 },
               ].map((benefit, index) => (
-                <div key={index} className="flex flex-col items-center text-center space-y-3">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <benefit.icon className="w-6 h-6 text-primary" />
+                <div key={index} className="flex flex-col items-center space-y-3 text-center">
+                  <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-xl">
+                    <benefit.icon className="text-primary h-6 w-6" />
                   </div>
                   <h3 className="font-semibold">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
                 </div>
               ))}
             </div>
@@ -158,15 +160,18 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white">
+      <section className="bg-white py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0 overflow-hidden relative">
-            <div className="absolute inset-0 bg-grid-white/10" />
-            <CardContent className="relative py-12 md:py-16 text-center space-y-6">
-              <Sparkles className="w-16 h-16 mx-auto opacity-80" />
-              <h2 className="text-3xl md:text-4xl font-serif font-bold">¿Necesitas un plan personalizado?</h2>
-              <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                Contáctanos y diseñaremos un plan de mantenimiento adaptado a tus necesidades específicas
+          <Card className="from-primary to-primary/80 text-primary-foreground relative overflow-hidden border-0 bg-gradient-to-br">
+            <div className="bg-grid-white/10 absolute inset-0" />
+            <CardContent className="relative space-y-6 py-12 text-center md:py-16">
+              <Sparkles className="mx-auto h-16 w-16 opacity-80" />
+              <h2 className="font-serif text-3xl font-bold md:text-4xl">
+                ¿Necesitas un plan personalizado?
+              </h2>
+              <p className="mx-auto max-w-2xl text-lg opacity-90">
+                Contáctanos y diseñaremos un plan de mantenimiento adaptado a tus necesidades
+                específicas
               </p>
               <Button size="lg" variant="secondary" asChild>
                 <Link href="/contacto">

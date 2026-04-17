@@ -54,12 +54,14 @@ export function ProductsView({ admin }: ProductsViewProps) {
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-2xl border border-white/20 backdrop-blur bg-white/70 shadow-lg">
+      <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
         <CardHeader className="space-y-4">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <CardTitle className="text-xl">Productos</CardTitle>
-              <CardDescription>DataGrid premium con edición inline y acciones masivas.</CardDescription>
+              <CardDescription>
+                DataGrid premium con edición inline y acciones masivas.
+              </CardDescription>
             </div>
 
             <div className="flex flex-wrap gap-2">
@@ -70,7 +72,9 @@ export function ProductsView({ admin }: ProductsViewProps) {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => applyBulkAction("activate")}>Activar</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => applyBulkAction("activate")}>
+                    Activar
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => applyBulkAction("deactivate")}>
                     Desactivar
                   </DropdownMenuItem>

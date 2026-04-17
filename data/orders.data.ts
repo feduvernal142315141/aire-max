@@ -1,4 +1,4 @@
-import type { AdminOrder } from "@/modules/admin/types";
+import type { AdminOrder } from "@/modules/admin/types"
 
 export const ordersData: AdminOrder[] = [
   {
@@ -25,4 +25,4 @@ export const ordersData: AdminOrder[] = [
     status: "Enviado",
     createdAt: "2026-03-26",
   },
-];
+]

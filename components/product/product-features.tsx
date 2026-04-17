@@ -54,23 +54,25 @@ export function ProductFeatures({ product }: ProductFeaturesProps) {
         <CardTitle>Características y Beneficios</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <div key={index} className="flex gap-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <feature.icon className="w-6 h-6 text-primary" />
+              <div className="bg-primary/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
+                <feature.icon className="text-primary h-6 w-6" />
               </div>
               <div className="space-y-1">
                 <h4 className="font-semibold">{feature.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 pt-8 border-t">
-          <h4 className="font-semibold mb-4">Incluye:</h4>
-          <div className="grid md:grid-cols-2 gap-3">
+        <div className="mt-8 border-t pt-8">
+          <h4 className="mb-4 font-semibold">Incluye:</h4>
+          <div className="grid gap-3 md:grid-cols-2">
             {[
               "Instalación profesional certificada",
               "Garantía extendida de fábrica",
@@ -80,7 +82,7 @@ export function ProductFeatures({ product }: ProductFeaturesProps) {
               "Soporte técnico 24/7",
             ].map((item, index) => (
               <div key={index} className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                <CheckCircle2 className="text-primary h-5 w-5 flex-shrink-0" />
                 <span className="text-sm">{item}</span>
               </div>
             ))}
