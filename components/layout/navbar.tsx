@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Menu, Snowflake, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
 
 const navigation = [
   { name: "Inicio", href: "/" },
@@ -99,30 +98,24 @@ export function Navbar() {
                   className="hover:bg-primary/10 flex h-16 w-16 items-center justify-center rounded-xl transition-all duration-300 md:h-12 md:w-12"
                 >
                   {/* ÍCONO MENU */}
-                  <motion.div
-                    initial={false}
-                    animate={isOpen ? "hidden" : "visible"}
-                    variants={{
-                      visible: { opacity: 1, scale: 1, rotate: 0 },
-                      hidden: { opacity: 0, scale: 0.2, rotate: 90 },
-                    }}
-                    className="absolute"
+                  <div
+                    className={cn(
+                      "absolute transition-all duration-200",
+                      isOpen ? "scale-0 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100",
+                    )}
                   >
                     <Menu className="h-10 w-10" />
-                  </motion.div>
+                  </div>
 
                   {/* ÍCONO X */}
-                  <motion.div
-                    initial={false}
-                    animate={isOpen ? "visible" : "hidden"}
-                    variants={{
-                      visible: { opacity: 1, scale: 1, rotate: 0 },
-                      hidden: { opacity: 0, scale: 0.2, rotate: -90 },
-                    }}
-                    className="absolute"
+                  <div
+                    className={cn(
+                      "absolute transition-all duration-200",
+                      isOpen ? "scale-100 rotate-0 opacity-100" : "scale-0 -rotate-90 opacity-0",
+                    )}
                   >
                     <X className="h-8 w-8" />
-                  </motion.div>
+                  </div>
                 </Button>
               </SheetTrigger>
 
@@ -142,12 +135,7 @@ export function Navbar() {
 
                 <div className="relative flex h-full flex-col px-7 pt-[72px] pb-6">
                   {/* LOGO */}
-                  <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="mb-12 flex items-center justify-center"
-                  >
+                  <div className="animate-fade-up mb-12 flex items-center justify-center">
                     <Link
                       href="/"
                       className="flex items-center gap-3"
@@ -161,16 +149,15 @@ export function Navbar() {
                       </div>
                       <span className="font-serif text-3xl font-bold text-[#0f172a]">Aire-Max</span>
                     </Link>
-                  </motion.div>
+                  </div>
 
                   {/* LINKS */}
                   <nav className="flex flex-1 flex-col gap-[22px]">
                     {navigation.map((item, index) => (
-                      <motion.div
+                      <div
                         key={item.name}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        className="animate-fade-up"
+                        style={{ animationDelay: `${index * 50}ms`, animationFillMode: "backwards" }}
                       >
                         <Link
                           href={item.href}
@@ -182,16 +169,14 @@ export function Navbar() {
                             <span className="absolute bottom-0 left-0 h-0.5 w-0 rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
                           </span>
                         </Link>
-                      </motion.div>
+                      </div>
                     ))}
                   </nav>
 
                   {/* CTA MOBILE */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="-mx-7 mt-6 flex flex-col gap-3 rounded-t-2xl border-t border-white/40 bg-white/60 px-7 pt-6 pb-2 shadow-[0_-8px_30px_rgba(7,156,251,0.1)] backdrop-blur-lg"
+                  <div
+                    className="animate-fade-up -mx-7 mt-6 flex flex-col gap-3 rounded-t-2xl border-t border-white/40 bg-white/60 px-7 pt-6 pb-2 shadow-[0_-8px_30px_rgba(7,156,251,0.1)] backdrop-blur-lg"
+                    style={{ animationDelay: "400ms", animationFillMode: "backwards" }}
                   >
                     <Button
                       asChild
@@ -202,7 +187,7 @@ export function Navbar() {
                         Cotizar Ahora
                       </a>
                     </Button>
-                  </motion.div>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
@@ -211,18 +196,13 @@ export function Navbar() {
       </header>
 
       {/* OVERLAY */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
-            onClick={() => setIsOpen(false)}
-          />
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden transition-opacity duration-300",
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
         )}
-      </AnimatePresence>
+        onClick={() => setIsOpen(false)}
+      />
     </>
   )
 }

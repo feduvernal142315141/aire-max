@@ -283,15 +283,6 @@
   }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
 /* Added gradient-x animation for CTA button */
 @keyframes gradient-x {
   0%,
@@ -324,15 +315,6 @@
   }
 }
 
-/* Added light wave animation class for button effects */
-@keyframes light-wave {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(400%);
-  }
-}
 
 /* Added breathing animation for ambient halo */
 @keyframes breathe {
@@ -378,61 +360,6 @@
   }
 }
 
-/* Added check-rotate animation for list items on hover */
-@keyframes check-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
-}
-
-/* Added light direction simulation for vitrine effect */
-@keyframes light-direction {
-  0% {
-    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.6) inset;
-  }
-  50% {
-    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.8) inset;
-  }
-  100% {
-    box-shadow: 0 -50px 150px rgba(255, 255, 255, 0.6) inset;
-  }
-}
-
-/* Added diagonal reflection animation for product images */
-@keyframes diagonal-reflection {
-  0% {
-    transform: translateX(-150%) translateY(-150%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(150%) translateY(150%) rotate(45deg);
-  }
-}
-
-/* Added hover shadow connect effect for adjacent cards */
-@keyframes shadow-connect {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Added tooltip fade-in animation */
-@keyframes tooltip-fade {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Added icon-breathe animation for trust badges */
 @keyframes icon-breathe {
   0%,
@@ -466,17 +393,6 @@
   }
 }
 
-/* Added ink-flow animation for FAQ title underline */
-@keyframes ink-flow {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 100%;
-    opacity: 1;
-  }
-}
 
 /* Global transition for smooth interactions */
 .transition-all-smooth {
@@ -537,29 +453,8 @@
   animation: pulse-slow 3s ease-in-out infinite;
 }
 
-/* Added light-wave animation class for button effects */
-.animate-light-wave {
-  animation: light-wave 1s ease-out;
-}
-
 .animate-breathe {
   animation: breathe 10s ease-in-out infinite;
-}
-
-.animate-light-direction {
-  animation: light-direction 10s ease-in-out infinite;
-}
-
-.animate-diagonal-reflection {
-  animation: diagonal-reflection 2s ease-out;
-}
-
-.animate-shadow-connect {
-  animation: shadow-connect 0.3s ease-out;
-}
-
-.animate-tooltip-fade {
-  animation: tooltip-fade 0.2s ease-out;
 }
 
 .animate-icon-breathe {
@@ -653,21 +548,6 @@
   box-shadow: inset 0 -40px 80px rgba(0, 0, 0, 0.05);
 }
 
-/* Added air-flow parallax animation for catalog scroll effect */
-@keyframes air-flow {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-.animate-air-flow {
-  animation: air-flow 8s ease-in-out infinite;
-}
-
 /* Added skeleton shimmer for loading states */
 @keyframes skeleton-shimmer {
   0% {
@@ -689,39 +569,6 @@
   animation: skeleton-shimmer 2s infinite;
 }
 
-/* Added bounce animation for chip selection */
-@keyframes chip-bounce {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.96);
-  }
-}
-
-.animate-chip-bounce {
-  animation: chip-bounce 0.3s ease;
-}
-
-/* Added spring easing for smooth mobile interactions */
-@keyframes spring-in {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-spring-in {
-  animation: spring-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
 
 /* Added inertia scroll effect for smooth product scrolling */
 .scroll-smooth-inertia {
@@ -765,22 +612,17 @@
   animation-delay: 200ms;
 }
 
-/* Added counter animation for metrics */
-@keyframes counter-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* ─── prefers-reduced-motion ─────────────────────────────────────────────────
+   Disable all animations and transitions for users who prefer reduced motion.
+   framer-motion v11+ also checks this automatically for JS-driven animations.
+─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-counter-up {
-  animation: counter-up 0.3s ease-out;
-}
-
-.animate-ink-flow {
-  animation: ink-flow 0.6s ease-out forwards;
 }

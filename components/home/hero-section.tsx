@@ -94,6 +94,7 @@ export function HeroSection() {
                 fill
                 className="object-cover"
                 priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/10" />
               <div className="animate-shimmer-slow absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
