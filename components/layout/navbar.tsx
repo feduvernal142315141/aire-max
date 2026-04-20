@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Menu, Snowflake, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { DarkModeToggle } from "@/components/ui/dark-mode-toggle"
 
 const navigation = [
   { name: "Inicio", href: "/" },
@@ -25,6 +27,7 @@ const WHATSAPP_MESSAGE =
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -42,9 +45,9 @@ export function Navbar() {
       <header
         className={cn(
           "animate-fade-down fixed top-0 right-0 left-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "h-14 border-b border-white/20 bg-white/95 shadow-[0_2px_20px_rgba(0,0,0,0.05)] backdrop-blur-md md:h-16"
-            : "h-14 bg-white/20 backdrop-blur-md md:h-18",
+            isScrolled
+            ? "h-14 border-b border-white/20 bg-background/95 shadow-[0_2px_20px_rgba(0,0,0,0.05)] backdrop-blur-md md:h-16"
+            : "h-14 bg-background/20 backdrop-blur-md md:h-18",
         )}
       >
         <nav className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
@@ -59,26 +62,41 @@ export function Navbar() {
               >
                 <Snowflake className="h-5 w-5 md:h-7 md:w-7" />
               </div>
-              <span className="font-serif text-lg font-bold text-[#0f172a] md:text-2xl lg:text-3xl">
+              <span className="font-serif text-lg font-bold text-foreground md:text-2xl lg:text-3xl">
                 Aire-Max
               </span>
             </Link>
 
             {/* NAV DESKTOP */}
-            <div className="hidden items-center gap-8 lg:flex">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="relative py-2 text-sm font-medium text-[#0f172a]/80 transition-all duration-300 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[2px] after:origin-left after:scale-x-0 after:rounded-full after:bg-gradient-to-r after:from-[#037ecc] after:to-[#00baff] after:transition-transform after:duration-300 hover:text-[#0f172a] hover:after:scale-x-100"
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <div className="hidden items-center gap-1 lg:flex">
+              {navigation.map((item) => {
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname?.startsWith(item.href)
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "relative rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200",
+                      isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground/70 hover:bg-primary/5 hover:text-foreground",
+                    )}
+                  >
+                    {item.name}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary" />
+                    )}
+                  </Link>
+                )
+              })}
             </div>
 
             {/* CTA DESKTOP */}
             <div className="hidden items-center gap-3 lg:flex">
+              <DarkModeToggle />
               <Button
                 size="default"
                 asChild
@@ -122,7 +140,7 @@ export function Navbar() {
               {/* CONTENIDO DEL MENU */}
               <SheetContent
                 side="right"
-                className="w-[88vw] overflow-hidden rounded-l-[24px] border-l border-white/40 bg-gradient-to-br from-white/70 via-white/60 to-[#e7f6ff]/50 p-0 shadow-[0_0_40px_rgba(7,156,251,0.2)] backdrop-blur-2xl"
+                className="w-[88vw] overflow-hidden rounded-l-[24px] border-l border-white/40 bg-gradient-to-br from-white/70 via-white/60 to-[#e7f6ff]/50 dark:from-slate-900/90 dark:via-slate-800/80 dark:to-slate-900/80 p-0 shadow-[0_0_40px_rgba(7,156,251,0.2)] backdrop-blur-2xl"
               >
                 {/* FIX DE RADIX (IMPORTANTE) */}
                 <SheetHeader className="sr-only">
@@ -147,37 +165,52 @@ export function Navbar() {
                           <Snowflake className="h-8 w-8" />
                         </div>
                       </div>
-                      <span className="font-serif text-3xl font-bold text-[#0f172a]">Aire-Max</span>
+                      <span className="font-serif text-3xl font-bold text-foreground">Aire-Max</span>
                     </Link>
                   </div>
 
                   {/* LINKS */}
-                  <nav className="flex flex-1 flex-col gap-[22px]">
-                    {navigation.map((item, index) => (
-                      <div
-                        key={item.name}
-                        className="animate-fade-up"
-                        style={{ animationDelay: `${index * 50}ms`, animationFillMode: "backwards" }}
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setIsOpen(false)}
-                          className="group relative block rounded-xl px-4 py-[14px] text-lg font-medium text-[#0f172a] transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                  <nav className="flex flex-1 flex-col gap-[8px]">
+                    {navigation.map((item, index) => {
+                      const isActive =
+                        item.href === "/"
+                          ? pathname === "/"
+                          : pathname?.startsWith(item.href)
+                      return (
+                        <div
+                          key={item.name}
+                          className="animate-fade-up"
+                          style={{ animationDelay: `${index * 50}ms`, animationFillMode: "backwards" }}
                         >
-                          <span className="relative tracking-[0.5px]">
-                            {item.name}
-                            <span className="absolute bottom-0 left-0 h-0.5 w-0 rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
-                          </span>
-                        </Link>
-                      </div>
-                    ))}
+                          <Link
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "group relative flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium transition-all duration-200",
+                              isActive
+                                ? "bg-primary/10 text-primary"
+                                : "text-foreground hover:bg-primary/5 hover:text-primary",
+                            )}
+                          >
+                            {isActive && (
+                              <span className="h-4 w-1 rounded-full bg-primary" />
+                            )}
+                            <span className="tracking-[0.3px]">{item.name}</span>
+                          </Link>
+                        </div>
+                      )
+                    })}
                   </nav>
 
                   {/* CTA MOBILE */}
                   <div
-                    className="animate-fade-up -mx-7 mt-6 flex flex-col gap-3 rounded-t-2xl border-t border-white/40 bg-white/60 px-7 pt-6 pb-2 shadow-[0_-8px_30px_rgba(7,156,251,0.1)] backdrop-blur-lg"
+                    className="animate-fade-up -mx-7 mt-6 flex flex-col gap-3 rounded-t-2xl border-t border-white/40 bg-white/60 dark:bg-slate-800/60 px-7 pt-6 pb-2 shadow-[0_-8px_30px_rgba(7,156,251,0.1)] backdrop-blur-lg"
                     style={{ animationDelay: "400ms", animationFillMode: "backwards" }}
                   >
+                    <div className="flex items-center justify-between px-1 pb-1">
+                      <span className="text-sm text-muted-foreground">Tema</span>
+                      <DarkModeToggle />
+                    </div>
                     <Button
                       asChild
                       className="group relative h-12 w-full gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#037ecc] to-[#00baff] font-semibold text-white shadow-[0_6px_20px_rgba(7,156,251,0.4)] hover:from-[#026bb3] hover:to-[#0088d6] hover:shadow-[0_8px_24px_rgba(7,156,251,0.5)]"

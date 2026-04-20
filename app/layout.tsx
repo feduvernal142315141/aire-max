@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { AppShell } from "@/components/layout/app-shell"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
     description: "Venta, instalación y mantenimiento profesional de aires acondicionados",
     type: "website",
   },
+  other: {
+    "theme-color": "#079cfb",
+  },
 }
 
 export default function RootLayout({
@@ -36,10 +40,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <AppShell>{children}</AppShell>
-        <Analytics />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AppShell>{children}</AppShell>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
