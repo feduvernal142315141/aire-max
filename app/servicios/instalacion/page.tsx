@@ -1,8 +1,23 @@
+import type { Metadata } from "next"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle2, Phone, Calendar } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Instalación de Aires Acondicionados | Aire-Max",
+  description:
+    "Servicio profesional de instalación de aires acondicionados. Técnicos certificados, trabajo garantizado y limpieza total. Presupuesto sin costo en menos de 24h.",
+  keywords: "instalación aire acondicionado, instalación split profesional, técnico AC certificado México",
+  openGraph: {
+    title: "Instalación AC | Aire-Max",
+    description:
+      "Instalación profesional de aires acondicionados con garantía. Técnicos certificados en toda la República.",
+    type: "website",
+  },
+}
 import Image from "next/image"
 
 export default function InstalacionPage() {

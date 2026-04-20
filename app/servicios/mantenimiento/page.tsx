@@ -1,8 +1,23 @@
+import type { Metadata } from "next"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle2, Phone, Calendar, Star } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Mantenimiento de Aires Acondicionados | Aire-Max",
+  description:
+    "Mantenimiento preventivo y correctivo de aires acondicionados. Limpieza de filtros, carga de gas, revisión eléctrica y más. Prolonga la vida útil de tu equipo.",
+  keywords: "mantenimiento aire acondicionado, limpieza filtros AC, carga gas refrigerante, mantenimiento preventivo HVAC",
+  openGraph: {
+    title: "Mantenimiento AC | Aire-Max",
+    description:
+      "Mantenimiento profesional de aires acondicionados. Previene fallas y reduce el consumo eléctrico hasta un 30%.",
+    type: "website",
+  },
+}
 import Image from "next/image"
 
 export default function MantenimientoPage() {

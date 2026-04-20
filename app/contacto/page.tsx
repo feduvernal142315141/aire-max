@@ -1,9 +1,24 @@
+import type { Metadata } from "next"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+
+export const metadata: Metadata = {
+  title: "Contacto | Aire-Max — Solicita Presupuesto Gratis",
+  description:
+    "Contáctanos para instalación, mantenimiento o reparación de tu aire acondicionado. Respuesta en menos de 24 horas. WhatsApp, teléfono o formulario online.",
+  keywords: "contacto aire acondicionado, presupuesto HVAC, instalación AC México, servicio técnico climatización",
+  openGraph: {
+    title: "Contacto | Aire-Max",
+    description:
+      "Solicita tu presupuesto gratuito. Técnicos certificados disponibles en toda la República Mexicana.",
+    type: "website",
+  },
+}
 import {
   Select,
   SelectContent,

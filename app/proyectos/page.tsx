@@ -1,9 +1,24 @@
+import type { Metadata } from "next"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Building2, Home, Factory, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+
+export const metadata: Metadata = {
+  title: "Proyectos | Aire-Max — Casos de Éxito en Climatización",
+  description:
+    "Conoce nuestros proyectos de instalación HVAC: oficinas corporativas, residencias premium e instalaciones industriales. Resultados reales con ahorro energético comprobado.",
+  keywords: "proyectos climatización, instalación AC corporativa, HVAC residencial, casos de éxito aire acondicionado",
+  openGraph: {
+    title: "Proyectos | Aire-Max",
+    description:
+      "Portafolio de instalaciones HVAC en toda la República Mexicana. Comercial, residencial e industrial.",
+    type: "website",
+  },
+}
 
 const projects = [
   {

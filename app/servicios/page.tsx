@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +17,19 @@ import {
   Award,
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Servicios de Climatización | Aire-Max — Instalación, Mantenimiento y Reparación",
+  description:
+    "Servicios profesionales de climatización: instalación de splits, mantenimiento preventivo y reparación de aires acondicionados. Técnicos certificados, garantía en todos los trabajos.",
+  keywords: "servicios climatización, instalación split, mantenimiento aire acondicionado, reparación AC, HVAC México",
+  openGraph: {
+    title: "Servicios | Aire-Max",
+    description:
+      "Instalación, mantenimiento y reparación de aires acondicionados. Técnicos certificados con garantía extendida.",
+    type: "website",
+  },
+}
 
 export default function ServiciosPage() {
   return (

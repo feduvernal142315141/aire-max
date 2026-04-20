@@ -1,8 +1,23 @@
+import type { Metadata } from "next"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle2, Phone, Sparkles, Shield, Clock, Wrench } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Planes de Mantenimiento | Aire-Max — Protege tu Climatización",
+  description:
+    "Planes de mantenimiento preventivo para aires acondicionados desde $49.99/mes. Básico, Estándar y Premium con visitas periódicas, limpieza y soporte técnico.",
+  keywords: "plan mantenimiento aire acondicionado, mantenimiento preventivo HVAC, contrato servicio AC",
+  openGraph: {
+    title: "Planes de Mantenimiento | Aire-Max",
+    description:
+      "Protege tu inversión con nuestros planes de mantenimiento. Revisiones periódicas, limpieza profunda y respuesta prioritaria.",
+    type: "website",
+  },
+}
 
 const plans = [
   {

@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -7,6 +9,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+
+export const metadata: Metadata = {
+  title: "Preguntas Frecuentes | Aire-Max — Todo sobre Aires Acondicionados",
+  description:
+    "Resolvemos tus dudas sobre compra, instalación, mantenimiento y garantías de aires acondicionados. Guías de BTU, eficiencia energética y más.",
+  keywords: "FAQ aire acondicionado, preguntas frecuentes AC, BTU calculadora, eficiencia energética HVAC",
+  openGraph: {
+    title: "FAQ | Aire-Max",
+    description:
+      "Todas las respuestas sobre aires acondicionados: cómo elegir el BTU correcto, tiempos de instalación, garantías y más.",
+    type: "website",
+  },
+}
 import {
   MessageCircle,
   HelpCircle,
