@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="admin@aire-max.com"
+                  placeholder="Email exacto de Authentication → Users"
                   required
                   autoComplete="email"
                   className="focus-visible:ring-primary/50 border-slate-600 bg-slate-700/50 text-white placeholder:text-slate-500"
