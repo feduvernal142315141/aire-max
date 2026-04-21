@@ -1,8 +1,6 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
-import type { Database } from "./lib/supabase/types.generated"
-
 const ADMIN_PUBLIC_PATHS = ["/admin/login"]
 
 export async function middleware(request: NextRequest) {
@@ -26,7 +24,8 @@ async function handleAuth(request: NextRequest) {
   // supabaseResponse must be used consistently — Supabase official pattern
   let supabaseResponse = NextResponse.next({ request })
 
-  const supabase = createServerClient<Database>(url, anonKey, {
+  // No Database generic here — middleware only needs auth, not typed DB queries
+  const supabase = createServerClient(url, anonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll()
@@ -42,9 +41,12 @@ async function handleAuth(request: NextRequest) {
   })
 
   // IMPORTANT: do not run any logic between createServerClient and getUser
+  const authClient = supabase.auth as unknown as {
+    getUser: () => Promise<{ data: { user: { id: string } | null } }>
+  }
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await authClient.getUser()
 
   const { pathname } = request.nextUrl
 
