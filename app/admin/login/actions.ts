@@ -23,6 +23,16 @@ export async function signIn(
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
+    // Vercel → Logs: ver el mensaje real si falla en prod pero no en local
+    console.error("[admin login]", error.message, error.code)
+
+    if (error.message.includes("Email not confirmed") || error.code === "email_not_confirmed") {
+      return {
+        error:
+          "Tenés que confirmar el email antes de entrar. Revisá Supabase → Authentication → Users y confirmá el usuario o desactivá “Confirm email” en Auth settings.",
+      }
+    }
+
     return { error: "Credenciales incorrectas. Verificá email y contraseña." }
   }
 
