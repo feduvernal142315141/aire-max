@@ -43,7 +43,7 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden dark:bg-slate-900/50">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f8fcff] via-[#eaf6ff] to-[#d9f0ff] opacity-50" />
+      <div className="bg-section absolute inset-0 opacity-80" />
       <div className="animate-breathe absolute top-0 left-1/4 h-96 w-96 rounded-full bg-[#00baff]/10 blur-3xl" />
       <div
         className="animate-breathe absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-[#037ecc]/10 blur-3xl"
@@ -52,7 +52,7 @@ export function Footer() {
 
       <div className="relative border-b border-[#037ecc]/10">
         <div className="container mx-auto px-6 py-8 lg:px-12">
-          <div className="animate-fade-up flex flex-col items-center justify-between gap-6 rounded-2xl border border-white/40 bg-white/60 dark:bg-slate-800/60 p-6 shadow-[0_10px_40px_rgba(7,156,251,0.06)] backdrop-blur-xl lg:flex-row lg:gap-8 lg:p-8">
+          <div className="animate-fade-up flex flex-col items-center justify-between gap-6 rounded-2xl border border-white/40 bg-white/60 p-6 shadow-[0_10px_40px_rgba(7,156,251,0.06)] backdrop-blur-xl lg:flex-row lg:gap-8 lg:p-8 dark:bg-slate-800/60">
             {/* Trust badges */}
             <div className="flex flex-wrap items-center justify-center gap-6 lg:justify-start lg:gap-8">
               {trustBadges.map((badge, index) => (
@@ -64,7 +64,7 @@ export function Footer() {
                   <div className="animate-icon-breathe bg-gradient-radial flex h-12 w-12 items-center justify-center rounded-full border border-[#037ecc]/10 from-[#00baff]/10 to-transparent">
                     <badge.icon className="h-5 w-5 text-[#037ecc]" />
                   </div>
-                  <span className="text-sm font-medium text-foreground">{badge.text}</span>
+                  <span className="text-foreground text-sm font-medium">{badge.text}</span>
                 </div>
               ))}
             </div>
@@ -108,7 +108,7 @@ export function Footer() {
                   Aire-Max
                 </span>
               </Link>
-              <p className="mb-6 text-sm leading-relaxed text-muted-foreground opacity-90">
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed opacity-90">
                 Más de 15 años ofreciendo soluciones de climatización profesional.
               </p>
 
@@ -116,7 +116,7 @@ export function Footer() {
               <div className="space-y-3">
                 <a
                   href={`tel:${WHATSAPP_NUMBER}`}
-                  className="group flex items-center gap-3 text-sm text-foreground transition-all duration-200 hover:translate-x-1 hover:text-[#037ecc]"
+                  className="group text-foreground flex items-center gap-3 text-sm transition-all duration-200 hover:translate-x-1 hover:text-[#037ecc]"
                 >
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00baff]/10 transition-colors group-hover:bg-[#00baff]/20">
                     <Phone className="h-4 w-4" />
@@ -125,20 +125,20 @@ export function Footer() {
                 </a>
                 <a
                   href="mailto:info@aire-max.com"
-                  className="group flex items-center gap-3 text-sm text-foreground transition-all duration-200 hover:translate-x-1 hover:text-[#037ecc]"
+                  className="group text-foreground flex items-center gap-3 text-sm transition-all duration-200 hover:translate-x-1 hover:text-[#037ecc]"
                 >
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00baff]/10 transition-colors group-hover:bg-[#00baff]/20">
                     <Mail className="h-4 w-4" />
                   </div>
                   <span>info@aire-max.com</span>
                 </a>
-                <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <div className="text-muted-foreground flex items-start gap-3 text-sm">
                   <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-[#00baff]/10">
                     <MapPin className="h-4 w-4" />
                   </div>
                   <span>Av. Principal 123, Ciudad, País</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <div className="text-muted-foreground flex items-center gap-3 text-sm">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00baff]/10">
                     <Clock className="h-4 w-4" />
                   </div>
@@ -152,13 +152,13 @@ export function Footer() {
               className="animate-fade-up"
               style={{ animationDelay: "100ms", animationFillMode: "backwards" }}
             >
-              <h3 className="mb-6 text-base font-semibold text-foreground">Productos</h3>
+              <h3 className="text-foreground mb-6 text-base font-semibold">Productos</h3>
               <ul className="space-y-3">
                 {footerLinks.productos.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                      className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                     >
                       {link.name}
                       <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -173,13 +173,13 @@ export function Footer() {
               className="animate-fade-up"
               style={{ animationDelay: "200ms", animationFillMode: "backwards" }}
             >
-              <h3 className="mb-6 text-base font-semibold text-foreground">Servicios</h3>
+              <h3 className="text-foreground mb-6 text-base font-semibold">Servicios</h3>
               <ul className="space-y-3">
                 {footerLinks.servicios.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                      className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                     >
                       {link.name}
                       <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -194,12 +194,12 @@ export function Footer() {
               className="animate-fade-up"
               style={{ animationDelay: "300ms", animationFillMode: "backwards" }}
             >
-              <h3 className="mb-6 text-base font-semibold text-foreground">Contacto</h3>
+              <h3 className="text-foreground mb-6 text-base font-semibold">Contacto</h3>
               <ul className="space-y-3">
                 <li>
                   <Link
                     href="/nosotros"
-                    className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                    className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                   >
                     Nosotros
                     <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -208,7 +208,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/proyectos"
-                    className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                    className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                   >
                     Proyectos
                     <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -217,7 +217,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/faq"
-                    className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                    className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                   >
                     FAQ
                     <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -226,7 +226,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/contacto"
-                    className="group relative inline-block text-sm text-muted-foreground transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
+                    className="group text-muted-foreground relative inline-block text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#037ecc] hover:to-[#00baff] hover:bg-clip-text hover:text-transparent"
                   >
                     Contacto
                     <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
@@ -248,7 +248,7 @@ export function Footer() {
               href="https://www.kodewave-solutions.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-muted-foreground transition-all duration-200 hover:scale-105 hover:text-[#037ecc]"
+              className="group text-muted-foreground flex items-center gap-2 transition-all duration-200 hover:scale-105 hover:text-[#037ecc]"
             >
               <span>Diseñado con</span>
               <span className="animate-icon-breathe inline-block bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-transparent">

@@ -27,6 +27,10 @@ export interface GeneralTabProps {
   onSuggestAi: () => void
 }
 
+const fieldClass =
+  "cursor-pointer rounded-xl border-border bg-background text-foreground placeholder:text-muted-foreground/60 focus-visible:ring-primary/25 focus-visible:border-primary/50 transition-colors dark:bg-muted/20"
+const labelClass = "text-sm font-medium text-foreground"
+
 export function GeneralTab({
   draft,
   setDraft,
@@ -37,48 +41,52 @@ export function GeneralTab({
   onSuggestAi,
 }: GeneralTabProps) {
   return (
-    <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
-      <div className="space-y-2">
-        <Label className="text-slate-700">Nombre</Label>
+    <div className="space-y-5">
+      {/* Nombre */}
+      <div className="space-y-1.5">
+        <Label className={labelClass}>Nombre del producto</Label>
         <Input
-          className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+          className={fieldClass}
+          placeholder="Ej: Split Inverter 12000 BTU"
           value={draft.name}
           onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value }))}
         />
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        <div className="space-y-2">
-          <Label className="text-slate-700">Marca</Label>
+
+      {/* Marca + Categoría */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-1.5">
+          <Label className={labelClass}>Marca</Label>
           <Select
             value={draft.brand}
             onValueChange={(value) => setDraft((p) => ({ ...p, brand: value as ProductBrand }))}
           >
-            <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
-              <SelectValue />
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Selecciona marca" />
             </SelectTrigger>
             <SelectContent>
               {brands.map((brand) => (
-                <SelectItem key={brand} value={brand}>
+                <SelectItem key={brand} value={brand} className="cursor-pointer">
                   {brand}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2">
-          <Label className="text-slate-700">Categoría</Label>
+        <div className="space-y-1.5">
+          <Label className={labelClass}>Categoría</Label>
           <Select
             value={draft.category}
             onValueChange={(value) =>
               setDraft((p) => ({ ...p, category: value as ProductCategory }))
             }
           >
-            <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
-              <SelectValue />
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Selecciona tipo" />
             </SelectTrigger>
             <SelectContent>
               {CATEGORY_OPTIONS.map((category: ProductCategory) => (
-                <SelectItem key={category} value={category}>
+                <SelectItem key={category} value={category} className="cursor-pointer">
                   {category}
                 </SelectItem>
               ))}
@@ -86,50 +94,65 @@ export function GeneralTab({
           </Select>
         </div>
       </div>
-      <div className="mt-4 space-y-2">
+
+      {/* Descripción */}
+      <div className="space-y-1.5">
         <div className="flex items-center justify-between">
-          <Label className="text-slate-700">Descripción</Label>
+          <Label className={labelClass}>Descripción</Label>
           <Button
             type="button"
             variant="ghost"
             size="sm"
-            className="h-7 rounded-full px-3 text-blue-700 hover:bg-blue-50"
+            className="text-primary hover:bg-primary/8 h-7 cursor-pointer gap-1 rounded-full px-2.5 text-xs dark:text-blue-400 dark:hover:bg-blue-950/50"
             onClick={onSuggestAi}
           >
-            <Sparkles className="mr-1 h-3.5 w-3.5" /> Sugerir con IA
+            <Sparkles className="h-3 w-3" />
+            Sugerir con IA
           </Button>
         </div>
         <Textarea
-          className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+          className={fieldClass}
+          placeholder="Describe el producto: características, uso recomendado, ventajas..."
           value={draft.description}
           onChange={(e) => setDraft((p) => ({ ...p, description: e.target.value }))}
           rows={4}
         />
       </div>
-      <div className="mt-4 space-y-2">
-        <Label className="text-slate-700">Tags</Label>
+
+      {/* Tags */}
+      <div className="space-y-2">
+        <Label className={labelClass}>Tags</Label>
         <div className="flex gap-2">
           <Input
-            className="rounded-xl border-slate-200/90 bg-white/90 focus-visible:ring-2 focus-visible:ring-blue-400/40"
+            className={`${fieldClass} flex-1`}
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
-            placeholder="inverter, premium..."
+            placeholder="inverter, wifi, premium…"
+            onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), onAddTag())}
           />
-          <Button type="button" variant="outline" className="rounded-xl" onClick={onAddTag}>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="border-border hover:border-primary/30 hover:bg-primary/5 hover:text-primary cursor-pointer rounded-xl px-4 text-sm"
+            onClick={onAddTag}
+          >
             Agregar
           </Button>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {(draft.tags ?? []).map((tag) => (
-            <Badge
-              key={tag}
-              variant="secondary"
-              className="rounded-full border-blue-100 bg-blue-50 text-blue-700"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
+        {(draft.tags ?? []).length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {(draft.tags ?? []).map((tag) => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="border-primary/20 bg-primary/8 text-primary rounded-full border text-xs dark:border-blue-700/30 dark:bg-blue-950/40 dark:text-blue-300"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

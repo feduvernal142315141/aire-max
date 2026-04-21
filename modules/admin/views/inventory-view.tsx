@@ -10,7 +10,7 @@ interface InventoryViewProps {
 
 export function InventoryView({ products, onAdjustStock }: InventoryViewProps) {
   return (
-    <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
+    <Card className="border-border dark:bg-card/70 rounded-2xl border bg-white/70 shadow-lg backdrop-blur dark:shadow-none">
       <CardHeader>
         <CardTitle>Inventario</CardTitle>
         <CardDescription>Alertas por salud de stock + ajustes rápidos.</CardDescription>

@@ -38,7 +38,7 @@ export function AdminShell({
   const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f3fbff,_#e8f3ff_40%,_#f8fbff_100%)] text-slate-900">
+    <div className="text-foreground min-h-screen bg-[radial-gradient(circle_at_top,_#f3fbff,_#e8f3ff_40%,_#f8fbff_100%)] dark:bg-[radial-gradient(circle_at_top,_#070d18,_#091422_40%,_#070d18_100%)]">
       <div
         className="grid min-h-screen"
         style={{ gridTemplateColumns: collapsed ? "88px 1fr" : "260px 1fr" }}

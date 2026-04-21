@@ -1,6 +1,7 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
+import { Package, Save, X } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -28,7 +29,11 @@ export interface ProductDrawerProps {
 }
 
 const TAB_TRIGGER_CLASS =
-  "rounded-xl text-slate-600 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_8px_18px_rgba(37,99,235,0.35)]"
+  "cursor-pointer rounded-lg text-sm font-medium text-muted-foreground transition-all duration-150" +
+  " data-[state=active]:bg-primary data-[state=active]:text-white" +
+  " data-[state=active]:shadow-[0_4px_12px_rgba(7,156,251,0.25)]" +
+  " dark:data-[state=active]:bg-blue-600 dark:data-[state=active]:shadow-[0_4px_12px_rgba(37,99,235,0.3)]" +
+  " hover:text-foreground hover:bg-muted/50"
 
 export function ProductDrawer({
   open,
@@ -47,54 +52,54 @@ export function ProductDrawer({
 
   const handleSuggestAi = () =>
     toast({
-      title: "IA mock",
-      description: "Próximo paso: generador automático de descripción.",
+      title: "IA — próximamente",
+      description: "Generador automático de descripción con inteligencia artificial.",
     })
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="w-full border-l border-white/40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.98),_rgba(241,247,255,0.98)_45%,_rgba(235,244,255,0.98)_100%)] p-0 sm:max-w-[760px]"
+        className="border-border bg-background flex w-full flex-col border-l p-0 sm:max-w-[720px]"
       >
-        <div className="flex h-full flex-col">
-          <div className="border-b border-white/50 bg-gradient-to-r from-blue-600/[0.10] via-cyan-400/[0.08] to-blue-500/[0.06] px-6 py-5 backdrop-blur-xl">
-            <SheetHeader className="space-y-3 text-left">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <SheetTitle className="text-2xl font-semibold tracking-tight text-slate-900">
-                    {editingId ? "Editar producto" : "Crear producto"}
-                  </SheetTitle>
-                  <p className="mt-1 text-sm text-slate-600">
-                    Formulario premium con edición rápida, specs técnicas y SEO listo para backend.
-                  </p>
-                </div>
-                <Badge className="border-blue-200 bg-blue-100/90 text-blue-700">Mock mode</Badge>
+        {/* Header */}
+        <div className="border-border shrink-0 border-b px-6 py-5">
+          <SheetHeader className="text-left">
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-xl dark:bg-blue-500/15 dark:text-blue-400">
+                <Package className="h-5 w-5" />
               </div>
-            </SheetHeader>
-          </div>
+              <div>
+                <SheetTitle className="text-foreground text-lg leading-tight font-semibold">
+                  {editingId ? "Editar producto" : "Nuevo producto"}
+                </SheetTitle>
+                <p className="text-muted-foreground mt-0.5 text-xs">
+                  {editingId
+                    ? `Editando · ID ${editingId}`
+                    : "Completa la información del producto"}
+                </p>
+              </div>
+            </div>
+          </SheetHeader>
+        </div>
 
-          <div className="flex-1 overflow-y-auto px-6 pt-5 pb-28">
-            <Tabs defaultValue="general" className="space-y-5">
-              <TabsList className="grid h-auto grid-cols-5 rounded-2xl border border-white/70 bg-white/85 p-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur">
-                <TabsTrigger value="general" className={TAB_TRIGGER_CLASS}>
-                  General
-                </TabsTrigger>
-                <TabsTrigger value="pricing" className={TAB_TRIGGER_CLASS}>
-                  Precio
-                </TabsTrigger>
-                <TabsTrigger value="specs" className={TAB_TRIGGER_CLASS}>
-                  Specs
-                </TabsTrigger>
-                <TabsTrigger value="media" className={TAB_TRIGGER_CLASS}>
-                  Media
-                </TabsTrigger>
-                <TabsTrigger value="seo" className={TAB_TRIGGER_CLASS}>
-                  SEO
-                </TabsTrigger>
+        {/* Tabs + content */}
+        <div className="flex-1 overflow-y-auto">
+          <Tabs defaultValue="general" className="flex h-full flex-col">
+            {/* Tab bar */}
+            <div className="border-border bg-background/95 sticky top-0 z-10 border-b px-6 py-2 backdrop-blur-sm">
+              <TabsList className="border-border bg-muted/40 dark:bg-muted/20 inline-flex h-auto gap-1 rounded-xl border p-1">
+                {["general", "pricing", "specs", "media", "seo"].map((tab) => (
+                  <TabsTrigger key={tab} value={tab} className={TAB_TRIGGER_CLASS}>
+                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  </TabsTrigger>
+                ))}
               </TabsList>
+            </div>
 
-              <TabsContent value="general" className="space-y-4">
+            {/* Tab content */}
+            <div className="flex-1 px-6 py-5">
+              <TabsContent value="general" className="mt-0 space-y-0">
                 <GeneralTab
                   draft={draft}
                   setDraft={setDraft}
@@ -106,36 +111,43 @@ export function ProductDrawer({
                 />
               </TabsContent>
 
-              <TabsContent value="pricing" className="space-y-4">
+              <TabsContent value="pricing" className="mt-0 space-y-0">
                 <PricingTab draft={draft} setDraft={setDraft} />
               </TabsContent>
 
-              <TabsContent value="specs" className="space-y-4">
+              <TabsContent value="specs" className="mt-0 space-y-0">
                 <SpecsTab draft={draft} setDraft={setDraft} capacities={capacities} />
               </TabsContent>
 
-              <TabsContent value="media" className="space-y-4">
+              <TabsContent value="media" className="mt-0 space-y-0">
                 <MediaTab draft={draft} setDraft={setDraft} />
               </TabsContent>
 
-              <TabsContent value="seo" className="space-y-4">
+              <TabsContent value="seo" className="mt-0 space-y-0">
                 <SeoTab draft={draft} setDraft={setDraft} />
               </TabsContent>
-            </Tabs>
-          </div>
-
-          <div className="sticky bottom-0 border-t border-white/60 bg-white/70 px-6 py-4 backdrop-blur-xl">
-            <div className="flex items-center gap-3">
-              <Button variant="outline" className="rounded-xl" onClick={() => onOpenChange(false)}>
-                Cancelar
-              </Button>
-              <Button
-                className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.35)] transition-all hover:shadow-[0_12px_30px_rgba(37,99,235,0.42)] hover:brightness-110"
-                onClick={onSave}
-              >
-                Guardar producto
-              </Button>
             </div>
+          </Tabs>
+        </div>
+
+        {/* Footer actions */}
+        <div className="border-border bg-background/95 shrink-0 border-t px-6 py-4 backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              className="border-border text-muted-foreground hover:text-foreground cursor-pointer gap-1.5 rounded-xl"
+              onClick={() => onOpenChange(false)}
+            >
+              <X className="h-4 w-4" />
+              Cancelar
+            </Button>
+            <Button
+              className="from-primary flex-1 cursor-pointer gap-2 rounded-xl bg-gradient-to-r to-sky-500 text-white shadow-[0_4px_16px_rgba(7,156,251,0.3)] transition-all duration-200 hover:shadow-[0_6px_22px_rgba(7,156,251,0.4)] hover:brightness-105 dark:from-blue-600 dark:to-blue-500 dark:shadow-[0_4px_16px_rgba(37,99,235,0.3)] dark:hover:shadow-[0_6px_22px_rgba(37,99,235,0.4)]"
+              onClick={onSave}
+            >
+              <Save className="h-4 w-4" />
+              {editingId ? "Guardar cambios" : "Crear producto"}
+            </Button>
           </div>
         </div>
       </SheetContent>

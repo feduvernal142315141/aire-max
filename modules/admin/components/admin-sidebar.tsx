@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Circle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { navItems } from "@/modules/admin/lib/admin-constants"
@@ -20,21 +20,31 @@ export function AdminSidebar({
   onToggleCollapsed,
 }: AdminSidebarProps) {
   return (
-    <aside className="border-r border-white/40 bg-white/65 shadow-[inset_-1px_0_0_rgba(255,255,255,0.65)] backdrop-blur-xl">
-      <div className="flex h-full flex-col p-4">
-        <div className="mb-6 flex items-center justify-between rounded-2xl border border-white/40 bg-white/70 px-3 py-2 shadow-sm">
+    <aside className="border-border dark:bg-card/80 border-r bg-white/60 backdrop-blur-xl">
+      <div className="flex h-full flex-col">
+        {/* Collapse toggle */}
+        <div className="border-border flex items-center justify-end border-b px-3 py-3">
           {!collapsed && (
-            <div>
-              <p className="font-semibold">Aire-Max Admin</p>
-              <p className="text-xs text-slate-500">Demo tenant: Matriz CDMX</p>
-            </div>
+            <p className="text-muted-foreground flex-1 pl-1 text-xs font-semibold tracking-widest uppercase">
+              Menú
+            </p>
           )}
-          <Button variant="ghost" size="icon" onClick={onToggleCollapsed}>
-            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-muted-foreground hover:text-foreground hover:bg-muted/60 h-7 w-7 rounded-lg"
+            onClick={onToggleCollapsed}
+          >
+            {collapsed ? (
+              <ChevronRight className="h-3.5 w-3.5" />
+            ) : (
+              <ChevronLeft className="h-3.5 w-3.5" />
+            )}
           </Button>
         </div>
 
-        <nav className="space-y-2">
+        {/* Nav */}
+        <nav className="flex-1 space-y-1 p-3">
           {navItems.map((item) => {
             const Icon = item.icon
             const active = activeSection === item.id
@@ -43,22 +53,29 @@ export function AdminSidebar({
               <button
                 key={item.id}
                 onClick={() => onSectionChange(item.id)}
-                className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-200 ${
+                title={collapsed ? item.label : undefined}
+                className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-150 ${
                   active
-                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-[0_0_24px_rgba(37,99,235,0.35)]"
-                    : "hover:bg-white/80"
+                    ? "bg-primary text-white shadow-[0_4px_14px_rgba(7,156,251,0.35)] dark:bg-sky-500 dark:shadow-[0_4px_14px_rgba(56,189,248,0.25)]"
+                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground dark:hover:bg-muted/40"
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                {!collapsed && <span className="text-sm font-medium">{item.label}</span>}
+                {!collapsed && <span>{item.label}</span>}
               </button>
             )
           })}
         </nav>
 
-        <div className="mt-auto rounded-2xl border border-blue-100 bg-white/80 p-3 text-xs text-slate-600">
-          {!collapsed ? "Mock mode: sin integración API" : "Mock"}
-        </div>
+        {/* Status pill */}
+        {!collapsed && (
+          <div className="px-3 pb-4">
+            <div className="border-border bg-muted/30 dark:bg-muted/20 flex items-center gap-2 rounded-xl border px-3 py-2.5">
+              <Circle className="h-2 w-2 shrink-0 fill-emerald-500 text-emerald-500" />
+              <span className="text-muted-foreground text-xs">Conectado · Supabase</span>
+            </div>
+          </div>
+        )}
       </div>
     </aside>
   )

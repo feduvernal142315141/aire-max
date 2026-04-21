@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <section className="relative flex min-h-[80vh] items-center overflow-hidden py-16">
       {/* Background gradient consistent with hero */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f7fcff] via-[#dff4ff] to-[#c2edff]" />
+      <div className="bg-section absolute inset-0" />
 
       {/* Ambient glows */}
       <div className="animate-float absolute top-10 left-0 h-[300px] w-[300px] rounded-full bg-[#079cfb] opacity-15 blur-[120px] md:h-[500px] md:w-[500px]" />

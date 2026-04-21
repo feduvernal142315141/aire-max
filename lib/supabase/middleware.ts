@@ -3,6 +3,8 @@ import { NextResponse, type NextRequest } from "next/server"
 
 import type { Database } from "./types.generated"
 
+const ADMIN_PUBLIC_PATHS = ["/admin/login"]
+
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request })
 
@@ -28,7 +30,27 @@ export async function updateSession(request: NextRequest) {
     },
   })
 
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const { pathname } = request.nextUrl
+
+  // Protect /admin/** — redirect unauthenticated visitors to login
+  if (pathname.startsWith("/admin") && !ADMIN_PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
+    if (!user) {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = "/admin/login"
+      return NextResponse.redirect(loginUrl)
+    }
+  }
+
+  // If already logged in and visiting /admin/login, send to dashboard
+  if (pathname.startsWith("/admin/login") && user) {
+    const dashUrl = request.nextUrl.clone()
+    dashUrl.pathname = "/admin"
+    return NextResponse.redirect(dashUrl)
+  }
 
   return response
 }

@@ -1,8 +1,13 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 
-import { productsData } from "@/data"
+import {
+  createProductAction,
+  listProductsAction,
+  removeProductAction,
+  updateProductAction,
+} from "@/app/actions/products"
 import { useToast } from "@/hooks/use-toast"
 import { FILTERS_KEY, defaultFilters, initialDraft } from "@/modules/admin/lib/admin-constants"
 import type { ProductFilters } from "@/modules/admin/types"
@@ -28,6 +33,8 @@ export interface UseAdminProductsResult {
   brands: ProductBrand[]
   capacities: ProductCapacity[]
   dashboardData: AdminProductsDashboardData
+  isLoading: boolean
+  isSaving: boolean
   // drawer
   drawerOpen: boolean
   setDrawerOpen: (open: boolean) => void
@@ -56,8 +63,10 @@ export interface UseAdminProductsResult {
 
 export function useAdminProducts(): UseAdminProductsResult {
   const { toast } = useToast()
+  const [isPending, startTransition] = useTransition()
 
-  const [products, setProducts] = useState<ProductAdminView[]>(productsData)
+  const [products, setProducts] = useState<ProductAdminView[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState<ProductFilters>(readPersistedFilters)
   const [search, setSearch] = useState("")
   const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -67,7 +76,30 @@ export function useAdminProducts(): UseAdminProductsResult {
   const [draft, setDraft] = useState<ProductAdminView>(initialDraft)
   const [tagInput, setTagInput] = useState("")
 
-  // Persistencia: solo escritura en efecto (no hay setState aquí — el read vive en lazy initializer).
+  // ─── Shared refresh logic (used after save / delete / bulk actions) ─────────
+  const reloadProducts = useCallback(async () => {
+    const { data, error } = await listProductsAction()
+    if (error) {
+      toast({ title: "Error al cargar productos", description: error, variant: "destructive" })
+    }
+    setProducts(data as ProductAdminView[])
+    setIsLoading(false)
+  }, [toast])
+
+  // ─── Initial load — async function defined inline to satisfy react-hooks ─────
+  useEffect(() => {
+    async function load() {
+      const { data, error } = await listProductsAction()
+      if (error) {
+        toast({ title: "Error al cargar productos", description: error, variant: "destructive" })
+      }
+      setProducts(data as ProductAdminView[])
+      setIsLoading(false)
+    }
+    void load()
+  }, [toast])
+
+  // Persistencia de filtros
   useEffect(() => {
     window.localStorage.setItem(FILTERS_KEY, JSON.stringify(filters))
   }, [filters])
@@ -91,10 +123,8 @@ export function useAdminProducts(): UseAdminProductsResult {
       if (filters.capacities.length > 0 && !filters.capacities.includes(product.capacity))
         return false
       if (filters.status !== "all" && product.status !== filters.status) return false
-
       if (product.price < filters.priceRange.min || product.price > filters.priceRange.max)
         return false
-
       if (!query) return true
 
       const tagsPart = product.tags?.join(" ") ?? ""
@@ -114,11 +144,8 @@ export function useAdminProducts(): UseAdminProductsResult {
 
   const dashboardData = useMemo<AdminProductsDashboardData>(() => {
     const noStock = products.filter((p) => (p.stock ?? 0) === 0).length
-    const todaySales = 18450
-    const soldToday = 27
     const top = [...products].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 3)
-
-    return { todaySales, soldToday, noStock, top }
+    return { todaySales: 0, soldToday: 0, noStock, top }
   }, [products])
 
   function toggleFilterArray<K extends "brands" | "categories" | "capacities">(
@@ -130,7 +157,6 @@ export function useAdminProducts(): UseAdminProductsResult {
       const next = arr.includes(value as string)
         ? arr.filter((item) => item !== value)
         : [...arr, value as string]
-
       return { ...prev, [key]: next as ProductFilters[K] }
     })
   }
@@ -151,37 +177,69 @@ export function useAdminProducts(): UseAdminProductsResult {
 
   function applyBulkAction(action: BulkAction) {
     if (selectedIds.length === 0) {
-      toast({
-        title: "No hay selección",
-        description: "Seleccioná al menos un producto para aplicar acciones masivas.",
-      })
+      toast({ title: "No hay selección", description: "Seleccioná al menos un producto." })
       return
     }
 
+    // Optimistic update
+    const snapshot = products
     setProducts((prev) => {
-      if (action === "delete") {
-        return prev.filter((p) => !selectedIds.includes(p.id))
-      }
-
+      if (action === "delete") return prev.filter((p) => !selectedIds.includes(p.id))
       return prev.map((p) => {
         if (!selectedIds.includes(p.id)) return p
-
-        if (action === "activate") return { ...p, status: "active" }
-        if (action === "deactivate") return { ...p, status: "inactive" }
+        if (action === "activate") return { ...p, status: "active" as const }
+        if (action === "deactivate") return { ...p, status: "inactive" as const }
         if (action === "up10") return { ...p, price: Number((p.price * 1.1).toFixed(2)) }
         return { ...p, price: Number((p.price * 0.9).toFixed(2)) }
       })
     })
-
-    toast({
-      title: "Acción aplicada",
-      description: `Se aplicó ${action} sobre ${selectedIds.length} productos.`,
-    })
     setSelectedIds([])
+
+    startTransition(async () => {
+      const targets = snapshot.filter((p) => selectedIds.includes(p.id))
+      const results = await Promise.all(
+        targets.map((p) => {
+          if (action === "delete") return removeProductAction(p.id)
+          const newPrice =
+            action === "up10"
+              ? Number((p.price * 1.1).toFixed(2))
+              : action === "down10"
+                ? Number((p.price * 0.9).toFixed(2))
+                : undefined
+          const patch: Partial<ProductAdminView> = {}
+          if (action === "activate") patch.status = "active"
+          if (action === "deactivate") patch.status = "inactive"
+          if (newPrice !== undefined) patch.price = newPrice
+          return updateProductAction(p.id, patch)
+        }),
+      )
+
+      const failed = results.filter((r) => r.error)
+      if (failed.length > 0) {
+        toast({
+          title: "Algunos cambios fallaron",
+          description: `${failed.length} de ${targets.length} operaciones fallaron. Recargando...`,
+          variant: "destructive",
+        })
+        await reloadProducts()
+      } else {
+        toast({
+          title: "Acción aplicada",
+          description: `${action} aplicado a ${targets.length} productos.`,
+        })
+      }
+    })
   }
 
   function updateProductField(id: string, patch: Partial<ProductAdminView>) {
     setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch } : p)))
+    startTransition(async () => {
+      const { error } = await updateProductAction(id, patch)
+      if (error) {
+        toast({ title: "Error al actualizar", description: error, variant: "destructive" })
+        await reloadProducts()
+      }
+    })
   }
 
   function openCreateDrawer() {
@@ -206,23 +264,52 @@ export function useAdminProducts(): UseAdminProductsResult {
 
     if (editingId) {
       setProducts((prev) => prev.map((p) => (p.id === editingId ? draft : p)))
-      toast({
-        title: "Producto actualizado",
-        description: `${draft.name} se guardó correctamente.`,
+      setDrawerOpen(false)
+
+      startTransition(async () => {
+        const { error } = await updateProductAction(editingId, draft)
+        if (error) {
+          toast({ title: "Error al guardar", description: error, variant: "destructive" })
+          await reloadProducts()
+          return
+        }
+        toast({ title: "Producto actualizado", description: `${draft.name} guardado.` })
       })
     } else {
-      setProducts((prev) => [draft, ...prev])
-      toast({ title: "Producto creado", description: `${draft.name} se agregó al catálogo.` })
-    }
+      const tempId = `__temp__${Date.now()}`
+      const optimistic = { ...draft, id: tempId }
+      setProducts((prev) => [optimistic, ...prev])
+      setDrawerOpen(false)
 
-    setDrawerOpen(false)
+      startTransition(async () => {
+        const { data, error } = await createProductAction(draft)
+        if (error || !data) {
+          setProducts((prev) => prev.filter((p) => p.id !== tempId))
+          toast({
+            title: "Error al crear",
+            description: error ?? "Error inesperado.",
+            variant: "destructive",
+          })
+          return
+        }
+        setProducts((prev) => prev.map((p) => (p.id === tempId ? (data as ProductAdminView) : p)))
+        toast({ title: "Producto creado", description: `${draft.name} agregado al catálogo.` })
+      })
+    }
   }
 
   function removeProduct(id: string) {
+    const snapshot = products
     setProducts((prev) => prev.filter((p) => p.id !== id))
-    toast({
-      title: "Producto eliminado",
-      description: "El producto mock fue eliminado del listado.",
+
+    startTransition(async () => {
+      const { error } = await removeProductAction(id)
+      if (error) {
+        setProducts(snapshot)
+        toast({ title: "Error al eliminar", description: error, variant: "destructive" })
+        return
+      }
+      toast({ title: "Producto eliminado", description: "Eliminado del catálogo." })
     })
   }
 
@@ -230,18 +317,24 @@ export function useAdminProducts(): UseAdminProductsResult {
     if (!tagInput.trim()) return
     const currentTags = draft.tags ?? []
     if (currentTags.includes(tagInput.trim())) return
-
     setDraft((prev) => ({ ...prev, tags: [...(prev.tags ?? []), tagInput.trim()] }))
     setTagInput("")
   }
 
   function quickAdjustStock(id: string, delta: number) {
-    setProducts((prev) =>
-      prev.map((p) => {
-        if (p.id !== id) return p
-        return { ...p, stock: Math.max(0, (p.stock ?? 0) + delta) }
-      }),
-    )
+    const product = products.find((p) => p.id === id)
+    if (!product) return
+    const newStock = Math.max(0, (product.stock ?? 0) + delta)
+
+    setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, stock: newStock } : p)))
+
+    startTransition(async () => {
+      const { error } = await updateProductAction(id, { stock: newStock })
+      if (error) {
+        toast({ title: "Error al ajustar stock", description: error, variant: "destructive" })
+        await reloadProducts()
+      }
+    })
   }
 
   return {
@@ -255,6 +348,8 @@ export function useAdminProducts(): UseAdminProductsResult {
     brands,
     capacities,
     dashboardData,
+    isLoading,
+    isSaving: isPending,
     drawerOpen,
     setDrawerOpen,
     editingId,
@@ -277,11 +372,6 @@ export function useAdminProducts(): UseAdminProductsResult {
   }
 }
 
-/**
- * Lee los filtros persistidos de localStorage.
- * Implementado como lazy initializer para evitar el anti-patrón de `setState` dentro
- * de `useEffect` en la primera carga (React Compiler v7 lo flaggea como cascading render).
- */
 function readPersistedFilters(): ProductFilters {
   if (typeof window === "undefined") return defaultFilters
   try {

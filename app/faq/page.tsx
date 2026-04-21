@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   title: "Preguntas Frecuentes | Aire-Max — Todo sobre Aires Acondicionados",
   description:
     "Resolvemos tus dudas sobre compra, instalación, mantenimiento y garantías de aires acondicionados. Guías de BTU, eficiencia energética y más.",
-  keywords: "FAQ aire acondicionado, preguntas frecuentes AC, BTU calculadora, eficiencia energética HVAC",
+  keywords:
+    "FAQ aire acondicionado, preguntas frecuentes AC, BTU calculadora, eficiencia energética HVAC",
   openGraph: {
     title: "FAQ | Aire-Max",
     description:
@@ -107,34 +108,34 @@ const faqs = [
 export default function FAQPage() {
   return (
     <div className="flex flex-col pt-16 md:pt-20">
-      <section className="relative overflow-hidden bg-[#f3f9ff] py-10 md:py-16">
-        <div className="bg-gradient-radial absolute inset-0 from-[#e8f6ff] via-white to-[#f8fcff]" />
+      <section className="relative overflow-hidden py-12 md:py-20">
+        <div className="bg-section absolute inset-0" />
 
-        <div className="animate-breathe absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px]" />
+        <div className="animate-breathe bg-primary absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-[0.06] blur-[120px] dark:opacity-[0.10]" />
 
-        <div className="absolute top-20 left-10 opacity-5">
-          <Snowflake className="h-24 w-24 text-[#037ecc]" />
+        <div className="absolute top-20 left-10 opacity-[0.04] dark:opacity-[0.06]">
+          <Snowflake className="text-primary h-24 w-24" />
         </div>
-        <div className="absolute right-10 bottom-20 opacity-5">
-          <Snowflake className="h-32 w-32 text-[#037ecc]" />
+        <div className="absolute right-10 bottom-20 opacity-[0.04] dark:opacity-[0.06]">
+          <Snowflake className="text-primary h-32 w-32" />
         </div>
 
         <div className="relative z-10 container mx-auto px-5 md:px-4">
           <div className="mb-12 space-y-4 text-center md:mb-16 md:space-y-6">
-            <Badge className="animate-fade-down mx-auto w-fit rounded-full border-blue-200 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+            <Badge className="animate-fade-down border-primary/20 bg-primary/8 text-primary mx-auto w-fit rounded-full px-3 py-1 text-sm font-medium dark:bg-sky-500/15 dark:text-sky-400">
               <HelpCircle className="mr-2 h-4 w-4" />
               Preguntas Frecuentes
             </Badge>
 
             <h1 className="animate-fade-down font-serif text-3xl font-bold delay-100 md:text-5xl lg:text-6xl">
-              <span className="text-[#1e2b39]">¿Tienes </span>
+              <span className="text-foreground">¿Tienes </span>
               <span className="relative inline-block">
                 <span className="gradient-text">Dudas?</span>
-                <span className="animate-underline-sweep absolute -bottom-2 left-1/2 h-1 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff]" />
+                <span className="animate-underline-sweep from-primary absolute -bottom-2 left-1/2 h-1 -translate-x-1/2 rounded-full bg-gradient-to-r to-[#00baff]" />
               </span>
             </h1>
 
-            <p className="animate-fade-down mx-auto max-w-[520px] text-base leading-relaxed text-[#5f6b7a] delay-200 md:text-lg">
+            <p className="animate-fade-down text-muted-foreground mx-auto max-w-[520px] text-base leading-relaxed delay-200 md:text-lg">
               Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y productos
             </p>
           </div>
@@ -148,15 +149,14 @@ export default function FAQPage() {
                   className="animate-fade-up"
                   style={{ animationDelay: `${categoryIndex * 100}ms` }}
                 >
-                  <Card className="rounded-2xl border border-[#e6f3fb] bg-white/70 shadow-[0_8px_30px_rgba(3,126,204,0.08)] backdrop-blur-lg transition-all duration-300 hover:shadow-[0_12px_40px_rgba(3,126,204,0.12)]">
+                  <Card className="border-border bg-card/70 dark:bg-card/80 rounded-2xl border shadow-[var(--elevation-1)] backdrop-blur-lg transition-all duration-300 hover:shadow-[var(--elevation-2)]">
                     <CardContent className="p-5 md:p-8">
                       <div className="mb-6 flex items-center gap-3">
-                        <div className="rounded-lg bg-[#037ecc]/10 p-2">
-                          <Icon className="h-5 w-5 text-[#037ecc]" />
+                        <div className="bg-primary/10 dark:bg-primary/15 rounded-lg p-2">
+                          <Icon className="text-primary h-5 w-5 dark:text-sky-400" />
                         </div>
-                        <h2 className="relative text-xl font-semibold text-[#037ecc] md:text-2xl">
+                        <h2 className="text-foreground text-xl font-semibold md:text-2xl">
                           {category.category}
-                          <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] transition-all duration-300 group-hover:w-full" />
                         </h2>
                       </div>
 
@@ -165,13 +165,13 @@ export default function FAQPage() {
                           <AccordionItem
                             key={faqIndex}
                             value={`item-${categoryIndex}-${faqIndex}`}
-                            className="group border-b border-[#e6f3fb] last:border-0"
+                            className="border-border border-b last:border-0"
                           >
-                            <AccordionTrigger className="-mx-2 rounded-lg px-2 py-4 text-left text-[15px] transition-colors hover:text-[#037ecc] hover:shadow-[0_0_20px_rgba(7,156,251,0.08)] md:text-base">
+                            <AccordionTrigger className="hover:text-primary -mx-2 rounded-lg px-2 py-4 text-left text-sm transition-colors md:text-base dark:hover:text-sky-400">
                               {faq.q}
                             </AccordionTrigger>
 
-                            <AccordionContent className="animate-fade-down rounded-lg bg-gradient-to-b from-[#f9fcff] to-[#ffffff] px-2 pt-2 pb-4 text-[15px] leading-relaxed text-[#4a5568]">
+                            <AccordionContent className="bg-muted/20 text-muted-foreground dark:bg-muted/10 rounded-lg px-2 pt-2 pb-4 text-sm leading-relaxed">
                               {faq.a}
                             </AccordionContent>
                           </AccordionItem>
@@ -181,7 +181,7 @@ export default function FAQPage() {
                   </Card>
 
                   {categoryIndex < faqs.length - 1 && (
-                    <div className="my-6 h-px bg-gradient-to-r from-transparent via-blue-200/40 to-transparent md:my-10" />
+                    <div className="via-border my-6 h-px bg-gradient-to-r from-transparent to-transparent md:my-10" />
                   )}
                 </div>
               )
@@ -189,24 +189,24 @@ export default function FAQPage() {
           </div>
 
           <div className="animate-fade-up mt-12 text-center md:mt-16">
-            <Card className="bg-gradient-radial mx-auto max-w-2xl rounded-3xl border border-[#d4edff]/40 from-[#eaf7ff] via-[#ffffff] to-[#f8fcff] shadow-[0_12px_40px_rgba(3,126,204,0.1)]">
+            <Card className="border-border bg-card/80 dark:bg-card/90 mx-auto max-w-2xl rounded-3xl border shadow-[var(--elevation-2)] backdrop-blur-sm">
               <CardContent className="space-y-5 p-6 md:p-10">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#037ecc]/10 shadow-[0_0_20px_rgba(7,156,251,0.15)]">
-                  <MessageCircle className="h-8 w-8 text-[#037ecc]" />
+                <div className="bg-primary/10 dark:bg-primary/15 mx-auto flex h-16 w-16 items-center justify-center rounded-full shadow-[0_0_20px_rgba(7,156,251,0.15)]">
+                  <MessageCircle className="text-primary h-8 w-8 dark:text-sky-400" />
                 </div>
 
-                <h3 className="font-serif text-2xl font-bold text-[#002c5f] md:text-3xl">
+                <h3 className="text-foreground font-serif text-2xl font-bold md:text-3xl">
                   ¿No encontraste tu respuesta?
                 </h3>
 
-                <p className="mx-auto max-w-md text-base text-[#5f6b7a] md:text-lg">
+                <p className="text-muted-foreground mx-auto max-w-md text-base md:text-lg">
                   Nuestro equipo está disponible todos los días para ayudarte con cualquier consulta
                 </p>
 
                 <Button
                   size="lg"
                   asChild
-                  className="rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff] px-6 py-3 text-white shadow-[0_6px_20px_rgba(7,156,251,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)]"
+                  className="from-primary rounded-xl bg-gradient-to-r to-[#00baff] text-white shadow-[0_6px_20px_rgba(7,156,251,0.25)] transition-all hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)] hover:brightness-105 dark:from-sky-500 dark:to-cyan-400"
                 >
                   <Link href="/contacto">Contactar Soporte</Link>
                 </Button>

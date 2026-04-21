@@ -1,6 +1,5 @@
 "use client"
 import { motion } from "framer-motion"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
@@ -19,12 +18,51 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import type { FilterState } from "@/hooks/use-products"
+import { cn } from "@/lib/utils"
 
 interface ProductFiltersProps {
   filters: FilterState
   onFiltersChange: (filters: FilterState) => void
   activeFiltersCount: number
 }
+
+/* ─── Toggle indicator (avoids button-inside-button hydration error) ─────── */
+function ToggleIndicator({ active }: { active: boolean }) {
+  return (
+    <span
+      className={cn(
+        "flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border-2 transition-all duration-150",
+        active
+          ? "border-primary bg-primary dark:border-sky-500 dark:bg-sky-500"
+          : "border-border bg-background dark:bg-muted/30",
+      )}
+      aria-hidden
+    >
+      {active && (
+        <svg
+          viewBox="0 0 10 8"
+          className="h-2.5 w-2.5 stroke-white"
+          fill="none"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M1 4l3 3 5-6" />
+        </svg>
+      )}
+    </span>
+  )
+}
+
+/* ─── Chip styles ─────────────────────────────────────────────────────────── */
+const chipBase =
+  "cursor-pointer rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
+
+const chipActive =
+  "bg-gradient-to-r from-primary to-sky-500 text-white shadow-[0_4px_12px_rgba(7,156,251,0.25)] dark:from-blue-600 dark:to-blue-500 dark:shadow-[0_4px_12px_rgba(37,99,235,0.3)] -translate-y-px"
+
+const chipInactive =
+  "border border-border bg-muted/40 text-foreground hover:bg-primary/8 hover:border-primary/25 hover:text-primary dark:bg-muted/25 dark:hover:bg-primary/12 dark:hover:text-blue-400 dark:hover:border-blue-700/40"
 
 export function ProductFilters({
   filters,
@@ -89,11 +127,9 @@ export function ProductFilters({
     brand.toLowerCase().includes(brandSearch.toLowerCase()),
   )
 
-  // FiltersContent como JSX compartido — se computa una vez por render y se reusa en desktop + mobile.
-  // Evita crear un componente durante render (react-hooks/static-components v7) y mantiene el state
-  // compartido sin tener que extraer un componente separado con toda la superficie de props.
   const filtersContent = (
     <div className="space-y-6 px-1">
+      {/* ─── Clear filters ─── */}
       {activeFiltersCount > 0 && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -103,7 +139,7 @@ export function ProductFilters({
           <Button
             variant="outline"
             onClick={handleClearFilters}
-            className="w-full rounded-full border-[rgba(7,156,251,0.2)] bg-white/30 py-2.5 transition-all duration-200 hover:bg-white/50"
+            className="border-border text-muted-foreground hover:border-destructive/40 hover:bg-destructive/5 hover:text-destructive focus-visible:ring-primary/30 w-full cursor-pointer rounded-xl py-2.5 transition-all duration-200"
           >
             <X className="mr-2 h-4 w-4" />
             Limpiar filtros ({activeFiltersCount})
@@ -111,30 +147,30 @@ export function ProductFilters({
         </motion.div>
       )}
 
+      {/* ─── Tipo de equipo ─── */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Tipo de Equipo</h3>
-        <div className="mb-4 flex flex-wrap gap-2.5">
+        <h3 className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+          Tipo de Equipo
+        </h3>
+        <div className="flex flex-wrap gap-2">
           {categories.map((category) => {
             const icons: Record<string, string> = {
               split: "❄️",
               cassette: "🌀",
               "piso-techo": "🔲",
               ventana: "🪟",
+              portátil: "💨",
             }
+            const isActive = filters.categories.includes(category.value)
             return (
               <motion.button
                 key={category.value}
                 onClick={() => handleCategoryToggle(category.value)}
-                whileHover={{ scale: 0.98 }}
-                whileTap={{ scale: 0.96 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className={`rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
-                  filters.categories.includes(category.value)
-                    ? "-translate-y-0.5 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_4px_12px_rgba(7,156,251,0.25)]"
-                    : "border border-[rgba(7,156,251,0.05)] bg-[rgba(7,156,251,0.08)] text-[#037ecc] hover:bg-[rgba(7,156,251,0.15)]"
-                }`}
+                className={cn(chipBase, isActive ? chipActive : chipInactive)}
               >
-                <span className="mr-1.5">{icons[category.value]}</span>
+                <span className="mr-1">{icons[category.value]}</span>
                 {category.label}
               </motion.button>
             )
@@ -142,82 +178,81 @@ export function ProductFilters({
         </div>
       </div>
 
+      {/* ─── Marca ─── */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-[#0f172a]">Marca</h3>
+          <h3 className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+            Marca
+          </h3>
           {brandSearch && (
-            <span className="text-xs text-[#475569]">{filteredBrands.length} marcas coinciden</span>
+            <span className="text-muted-foreground text-xs">{filteredBrands.length} marcas</span>
           )}
         </div>
         <div className="relative">
-          <motion.div
-            animate={{ rotate: brandSearch ? [0, 10, -10, 0] : 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-1/2 left-3 -translate-y-1/2"
-          >
-            <Search className="h-4 w-4 text-[#037ecc]" />
-          </motion.div>
+          <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2" />
           <Input
             type="text"
             placeholder="Buscar marca..."
             value={brandSearch}
             onChange={(e) => setBrandSearch(e.target.value)}
-            className="my-3 rounded-xl border-[rgba(7,156,251,0.12)] bg-white/50 py-2.5 pl-10 shadow-[inset_0_2px_4px_rgba(7,156,251,0.05)] focus:border-[#037ecc]"
+            className="border-border bg-background/60 placeholder:text-muted-foreground/60 focus-visible:border-primary/50 focus-visible:ring-primary/20 dark:bg-muted/20 rounded-xl py-2 pl-9 text-sm"
           />
         </div>
-        <div className="mb-4 flex flex-wrap gap-2.5">
-          {filteredBrands.map((brand) => (
-            <motion.button
-              key={brand}
-              onClick={() => handleBrandToggle(brand)}
-              whileHover={{ scale: 0.98 }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className={`rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
-                filters.brands.includes(brand)
-                  ? "-translate-y-0.5 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_4px_12px_rgba(7,156,251,0.25)]"
-                  : "border border-[rgba(7,156,251,0.05)] bg-[rgba(7,156,251,0.08)] text-[#037ecc] hover:bg-[rgba(7,156,251,0.15)]"
-              }`}
-            >
-              {brand}
-            </motion.button>
-          ))}
+        <div className="flex flex-wrap gap-2">
+          {filteredBrands.map((brand) => {
+            const isActive = filters.brands.includes(brand)
+            return (
+              <motion.button
+                key={brand}
+                onClick={() => handleBrandToggle(brand)}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className={cn(chipBase, isActive ? chipActive : chipInactive)}
+              >
+                {brand}
+              </motion.button>
+            )
+          })}
         </div>
       </div>
 
+      {/* ─── Capacidad BTU ─── */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Capacidad (BTU)</h3>
-        <div className="mb-4 flex flex-wrap gap-2.5">
-          {capacities.map((capacity) => (
-            <motion.button
-              key={capacity.value}
-              onClick={() => handleCapacityToggle(capacity.value)}
-              whileHover={{ scale: 0.98 }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className={`rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
-                filters.capacities.includes(capacity.value)
-                  ? "-translate-y-0.5 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_4px_12px_rgba(7,156,251,0.25)]"
-                  : "border border-[rgba(7,156,251,0.05)] bg-[rgba(7,156,251,0.08)] text-[#037ecc] hover:bg-[rgba(7,156,251,0.15)]"
-              }`}
-            >
-              {capacity.label}
-            </motion.button>
-          ))}
+        <h3 className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+          Capacidad (BTU)
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {capacities.map((capacity) => {
+            const isActive = filters.capacities.includes(capacity.value)
+            return (
+              <motion.button
+                key={capacity.value}
+                onClick={() => handleCapacityToggle(capacity.value)}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className={cn(chipBase, isActive ? chipActive : chipInactive)}
+              >
+                {capacity.label}
+              </motion.button>
+            )
+          })}
         </div>
       </div>
 
+      {/* ─── Rango de precio ─── */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Rango de Precio</h3>
         <div className="flex items-center justify-between">
+          <h3 className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+            Rango de Precio
+          </h3>
           <motion.span
             key={`${filters.priceRange[0]}-${filters.priceRange[1]}`}
-            initial={{ scale: 1.2, opacity: 0 }}
+            initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-sm font-bold text-transparent"
+            transition={{ duration: 0.25 }}
+            className="text-primary text-sm font-bold tabular-nums dark:text-sky-400"
           >
-            ${filters.priceRange[0]} - ${filters.priceRange[1]}
+            ${filters.priceRange[0]} – ${filters.priceRange[1]}
           </motion.span>
         </div>
         <Slider
@@ -226,51 +261,59 @@ export function ProductFilters({
           step={50}
           value={filters.priceRange}
           onValueChange={handlePriceChange}
-          className="py-4"
+          className="py-3"
         />
+        <div className="text-muted-foreground/60 flex justify-between text-[10px]">
+          <span>$0</span>
+          <span>$2,000</span>
+        </div>
       </div>
 
+      {/* ─── Características ─── */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Características</h3>
-        <div className="space-y-3">
-          <motion.div
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.96 }}
-            className={`flex cursor-pointer items-center justify-between rounded-xl p-4 transition-all duration-300 ${
-              filters.inverter === true
-                ? "border-2 border-[#037ecc]/30 bg-gradient-to-r from-[#037ecc]/10 to-[#00baff]/10"
-                : "border border-[rgba(7,156,251,0.08)] bg-white/40"
-            }`}
+        <h3 className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+          Características
+        </h3>
+        <div className="space-y-2">
+          {/* Inverter — div with role="switch" to avoid button-inside-button */}
+          <div
+            role="switch"
+            aria-checked={filters.inverter === true}
+            tabIndex={0}
             onClick={handleInverterToggle}
+            onKeyDown={(e) => (e.key === " " || e.key === "Enter") && handleInverterToggle()}
+            className={cn(
+              "focus-visible:ring-primary/40 flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 transition-all duration-200 outline-none select-none focus-visible:ring-2",
+              filters.inverter === true
+                ? "border-primary/35 bg-primary/8 dark:border-sky-700/40 dark:bg-sky-500/10"
+                : "border-border bg-muted/25 hover:border-primary/20 hover:bg-primary/5 dark:bg-muted/15 dark:hover:border-sky-700/30 dark:hover:bg-sky-500/8",
+            )}
           >
-            <Label htmlFor="inverter" className="cursor-pointer text-sm font-medium text-[#0f172a]">
+            <Label className="text-foreground pointer-events-none cursor-pointer text-sm font-medium">
               Tecnología Inverter
             </Label>
-            <Checkbox
-              id="inverter"
-              checked={filters.inverter === true}
-              onCheckedChange={handleInverterToggle}
-            />
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.96 }}
-            className={`flex cursor-pointer items-center justify-between rounded-xl p-4 transition-all duration-300 ${
-              filters.wifi === true
-                ? "border-2 border-[#037ecc]/30 bg-gradient-to-r from-[#037ecc]/10 to-[#00baff]/10"
-                : "border border-[rgba(7,156,251,0.08)] bg-white/40"
-            }`}
+            <ToggleIndicator active={filters.inverter === true} />
+          </div>
+
+          {/* WiFi */}
+          <div
+            role="switch"
+            aria-checked={filters.wifi === true}
+            tabIndex={0}
             onClick={handleWifiToggle}
+            onKeyDown={(e) => (e.key === " " || e.key === "Enter") && handleWifiToggle()}
+            className={cn(
+              "focus-visible:ring-primary/40 flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 transition-all duration-200 outline-none select-none focus-visible:ring-2",
+              filters.wifi === true
+                ? "border-primary/35 bg-primary/8 dark:border-sky-700/40 dark:bg-sky-500/10"
+                : "border-border bg-muted/25 hover:border-primary/20 hover:bg-primary/5 dark:bg-muted/15 dark:hover:border-sky-700/30 dark:hover:bg-sky-500/8",
+            )}
           >
-            <Label htmlFor="wifi" className="cursor-pointer text-sm font-medium text-[#0f172a]">
+            <Label className="text-foreground pointer-events-none cursor-pointer text-sm font-medium">
               Control WiFi
             </Label>
-            <Checkbox
-              id="wifi"
-              checked={filters.wifi === true}
-              onCheckedChange={handleWifiToggle}
-            />
-          </motion.div>
+            <ToggleIndicator active={filters.wifi === true} />
+          </div>
         </div>
       </div>
     </div>
@@ -278,61 +321,72 @@ export function ProductFilters({
 
   return (
     <>
-      {/* Desktop Filters */}
+      {/* ─── Desktop ─── */}
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="sticky top-24 hidden lg:block"
       >
-        <div className="rounded-2xl border border-[rgba(7,156,251,0.08)] bg-white/65 p-6 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-xl">
-          <div className="mb-6 flex items-center gap-2">
-            <SlidersHorizontal className="h-5 w-5 text-[#037ecc]" />
-            <h2 className="text-lg font-semibold text-[#0f172a]">Filtros</h2>
+        <div className="border-border dark:bg-card/80 dark:border-border rounded-2xl border bg-white/75 p-6 shadow-[var(--elevation-2)] backdrop-blur-xl dark:shadow-none">
+          {/* Panel header */}
+          <div className="mb-5 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="bg-primary/10 dark:bg-primary/15 flex h-8 w-8 items-center justify-center rounded-lg">
+                <SlidersHorizontal className="text-primary h-4 w-4 dark:text-sky-400" />
+              </div>
+              <h2 className="text-foreground text-sm font-semibold">Filtros</h2>
+            </div>
+            {activeFiltersCount > 0 && (
+              <Badge className="bg-primary/10 text-primary border-0 text-[10px] font-bold dark:bg-sky-500/15 dark:text-sky-400">
+                {activeFiltersCount}
+              </Badge>
+            )}
           </div>
+
+          {/* Divider */}
+          <div className="bg-border mb-5 h-px" />
+
           {filtersContent}
         </div>
       </motion.div>
 
+      {/* ─── Mobile trigger ─── */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <motion.div whileHover={{ scale: 0.98 }} whileTap={{ scale: 0.96 }}>
-            <Button
-              variant="outline"
-              className="w-full rounded-full border-[rgba(7,156,251,0.08)] bg-white/70 py-6 font-semibold backdrop-blur-lg hover:bg-white/90 lg:hidden"
-            >
-              <SlidersHorizontal className="mr-2 h-4 w-4" />
-              Filtros
-              {activeFiltersCount > 0 && (
-                <Badge className="ml-2 border-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_0_10px_rgba(7,156,251,0.3)]">
-                  {activeFiltersCount}
-                </Badge>
-              )}
-            </Button>
-          </motion.div>
+          <Button
+            variant="outline"
+            className="border-border bg-card/70 hover:bg-card hover:border-primary/25 dark:bg-card/80 dark:hover:bg-card w-full cursor-pointer rounded-xl py-6 font-semibold backdrop-blur-lg transition-all lg:hidden"
+          >
+            <SlidersHorizontal className="text-primary mr-2 h-4 w-4 dark:text-sky-400" />
+            Filtros
+            {activeFiltersCount > 0 && (
+              <Badge className="from-primary ml-2 border-0 bg-gradient-to-r to-sky-500 text-white shadow-[0_0_10px_rgba(7,156,251,0.25)] dark:from-blue-600 dark:to-blue-500">
+                {activeFiltersCount}
+              </Badge>
+            )}
+          </Button>
         </SheetTrigger>
+
         <SheetContent
           side="bottom"
-          className="right-[3%] left-[3%] mx-auto h-[85vh] w-[94%] max-w-[480px] overflow-y-auto overscroll-contain scroll-smooth rounded-t-2xl border border-[rgba(7,156,251,0.08)] bg-white/75 shadow-[0_12px_40px_rgba(7,156,251,0.12),inset_0_10px_40px_rgba(255,255,255,0.4)] backdrop-blur-2xl"
+          className="border-border bg-background/95 dark:bg-card/95 right-[3%] left-[3%] mx-auto h-[85vh] w-[94%] max-w-[480px] overflow-y-auto overscroll-contain scroll-smooth rounded-t-2xl border shadow-[var(--elevation-4)] backdrop-blur-2xl"
         >
           <DialogTitle className="sr-only">Filtros</DialogTitle>
-          <SheetHeader className="mb-4 border-b border-[rgba(7,156,251,0.05)] px-2 pb-4">
-            <SheetTitle className="text-lg font-bold text-[#0f172a]">Filtros</SheetTitle>
+          <SheetHeader className="border-border mb-4 border-b px-2 pb-4">
+            <SheetTitle className="text-foreground text-base font-semibold">Filtros</SheetTitle>
           </SheetHeader>
           <div className="px-5 py-4 pb-6">{filtersContent}</div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="sticky right-0 bottom-0 left-0 border-t border-[rgba(7,156,251,0.1)] bg-white/95 px-6 py-4 backdrop-blur-xl"
-          >
+
+          <div className="border-border bg-background/95 dark:bg-card/95 sticky right-0 bottom-0 left-0 border-t px-6 py-4 backdrop-blur-xl">
             <Button
               onClick={() => setIsOpen(false)}
-              className="mx-0 mb-2 h-14 w-full rounded-full bg-gradient-to-r from-[#037ecc] to-[#00baff] font-semibold text-white shadow-[0_6px_20px_rgba(7,156,251,0.25)] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)] hover:brightness-110"
+              className="from-primary h-12 w-full cursor-pointer rounded-xl bg-gradient-to-r to-sky-500 font-semibold text-white shadow-[0_6px_20px_rgba(7,156,251,0.2)] transition-all hover:shadow-[0_8px_30px_rgba(7,156,251,0.35)] hover:brightness-105 dark:from-blue-600 dark:to-blue-500 dark:shadow-[0_6px_20px_rgba(37,99,235,0.25)]"
             >
               Aplicar filtros
+              {activeFiltersCount > 0 && ` (${activeFiltersCount})`}
             </Button>
-          </motion.div>
+          </div>
         </SheetContent>
       </Sheet>
     </>

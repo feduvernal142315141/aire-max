@@ -6,14 +6,11 @@ export interface ContactSubmitResult {
 }
 
 export async function submitContactForm(data: ContactFormData): Promise<ContactSubmitResult> {
-  // TODO: Replace with actual API call when backend is ready
-  // return apiClient.post<ContactSubmitResult>("/contact", data);
-
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  console.warn("[contact.service] submission (mock):", data)
+  // Offline fallback — used by contact.repository when Supabase is not configured
+  await new Promise((resolve) => setTimeout(resolve, 400))
+  console.warn("[contact.service] offline fallback — submission not persisted:", data)
   return {
     success: true,
-    message: "Mensaje enviado correctamente. Nos pondremos en contacto pronto.",
+    message: "Mensaje recibido. Nos pondremos en contacto pronto.",
   }
 }

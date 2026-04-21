@@ -31,34 +31,20 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[#f9fcff] via-[#eaf6ff] to-[#d9f0ff]" />
+      {/* Adaptive section background */}
+      <div className="bg-section fixed inset-0 -z-10" />
 
+      {/* Ambient orbs — subtle in both modes */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <motion.div
-          className="absolute top-20 left-10 h-96 w-96 rounded-full bg-[#00baff]/5 blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
+          className="absolute top-20 left-10 h-96 w-96 rounded-full bg-[#079cfb]/5 blur-3xl dark:bg-sky-500/8"
+          animate={{ x: [0, 50, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-[#079cfb]/5 blur-3xl"
-          animate={{
-            x: [0, -50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
+          className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-[#079cfb]/5 blur-3xl dark:bg-cyan-500/8"
+          animate={{ x: [0, -50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
       </div>
 
@@ -67,17 +53,17 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 text-center md:mb-12"
+          className="relative mb-6 text-center md:mb-12"
         >
-          <div className="absolute left-1/2 -z-10 h-32 w-[600px] -translate-x-1/2 rounded-full bg-[rgba(7,156,251,0.08)] blur-3xl" />
+          <div className="absolute left-1/2 -z-10 h-32 w-[600px] -translate-x-1/2 rounded-full bg-[#079cfb]/8 blur-3xl dark:bg-sky-500/10" />
 
-          <h1 className="mb-2 font-serif text-2xl font-bold tracking-tight text-[#0f172a] md:mb-3 md:text-[44px]">
+          <h1 className="text-foreground mb-2 font-serif text-3xl font-bold tracking-tight md:mb-3 md:text-5xl">
             Catálogo de Equipos{" "}
-            <span className="bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-transparent">
+            <span className="from-primary bg-gradient-to-r to-[#00baff] bg-clip-text text-transparent dark:from-sky-400 dark:to-cyan-300">
               Aire-Max
             </span>
           </h1>
-          <p className="mx-auto max-w-2xl px-4 text-sm text-[#475569] opacity-90 md:text-lg">
+          <p className="text-muted-foreground mx-auto max-w-2xl px-4 text-sm opacity-90 md:text-lg">
             Encuentra el sistema ideal para tu espacio
           </p>
         </motion.div>
@@ -92,14 +78,15 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
           </aside>
 
           <div className="space-y-6">
+            {/* Toolbar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgba(7,156,251,0.08)] bg-white/70 p-4 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg sm:flex-row sm:items-center md:p-5"
+              className="border-border dark:bg-card/70 flex flex-col items-start justify-between gap-4 rounded-2xl border bg-white/70 p-4 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg sm:flex-row sm:items-center md:p-5 dark:shadow-none"
             >
               <div className="flex flex-wrap items-center gap-3">
-                <p className="text-sm font-semibold text-[#0f172a] md:text-base">
+                <p className="text-foreground text-sm font-semibold md:text-base">
                   {filteredProducts.length}{" "}
                   {filteredProducts.length === 1 ? "producto" : "productos"}
                 </p>
@@ -109,7 +96,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   >
-                    <Badge className="border-0 bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_0_10px_rgba(7,156,251,0.3)]">
+                    <Badge className="from-primary border-0 bg-gradient-to-r to-sky-500 text-white shadow-[0_0_10px_rgba(7,156,251,0.3)] dark:from-sky-500 dark:to-cyan-400">
                       {activeFiltersCount} {activeFiltersCount === 1 ? "filtro" : "filtros"}
                     </Badge>
                   </motion.div>
@@ -117,15 +104,16 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
               </div>
 
               <div className="flex w-full items-center gap-3 sm:w-auto">
-                <div className="flex items-center gap-1 rounded-lg border border-[rgba(7,156,251,0.08)] bg-white/60 p-1">
+                <div className="border-border bg-muted/30 dark:bg-muted/40 flex items-center gap-1 rounded-lg border p-1">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setViewMode("grid")}
-                    className={`h-8 w-8 p-0 transition-all duration-300 ${
+                    title="Vista cuadrícula"
+                    className={`h-8 w-8 cursor-pointer rounded-md p-0 transition-all duration-200 ${
                       viewMode === "grid"
-                        ? "bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_2px_8px_rgba(7,156,251,0.25)]"
-                        : ""
+                        ? "from-primary bg-gradient-to-r to-sky-500 text-white shadow-[0_2px_8px_rgba(7,156,251,0.25)] dark:from-sky-500 dark:to-cyan-400"
+                        : "text-muted-foreground hover:bg-background/60 hover:text-foreground dark:hover:bg-muted/60"
                     }`}
                   >
                     <Grid3x3 className="h-4 w-4" />
@@ -134,10 +122,11 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                     variant="ghost"
                     size="sm"
                     onClick={() => setViewMode("list")}
-                    className={`h-8 w-8 p-0 transition-all duration-300 ${
+                    title="Vista lista"
+                    className={`h-8 w-8 cursor-pointer rounded-md p-0 transition-all duration-200 ${
                       viewMode === "list"
-                        ? "bg-gradient-to-r from-[#037ecc] to-[#00baff] text-white shadow-[0_2px_8px_rgba(7,156,251,0.25)]"
-                        : ""
+                        ? "from-primary bg-gradient-to-r to-sky-500 text-white shadow-[0_2px_8px_rgba(7,156,251,0.25)] dark:from-sky-500 dark:to-cyan-400"
+                        : "text-muted-foreground hover:bg-background/60 hover:text-foreground dark:hover:bg-muted/60"
                     }`}
                   >
                     <List className="h-4 w-4" />
@@ -148,6 +137,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
               </div>
             </motion.div>
 
+            {/* Product grid */}
             <AnimatePresence mode="wait">
               {filteredProducts.length > 0 ? (
                 <motion.div
@@ -167,11 +157,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                       key={product.id}
                       initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      transition={{
-                        duration: 0.5,
-                        delay: index * 0.08,
-                        ease: "easeOut",
-                      }}
+                      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
                     >
                       <ProductCard product={product} viewMode={viewMode} />
                     </motion.div>
@@ -186,12 +172,12 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                   transition={{ duration: 0.3 }}
                   className="px-4 py-16 text-center md:py-20"
                 >
-                  <div className="mx-auto max-w-md rounded-2xl border border-[rgba(7,156,251,0.08)] bg-white/70 p-8 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg md:p-10">
+                  <div className="border-border dark:bg-card/70 mx-auto max-w-md rounded-2xl border bg-white/70 p-8 shadow-[0_10px_40px_rgba(7,156,251,0.05)] backdrop-blur-lg md:p-10 dark:shadow-none">
                     <div className="mb-4 text-6xl opacity-20">❄️</div>
-                    <p className="mb-2 text-lg font-semibold text-[#0f172a]">
+                    <p className="text-foreground mb-2 text-lg font-semibold">
                       No encontramos equipos con esas características
                     </p>
-                    <p className="mb-6 text-sm text-[#475569] opacity-85">
+                    <p className="text-muted-foreground mb-6 text-sm opacity-85">
                       Intenta ajustar los filtros para ver más resultados
                     </p>
                     <Link
@@ -199,7 +185,7 @@ export function CatalogPageClient({ initialProducts }: CatalogPageClientProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button className="bg-gradient-to-r from-[#00d86a] to-[#00a34b] text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,216,106,0.3)]">
+                      <Button className="bg-gradient-to-r from-[#00d86a] to-[#00a34b] text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,216,106,0.3)] dark:from-emerald-500 dark:to-green-500">
                         <MessageCircle className="animate-pulse-slow mr-2 h-4 w-4" />
                         Habla con un asesor
                       </Button>

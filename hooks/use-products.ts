@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { productsData } from "@/data"
-import { filterProducts, sortProducts } from "@/services"
+import { filterProducts, sortProducts } from "@/lib/product-utils"
 import type { Product, SortOption, ProductBrand, ProductCategory, ProductCapacity } from "@/types"
 
 // ─── Filter State ────────────────────────────────────────────────────────────

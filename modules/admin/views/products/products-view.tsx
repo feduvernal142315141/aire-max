@@ -1,13 +1,15 @@
 "use client"
 
-import { Plus } from "lucide-react"
+import { ChevronDown, Package } from "lucide-react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import type { UseAdminProductsResult } from "@/modules/admin/hooks/use-admin-products"
@@ -44,7 +46,7 @@ export function ProductsView({ admin }: ProductsViewProps) {
     toggleAllVisible,
     applyBulkAction,
     updateProductField,
-    openCreateDrawer,
+    openCreateDrawer: _openCreateDrawer,
     openEditDrawer,
     saveProduct,
     removeProduct,
@@ -54,68 +56,80 @@ export function ProductsView({ admin }: ProductsViewProps) {
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-2xl border border-white/20 bg-white/70 shadow-lg backdrop-blur">
+      <Card className="border-border dark:bg-card/70 rounded-2xl border bg-white/70 shadow-lg backdrop-blur dark:shadow-none">
         <CardHeader className="space-y-4">
+          {/* Header row */}
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-            <div>
-              <CardTitle className="text-xl">Productos</CardTitle>
-              <CardDescription>
-                DataGrid premium con edición inline y acciones masivas.
-              </CardDescription>
+            {/* Title + stats */}
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 dark:bg-primary/15 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl">
+                <Package className="text-primary h-[18px] w-[18px] dark:text-blue-400" />
+              </div>
+              <div>
+                <CardTitle className="text-base font-semibold">Catálogo de productos</CardTitle>
+                <p className="text-muted-foreground text-xs">
+                  {products.length} equipos en total · {filteredProducts.length} mostrando
+                </p>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="rounded-xl">
-                    Acciones masivas ({selectedIds.length})
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => applyBulkAction("activate")}>
-                    Activar
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => applyBulkAction("deactivate")}>
-                    Desactivar
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => applyBulkAction("up10")}>
-                    Subir precio +10%
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => applyBulkAction("down10")}>
-                    Bajar precio -10%
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => applyBulkAction("delete")}
-                    className="text-red-600"
-                  >
-                    Eliminar
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <Button
-                onClick={openCreateDrawer}
-                className="rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-[0_0_22px_rgba(37,99,235,0.35)]"
-              >
-                <Plus className="mr-2 h-4 w-4" /> Nuevo producto
-              </Button>
-
-              <ProductDrawer
-                open={drawerOpen}
-                onOpenChange={setDrawerOpen}
-                editingId={editingId}
-                draft={draft}
-                setDraft={setDraft}
-                tagInput={tagInput}
-                setTagInput={setTagInput}
-                onAddTag={addTag}
-                onSave={saveProduct}
-                brands={brands}
-                capacities={capacities}
-              />
-            </div>
+            {/* Bulk actions — visible only when items are selected */}
+            {selectedIds.length > 0 && (
+              <div className="flex items-center gap-2">
+                <Badge className="bg-primary/10 text-primary border-0 text-xs font-semibold dark:bg-blue-500/15 dark:text-blue-400">
+                  {selectedIds.length} seleccionado{selectedIds.length !== 1 ? "s" : ""}
+                </Badge>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer gap-1.5 rounded-xl"
+                    >
+                      Acciones
+                      <ChevronDown className="text-muted-foreground h-3.5 w-3.5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => applyBulkAction("activate")}
+                    >
+                      Activar seleccionados
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => applyBulkAction("deactivate")}
+                    >
+                      Desactivar seleccionados
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => applyBulkAction("up10")}
+                    >
+                      Subir precio +10%
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => applyBulkAction("down10")}
+                    >
+                      Bajar precio −10%
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      className="text-destructive focus:text-destructive cursor-pointer"
+                      onClick={() => applyBulkAction("delete")}
+                    >
+                      Eliminar seleccionados
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
           </div>
 
+          {/* Filters */}
           <ProductsFilters
             filters={filters}
             setFilters={setFilters}
@@ -142,6 +156,21 @@ export function ProductsView({ admin }: ProductsViewProps) {
           />
         </CardContent>
       </Card>
+
+      {/* Drawer — rendered as portal, position in tree doesn't matter */}
+      <ProductDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        editingId={editingId}
+        draft={draft}
+        setDraft={setDraft}
+        tagInput={tagInput}
+        setTagInput={setTagInput}
+        onAddTag={addTag}
+        onSave={saveProduct}
+        brands={brands}
+        capacities={capacities}
+      />
     </div>
   )
 }

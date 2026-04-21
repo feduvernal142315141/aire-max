@@ -18,44 +18,49 @@ export interface SpecsTabProps {
   capacities: ProductCapacity[]
 }
 
+const fieldClass =
+  "cursor-pointer rounded-xl border-border bg-background text-foreground focus:ring-primary/25 focus:border-primary/50 transition-colors dark:bg-muted/20"
+const labelClass = "text-sm font-medium text-foreground"
+
 export function SpecsTab({ draft, setDraft, capacities }: SpecsTabProps) {
   return (
-    <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-[0_6px_20px_rgba(15,23,42,0.06)] backdrop-blur">
-      <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-2">
-          <Label className="text-slate-700">Capacidad (BTU)</Label>
+    <div className="space-y-5">
+      {/* Capacidad + Energía */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-1.5">
+          <Label className={labelClass}>Capacidad (BTU)</Label>
           <Select
             value={draft.capacity}
             onValueChange={(value) =>
               setDraft((p) => ({ ...p, capacity: value as ProductCapacity }))
             }
           >
-            <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
-              <SelectValue />
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Selecciona" />
             </SelectTrigger>
             <SelectContent>
               {capacities.map((cap) => (
-                <SelectItem key={cap} value={cap}>
+                <SelectItem key={cap} value={cap} className="cursor-pointer">
                   {cap}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2">
-          <Label className="text-slate-700">Energía</Label>
+        <div className="space-y-1.5">
+          <Label className={labelClass}>Eficiencia energética</Label>
           <Select
             value={draft.energyRating}
             onValueChange={(value) =>
               setDraft((p) => ({ ...p, energyRating: value as EnergyRating }))
             }
           >
-            <SelectTrigger className="rounded-xl border-slate-200/90 bg-white/90 focus:ring-2 focus:ring-blue-400/40">
-              <SelectValue />
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Selecciona" />
             </SelectTrigger>
             <SelectContent>
               {ENERGY_OPTIONS.map((rating) => (
-                <SelectItem key={rating} value={rating}>
+                <SelectItem key={rating} value={rating} className="cursor-pointer">
                   {rating}
                 </SelectItem>
               ))}
@@ -63,20 +68,33 @@ export function SpecsTab({ draft, setDraft, capacities }: SpecsTabProps) {
           </Select>
         </div>
       </div>
-      <div className="mt-4 space-y-2 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-3">
-        <div className="flex items-center justify-between">
-          <span className="font-medium text-slate-700">Inverter</span>
-          <Switch
-            checked={draft.inverter}
-            onCheckedChange={(checked) => setDraft((p) => ({ ...p, inverter: checked }))}
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="font-medium text-slate-700">WiFi</span>
-          <Switch
-            checked={draft.wifi}
-            onCheckedChange={(checked) => setDraft((p) => ({ ...p, wifi: checked }))}
-          />
+
+      {/* Toggles */}
+      <div className="space-y-2">
+        <p className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+          Características
+        </p>
+        <div className="divide-border border-border bg-muted/20 dark:bg-muted/10 divide-y rounded-xl border">
+          <div className="flex items-center justify-between px-4 py-3.5">
+            <div className="space-y-0.5">
+              <p className="text-foreground text-sm font-medium">Tecnología Inverter</p>
+              <p className="text-muted-foreground text-xs">Mayor eficiencia y ahorro de energía</p>
+            </div>
+            <Switch
+              checked={draft.inverter}
+              onCheckedChange={(checked) => setDraft((p) => ({ ...p, inverter: checked }))}
+            />
+          </div>
+          <div className="flex items-center justify-between px-4 py-3.5">
+            <div className="space-y-0.5">
+              <p className="text-foreground text-sm font-medium">Control por WiFi</p>
+              <p className="text-muted-foreground text-xs">Compatible con app móvil</p>
+            </div>
+            <Switch
+              checked={draft.wifi}
+              onCheckedChange={(checked) => setDraft((p) => ({ ...p, wifi: checked }))}
+            />
+          </div>
         </div>
       </div>
     </div>

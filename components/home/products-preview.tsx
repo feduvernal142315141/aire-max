@@ -7,26 +7,26 @@ import { homePopularProductsData } from "@/data"
 
 export function ProductsPreview() {
   return (
-    <section className="relative overflow-hidden py-[120px] md:py-[120px]">
-      <div className="animate-light-direction absolute inset-0 bg-gradient-to-b from-[#f9fcff] via-[#eaf6ff] to-[#d9f0ff]" />
+    <section className="relative overflow-hidden py-24 lg:py-32">
+      <div className="bg-section absolute inset-0" />
 
-      <div className="absolute top-0 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.08] blur-[180px]" />
+      <div className="absolute top-0 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.08] blur-[180px] dark:opacity-[0.12]" />
 
-      <div className="absolute top-[40%] left-[20%] h-[300px] w-[400px] rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px]" />
-      <div className="absolute top-[40%] left-1/2 h-[300px] w-[400px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px]" />
-      <div className="absolute top-[40%] right-[20%] h-[300px] w-[400px] rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px]" />
+      <div className="absolute top-[40%] left-[20%] h-[300px] w-[400px] rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px] dark:opacity-[0.10]" />
+      <div className="absolute top-[40%] left-1/2 h-[300px] w-[400px] -translate-x-1/2 rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px] dark:opacity-[0.10]" />
+      <div className="absolute top-[40%] right-[20%] h-[300px] w-[400px] rounded-full bg-[#079cfb] opacity-[0.06] blur-[120px] dark:opacity-[0.10]" />
 
       <div
-        className="animate-float absolute top-1/2 left-0 h-[500px] w-[350px] bg-[#00e0ff] opacity-[0.08] blur-[140px]"
+        className="animate-float absolute top-1/2 left-0 h-[500px] w-[350px] bg-[#00e0ff] opacity-[0.08] blur-[140px] dark:opacity-[0.06]"
         style={{ animationDuration: "15s" }}
       />
 
       <div
-        className="animate-float absolute top-[20%] right-[10%] h-[150px] w-[150px] rounded-full bg-white opacity-[0.06] blur-[80px]"
+        className="animate-float absolute top-[20%] right-[10%] h-[150px] w-[150px] rounded-full bg-white opacity-[0.06] blur-[80px] dark:bg-sky-900 dark:opacity-[0.08]"
         style={{ animationDelay: "1s", animationDuration: "12s" }}
       />
       <div
-        className="animate-float absolute bottom-[30%] left-[15%] h-[180px] w-[180px] rounded-full bg-white opacity-[0.05] blur-[90px]"
+        className="animate-float absolute bottom-[30%] left-[15%] h-[180px] w-[180px] rounded-full bg-white opacity-[0.05] blur-[90px] dark:bg-sky-900 dark:opacity-[0.06]"
         style={{ animationDelay: "2.5s", animationDuration: "14s" }}
       />
 
@@ -45,19 +45,15 @@ export function ProductsPreview() {
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-[48px]">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:mb-16 md:flex-row md:items-end">
           <div className="animate-fade-up space-y-2">
-            <h2
-              className="relative font-serif text-[28px] font-bold text-[#0f172a] md:text-[44px] lg:text-5xl"
-              style={{ letterSpacing: "-0.02em" }}
-            >
+            <h2 className="section-heading text-foreground">
               Equipos Más{" "}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-[#037ecc] to-[#00baff] bg-clip-text text-transparent">
+                <span className="from-primary bg-gradient-to-r to-[#00baff] bg-clip-text text-transparent dark:from-sky-400 dark:to-cyan-300">
                   Populares
                 </span>
-                <span className="animate-shine-diagonal absolute inset-0 skew-x-12 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
               </span>
             </h2>
-            <p className="mt-3 text-[18px] text-[#475569] opacity-90">
+            <p className="section-body mt-3">
               Los aires acondicionados más vendidos y recomendados
             </p>
           </div>
@@ -65,13 +61,10 @@ export function ProductsPreview() {
           <Button
             variant="outline"
             asChild
-            className="group animate-slide-right hidden border-[#037ecc]/20 bg-white/40 text-[#037ecc] backdrop-blur-sm transition-all duration-300 hover:border-[#00baff] hover:bg-gradient-to-r hover:from-[#037ecc]/5 hover:to-[#00baff]/5 md:flex"
-            style={{ animationDelay: "0.3s" }}
+            className="group border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5 dark:bg-muted/20 hidden bg-white/40 backdrop-blur-sm transition-all duration-300 md:flex dark:border-sky-700/30 dark:text-sky-400 dark:hover:border-sky-600/50"
           >
             <Link href="/catalogo">
-              <span className="transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#037ecc] group-hover:to-[#00baff] group-hover:bg-clip-text group-hover:text-transparent">
-                Ver todo el catálogo
-              </span>
+              Ver todo el catálogo
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -82,7 +75,7 @@ export function ProductsPreview() {
           {homePopularProductsData.map((product, index) => (
             <div
               key={product.productId}
-              className="group animate-fade-up relative flex min-h-[460px] flex-col overflow-hidden rounded-[24px] border border-[#079cfb]/8 bg-white/70 shadow-[0_4px_40px_rgba(7,156,251,0.08),0_2px_8px_rgba(255,255,255,0.5)] backdrop-blur-lg transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_12px_50px_rgba(7,156,251,0.15)]"
+              className="group animate-fade-up border-border dark:bg-card/70 relative flex min-h-[460px] flex-col overflow-hidden rounded-[24px] border bg-white/70 shadow-[0_4px_40px_rgba(7,156,251,0.08),0_2px_8px_rgba(255,255,255,0.5)] backdrop-blur-lg transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_12px_50px_rgba(7,156,251,0.15)] dark:shadow-none dark:hover:shadow-[0_12px_40px_rgba(56,189,248,0.08)]"
               style={{ animationDelay: `${index * 0.08}s` }}
             >
               <div className="relative h-[250px] overflow-hidden rounded-t-[24px]">
@@ -92,9 +85,9 @@ export function ProductsPreview() {
                   fill
                   className="image-inset-shadow object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute right-0 bottom-0 left-0 h-20 bg-gradient-to-t from-white/60 to-transparent" />
+                <div className="dark:from-card/80 absolute right-0 bottom-0 left-0 h-20 bg-gradient-to-t from-white/60 to-transparent" />
 
-                <div className="group-hover:animate-diagonal-reflection absolute inset-0 bg-gradient-to-br from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100" />
+                <div className="group-hover:animate-diagonal-reflection absolute inset-0 bg-gradient-to-br from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 dark:via-white/10" />
 
                 <Badge
                   className={`absolute top-4 left-4 bg-gradient-to-r ${product.badgeColor} rounded-full px-3 py-1 text-xs text-white shadow-[0_0_10px_rgba(7,156,251,0.3)]`}
@@ -118,16 +111,19 @@ export function ProductsPreview() {
               </div>
 
               <div className="flex flex-grow flex-col p-8">
-                <p className="mb-1 text-[14px] font-medium text-[#64748b]">{product.brand}</p>
-                <h3 className="mb-8 text-[20px] font-semibold text-[#0f172a]">{product.name}</h3>
+                <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-widest uppercase">
+                  {product.brand}
+                </p>
+                <h3 className="text-foreground mb-5 text-lg leading-snug font-semibold">
+                  {product.name}
+                </h3>
 
-                <div className="mb-8 flex flex-wrap gap-2">
+                <div className="mb-6 flex flex-wrap gap-1.5">
                   {product.features.map((feature, idx) => (
                     <Badge
                       key={idx}
                       variant="secondary"
-                      className="chip-hover-glow cursor-pointer border-0 bg-[#079cfb]/8 text-xs text-[#037ecc] transition-all duration-200 hover:bg-[#00baff]/15 hover:text-[#037ecc]"
-                      title={`${feature} - Tecnología avanzada`}
+                      className="bg-primary/8 text-primary border-0 text-xs dark:bg-sky-500/10 dark:text-sky-400"
                     >
                       {feature}
                     </Badge>
@@ -136,27 +132,22 @@ export function ProductsPreview() {
 
                 <div className="flex-grow" />
 
-                <div className="mt-5 mb-6">
-                  <p className="text-[22px] font-bold text-[#037ecc]">${product.price}</p>
-                  <p className="mt-1 text-[14px] text-[#475569] opacity-80">
+                <div className="mb-5 space-y-0.5">
+                  <p className="text-primary text-2xl font-bold tabular-nums dark:text-sky-400">
+                    ${product.price}
+                  </p>
+                  <p className="text-muted-foreground text-xs">
                     Instalación incluida: ${product.priceWithInstallation}
                   </p>
                 </div>
 
                 <Button
-                  className="group/btn relative w-full overflow-hidden rounded-full font-semibold text-white shadow-[0_6px_18px_rgba(7,156,251,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_25px_rgba(7,156,251,0.35)]"
-                  style={{
-                    background: "linear-gradient(90deg, #037ecc 0%, #00baff 100%)",
-                    padding: "12px 28px",
-                    fontSize: "15px",
-                    letterSpacing: "0.02em",
-                  }}
+                  className="group/btn from-primary w-full rounded-xl bg-gradient-to-r to-[#00baff] font-semibold text-white shadow-[0_4px_14px_rgba(7,156,251,0.25)] transition-all hover:shadow-[0_6px_20px_rgba(7,156,251,0.38)] hover:brightness-105 dark:from-sky-500 dark:to-cyan-400"
                   asChild
                 >
                   <Link href={`/catalogo/${product.productId}`}>
-                    <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-600 group-hover/btn:translate-x-full" />
-                    <span className="relative z-10">Ver más</span>
-                    <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    Ver detalles
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </Link>
                 </Button>
               </div>
@@ -172,7 +163,7 @@ export function ProductsPreview() {
             {homePopularProductsData.map((product) => (
               <div
                 key={product.productId}
-                className="flex w-[85vw] flex-shrink-0 snap-center flex-col overflow-hidden rounded-[24px] border border-[#079cfb]/8 bg-white/70 shadow-[0_4px_40px_rgba(7,156,251,0.05)] backdrop-blur-xl"
+                className="border-border dark:bg-card/70 flex w-[85vw] flex-shrink-0 snap-center flex-col overflow-hidden rounded-[24px] border bg-white/70 shadow-[0_4px_40px_rgba(7,156,251,0.05)] backdrop-blur-xl dark:shadow-none"
               >
                 <div className="relative h-[280px] overflow-hidden rounded-t-[24px]">
                   <Image
@@ -181,7 +172,7 @@ export function ProductsPreview() {
                     fill
                     className="image-inset-shadow object-cover"
                   />
-                  <div className="absolute right-0 bottom-0 left-0 h-20 bg-gradient-to-t from-white/60 to-transparent" />
+                  <div className="dark:from-card/80 absolute right-0 bottom-0 left-0 h-20 bg-gradient-to-t from-white/60 to-transparent" />
 
                   <Badge
                     className={`absolute top-4 left-4 bg-gradient-to-r ${product.badgeColor} rounded-full px-4 py-1.5 text-sm text-white shadow-[0_0_10px_rgba(7,156,251,0.4)]`}
@@ -194,16 +185,18 @@ export function ProductsPreview() {
                   </Badge>
                 </div>
 
-                <div className="flex flex-grow flex-col p-8 text-center">
-                  <p className="mb-1 text-[14px] font-medium text-[#64748b]">{product.brand}</p>
-                  <h3 className="mb-6 text-[20px] font-semibold text-[#0f172a]">{product.name}</h3>
+                <div className="flex flex-grow flex-col p-7 text-center">
+                  <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-widest uppercase">
+                    {product.brand}
+                  </p>
+                  <h3 className="text-foreground mb-4 text-lg font-semibold">{product.name}</h3>
 
-                  <div className="mb-8 flex flex-wrap justify-center gap-2">
+                  <div className="mb-6 flex flex-wrap justify-center gap-1.5">
                     {product.features.map((feature, idx) => (
                       <Badge
                         key={idx}
                         variant="secondary"
-                        className="border-0 bg-[#079cfb]/8 text-xs text-[#037ecc]"
+                        className="bg-primary/8 text-primary border-0 text-xs dark:bg-sky-500/10 dark:text-sky-400"
                       >
                         {feature}
                       </Badge>
@@ -212,24 +205,21 @@ export function ProductsPreview() {
 
                   <div className="flex-grow" />
 
-                  <div className="mb-6">
-                    <p className="text-[22px] font-bold text-[#037ecc]">${product.price}</p>
-                    <p className="mt-1 text-[14px] text-[#475569] opacity-85">
+                  <div className="mb-5 space-y-0.5">
+                    <p className="text-primary text-2xl font-bold tabular-nums dark:text-sky-400">
+                      ${product.price}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
                       Instalación incluida: ${product.priceWithInstallation}
                     </p>
                   </div>
 
                   <Button
-                    className="mx-auto w-[80%] rounded-full font-semibold text-white shadow-[0_6px_20px_rgba(7,156,251,0.25)]"
-                    style={{
-                      background: "linear-gradient(90deg, #037ecc 0%, #00baff 100%)",
-                      padding: "14px 28px",
-                      fontSize: "15px",
-                    }}
+                    className="from-primary w-full rounded-xl bg-gradient-to-r to-[#00baff] font-semibold text-white shadow-[0_4px_14px_rgba(7,156,251,0.25)] hover:brightness-105 dark:from-sky-500 dark:to-cyan-400"
                     asChild
                   >
                     <Link href={`/catalogo/${product.productId}`}>
-                      <span>Ver más</span>
+                      Ver detalles
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -239,12 +229,11 @@ export function ProductsPreview() {
           </div>
         </div>
 
-        {/* Mobile CTA */}
         <div className="mt-12 text-center md:hidden">
           <Button
             variant="outline"
             asChild
-            className="w-full border-[#037ecc]/20 bg-white/40 text-[#037ecc] backdrop-blur-sm hover:border-[#00baff] hover:bg-gradient-to-r hover:from-[#037ecc]/5 hover:to-[#00baff]/5 sm:w-auto"
+            className="border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5 dark:bg-muted/20 w-full bg-white/40 backdrop-blur-sm sm:w-auto dark:border-sky-700/30 dark:text-sky-400"
           >
             <Link href="/catalogo">
               Ver todo el catálogo

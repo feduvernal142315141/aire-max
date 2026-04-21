@@ -25,8 +25,8 @@ export function NosotrosClient() {
   return (
     <div className="flex flex-col pt-16 md:pt-20">
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#eaf7ff] via-[#f9fcff] to-[#ffffff]" />
-        <div className="animate-breathe absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#079cfb] opacity-[0.08] blur-[120px]" />
+        <div className="bg-section absolute inset-0" />
+        <div className="animate-breathe bg-primary absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08] blur-[120px] dark:opacity-[0.12]" />
 
         <div className="relative z-10 container mx-auto px-4">
           <motion.div
@@ -38,7 +38,7 @@ export function NosotrosClient() {
             <Badge className="border-primary/20 text-primary mx-auto w-fit border bg-white/80 backdrop-blur-sm">
               Sobre Nosotros
             </Badge>
-            <h1 className="font-serif text-4xl font-bold text-[#0f172a] md:text-5xl lg:text-6xl">
+            <h1 className="text-foreground font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Expertos en{" "}
               <span className="relative inline-block">
                 <span className="gradient-text">Climatización</span>
@@ -46,11 +46,11 @@ export function NosotrosClient() {
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
                   transition={{ duration: 1, delay: 0.8 }}
-                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#079cfb] to-[#00e0ff] opacity-30"
+                  className="from-primary absolute bottom-0 left-0 h-1 bg-gradient-to-r to-[#00e0ff] opacity-30"
                 />
               </span>
             </h1>
-            <p className="mx-auto max-w-[620px] text-lg leading-relaxed text-slate-600 opacity-90 md:text-xl">
+            <p className="text-muted-foreground mx-auto max-w-[620px] text-lg leading-relaxed md:text-xl">
               Más de 15 años brindando soluciones de climatización profesional con compromiso,
               calidad y excelencia en el servicio
             </p>
@@ -79,24 +79,24 @@ export function NosotrosClient() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
               >
-                <Card className="group border border-[rgba(7,156,251,0.08)] bg-white/50 shadow-[0_8px_40px_rgba(3,126,204,0.1)] backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_50px_rgba(3,126,204,0.15)]">
+                <Card className="group border-border bg-card/60 dark:bg-card/70 border shadow-[var(--elevation-1)] backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--elevation-3)]">
                   <CardContent className="space-y-4 pt-8 pb-6 text-center">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10 shadow-[0_0_20px_rgba(7,156,251,0.15)] transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(7,156,251,0.3)]"
+                      className="bg-primary/10 dark:bg-primary/15 mx-auto flex h-16 w-16 items-center justify-center rounded-full shadow-[0_0_20px_rgba(7,156,251,0.15)] transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(7,156,251,0.3)]"
                     >
-                      <stat.icon className="animate-icon-breathe h-8 w-8 text-[#037ecc]" />
+                      <stat.icon className="animate-icon-breathe text-primary h-8 w-8 dark:text-sky-400" />
                     </motion.div>
                     <motion.div
                       key={stat.value}
                       initial={{ scale: 1.05 }}
                       animate={{ scale: 1 }}
-                      className="text-4xl font-bold text-[#037ecc] transition-transform duration-300 group-hover:scale-105"
+                      className="text-primary text-4xl font-bold tabular-nums transition-transform duration-300 group-hover:scale-105 dark:text-sky-400"
                     >
                       {stat.value}
                       {stat.suffix}
                     </motion.div>
-                    <p className="text-sm text-gray-500">{stat.label}</p>
+                    <p className="text-muted-foreground text-sm">{stat.label}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -110,12 +110,12 @@ export function NosotrosClient() {
             transition={{ duration: 0.6 }}
             className="mx-auto mb-16 max-w-6xl"
           >
-            <Card className="hover:border-primary/20 overflow-hidden border-2 border-transparent bg-gradient-to-br from-[#e0f2fe] via-white to-white transition-all">
+            <Card className="hover:border-primary/20 bg-card dark:bg-card/80 overflow-hidden border-2 border-transparent transition-all">
               <CardContent className="p-0">
                 <div className="grid gap-0 md:grid-cols-2">
                   <div className="space-y-6 p-8 md:p-10">
                     <div className="relative inline-block">
-                      <h2 className="font-serif text-3xl font-bold text-[#0f172a]">
+                      <h2 className="text-foreground font-serif text-3xl font-bold">
                         Nuestra Historia
                       </h2>
                       <motion.div
@@ -123,7 +123,7 @@ export function NosotrosClient() {
                         whileInView={{ width: "60%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-[#079cfb] to-[#00e0ff]"
+                        className="from-primary absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r to-[#00e0ff]"
                       />
                     </div>
                     <div className="text-muted-foreground space-y-4 leading-relaxed">
@@ -132,7 +132,7 @@ export function NosotrosClient() {
                         climatización en México. Comenzamos como un pequeño taller familiar y hoy
                         somos líderes en soluciones HVAC para hogares y empresas.
                       </p>
-                      <p className="font-semibold text-[#037ecc] italic">
+                      <p className="text-primary font-semibold italic dark:text-sky-400">
                         "Cada instalación es una promesa de confort y confianza."
                       </p>
                     </div>
@@ -143,10 +143,10 @@ export function NosotrosClient() {
                         { icon: Wrench, text: "Garantía Certificada" },
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#079cfb]/10 to-[#00e0ff]/10">
-                            <item.icon className="h-5 w-5 text-[#037ecc]" />
+                          <div className="bg-primary/10 dark:bg-primary/15 flex h-10 w-10 items-center justify-center rounded-full">
+                            <item.icon className="text-primary h-5 w-5 dark:text-sky-400" />
                           </div>
-                          <span className="text-sm font-medium text-[#0f172a]">{item.text}</span>
+                          <span className="text-foreground text-sm font-medium">{item.text}</span>
                         </div>
                       ))}
                     </div>
@@ -173,9 +173,9 @@ export function NosotrosClient() {
             transition={{ duration: 0.6 }}
             className="mx-auto mb-16 max-w-6xl"
           >
-            <Card className="hover:border-primary/20 border-2 border-transparent bg-gradient-to-b from-[#f8fbff] to-[#ffffff] transition-all">
+            <Card className="hover:border-primary/20 from-card to-background dark:from-card/80 dark:to-background/80 border-2 border-transparent bg-gradient-to-b transition-all">
               <CardContent className="space-y-6 p-8 md:p-10">
-                <h2 className="text-center font-serif text-3xl font-bold text-[#0f172a]">
+                <h2 className="text-foreground text-center font-serif text-3xl font-bold">
                   Certificaciones y Alianzas
                 </h2>
                 <div className="grid gap-4 md:grid-cols-3">
@@ -193,11 +193,11 @@ export function NosotrosClient() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
-                      whileHover={{ scale: 1.02, borderColor: "rgba(7,156,251,0.3)" }}
-                      className="flex items-center gap-3 rounded-xl border border-[rgba(7,156,251,0.08)] bg-white/60 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#079cfb] hover:shadow-[0_0_20px_rgba(7,156,251,0.15)]"
+                      whileHover={{ scale: 1.02 }}
+                      className="border-border bg-muted/30 hover:border-primary/30 dark:bg-muted/20 flex items-center gap-3 rounded-xl border p-4 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(7,156,251,0.1)]"
                     >
-                      <Star className="h-5 w-5 flex-shrink-0 text-[#037ecc]" />
-                      <span className="text-sm font-medium text-[#0f172a]">{cert}</span>
+                      <Star className="text-primary h-5 w-5 flex-shrink-0 dark:text-sky-400" />
+                      <span className="text-foreground text-sm font-medium">{cert}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -219,7 +219,7 @@ export function NosotrosClient() {
                 <div className="animate-pulse-slow absolute bottom-1/3 left-1/2 h-3 w-3 rounded-full bg-[#079cfb] delay-200" />
               </div>
               <CardContent className="relative z-10 space-y-6 p-8 md:p-10">
-                <h2 className="text-center font-serif text-3xl font-bold text-[#0f172a]">
+                <h2 className="text-foreground text-center font-serif text-3xl font-bold">
                   Cobertura Nacional
                 </h2>
                 <div className="flex flex-col items-center gap-6">
@@ -231,7 +231,7 @@ export function NosotrosClient() {
                       ease: "easeInOut",
                     }}
                   >
-                    <MapPin className="h-12 w-12 text-[#037ecc]" />
+                    <MapPin className="text-primary h-12 w-12 dark:text-sky-400" />
                   </motion.div>
                   <p className="text-muted-foreground max-w-2xl text-center leading-relaxed">
                     Brindamos servicio en toda la República Mexicana con tiempos de respuesta
@@ -249,10 +249,12 @@ export function NosotrosClient() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: i * 0.1 }}
-                        className="rounded-xl border border-[rgba(7,156,251,0.1)] bg-gradient-to-br from-[#079cfb]/5 to-[#00e0ff]/5 p-6 text-center"
+                        className="border-border bg-primary/5 dark:bg-primary/8 rounded-xl border p-6 text-center"
                       >
                         <div className="text-muted-foreground mb-2 text-sm">{item.zone}</div>
-                        <div className="text-2xl font-bold text-[#037ecc]">{item.time}</div>
+                        <div className="text-primary text-2xl font-bold tabular-nums dark:text-sky-400">
+                          {item.time}
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -263,7 +265,7 @@ export function NosotrosClient() {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-section py-16 md:py-24">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -299,7 +301,7 @@ export function NosotrosClient() {
                     size="lg"
                     variant="secondary"
                     asChild
-                    className="group bg-white text-[#037ecc] shadow-lg transition-all duration-300 hover:bg-white/90 hover:shadow-xl"
+                    className="group text-primary dark:bg-card dark:hover:bg-card/90 bg-white shadow-lg transition-all duration-300 hover:bg-white/90 hover:shadow-xl dark:text-sky-400"
                   >
                     <Link href="/contacto">
                       <Phone className="group-hover:animate-pulse-icon mr-2 h-5 w-5" />
