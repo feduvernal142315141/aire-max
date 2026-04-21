@@ -1,73 +1,42 @@
-import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
-const ADMIN_PUBLIC_PATHS = ["/admin/login"]
-
-export async function middleware(request: NextRequest) {
-  // Safety net — never let the middleware crash the whole site
-  try {
-    return await handleAuth(request)
-  } catch {
-    return NextResponse.next({ request })
-  }
-}
-
-async function handleAuth(request: NextRequest) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-  // If env vars are missing, let the page-level auth handle it
-  if (!url || !anonKey) {
-    return NextResponse.next({ request })
-  }
-
-  // supabaseResponse must be used consistently — Supabase official pattern
-  let supabaseResponse = NextResponse.next({ request })
-
-  // No Database generic here — middleware only needs auth, not typed DB queries
-  const supabase = createServerClient(url, anonKey, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll()
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-        supabaseResponse = NextResponse.next({ request })
-        cookiesToSet.forEach(({ name, value, options }) => {
-          supabaseResponse.cookies.set(name, value, options)
-        })
-      },
-    },
-  })
-
-  // IMPORTANT: do not run any logic between createServerClient and getUser
-  const authClient = supabase.auth as unknown as {
-    getUser: () => Promise<{ data: { user: { id: string } | null } }>
-  }
-  const {
-    data: { user },
-  } = await authClient.getUser()
-
+/**
+ * Middleware minimalista — solo mira cookies de Supabase para decidir redirects.
+ *
+ * El auth check REAL se hace en `app/admin/(dashboard)/layout.tsx` server-side,
+ * que valida con Supabase y verifica el rol. Acá solo hacemos un redirect rápido
+ * si visitan /admin sin cookie alguna, para evitar renderizar la página antes.
+ *
+ * No usamos @supabase/ssr en el middleware para mantener el Edge bundle mínimo
+ * y evitar fallos de runtime del Edge.
+ */
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Protect /admin/** — redirect unauthenticated visitors to login
-  if (pathname.startsWith("/admin") && !ADMIN_PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
-    if (!user) {
-      const loginUrl = request.nextUrl.clone()
-      loginUrl.pathname = "/admin/login"
-      return NextResponse.redirect(loginUrl)
-    }
+  // Solo nos interesa /admin/**
+  if (!pathname.startsWith("/admin")) {
+    return NextResponse.next()
   }
 
-  // If already logged in and visiting /admin/login, redirect to dashboard
-  if (pathname.startsWith("/admin/login") && user) {
-    const dashUrl = request.nextUrl.clone()
-    dashUrl.pathname = "/admin"
-    return NextResponse.redirect(dashUrl)
+  // /admin/login es público
+  if (pathname.startsWith("/admin/login")) {
+    return NextResponse.next()
   }
 
-  // IMPORTANT: return supabaseResponse (not a new NextResponse) so cookies propagate
-  return supabaseResponse
+  // Para el resto de /admin/**, si no hay ninguna cookie de Supabase -> login.
+  // Supabase guarda cookies tipo: sb-<project-ref>-auth-token
+  const hasSupabaseCookie = request.cookies
+    .getAll()
+    .some((c) => c.name.startsWith("sb-") && c.name.includes("auth-token"))
+
+  if (!hasSupabaseCookie) {
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = "/admin/login"
+    return NextResponse.redirect(loginUrl)
+  }
+
+  // Tiene cookie → el layout hará el auth check completo (incluyendo rol)
+  return NextResponse.next()
 }
 
 export const config = {
