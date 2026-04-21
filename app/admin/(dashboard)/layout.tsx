@@ -4,6 +4,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/server"
 import { createSupabaseAdminClient } from "@/lib/supabase/admin"
 import { signOut } from "../login/actions"
 
+export const dynamic = "force-dynamic"
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createSupabaseServerClient()
   const {
