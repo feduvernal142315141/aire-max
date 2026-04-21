@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getProductById, getProducts, getRelatedProducts } from "@/services"
+import { getProductById, getRelatedProducts } from "@/services"
+
+/** Detalle siempre desde Supabase (cambios en admin sin redeploy). */
+export const dynamic = "force-dynamic"
 import { ProductGallery } from "@/components/product/product-gallery"
 import { ProductInfo } from "@/components/product/product-info"
 import { ProductSpecs } from "@/components/product/product-specs"
@@ -39,13 +42,6 @@ export async function generateMetadata({
       type: "website",
     },
   }
-}
-
-export async function generateStaticParams() {
-  const products = await getProducts()
-  return products.map((product) => ({
-    id: product.id,
-  }))
 }
 
 interface ProductPageProps {
