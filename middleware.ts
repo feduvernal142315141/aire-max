@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
+import type { Database } from "./lib/supabase/types.generated"
+
 const ADMIN_PUBLIC_PATHS = ["/admin/login"]
 
 export async function middleware(request: NextRequest) {
@@ -24,7 +26,7 @@ async function handleAuth(request: NextRequest) {
   // supabaseResponse must be used consistently — Supabase official pattern
   let supabaseResponse = NextResponse.next({ request })
 
-  const supabase = createServerClient(url, anonKey, {
+  const supabase = createServerClient<Database>(url, anonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll()
