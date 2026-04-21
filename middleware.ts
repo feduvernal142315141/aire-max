@@ -4,14 +4,25 @@ import { NextResponse, type NextRequest } from "next/server"
 const ADMIN_PUBLIC_PATHS = ["/admin/login"]
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({ request })
+  // Safety net — never let the middleware crash the whole site
+  try {
+    return await handleAuth(request)
+  } catch {
+    return NextResponse.next({ request })
+  }
+}
 
+async function handleAuth(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
+  // If env vars are missing, let the page-level auth handle it
   if (!url || !anonKey) {
-    return response
+    return NextResponse.next({ request })
   }
+
+  // supabaseResponse must be used consistently — Supabase official pattern
+  let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(url, anonKey, {
     cookies: {
@@ -20,14 +31,15 @@ export async function middleware(request: NextRequest) {
       },
       setAll(cookiesToSet) {
         cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-        response = NextResponse.next({ request })
+        supabaseResponse = NextResponse.next({ request })
         cookiesToSet.forEach(({ name, value, options }) => {
-          response.cookies.set(name, value, options)
+          supabaseResponse.cookies.set(name, value, options)
         })
       },
     },
   })
 
+  // IMPORTANT: do not run any logic between createServerClient and getUser
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -43,14 +55,15 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // If already logged in and visiting /admin/login, send to dashboard
+  // If already logged in and visiting /admin/login, redirect to dashboard
   if (pathname.startsWith("/admin/login") && user) {
     const dashUrl = request.nextUrl.clone()
     dashUrl.pathname = "/admin"
     return NextResponse.redirect(dashUrl)
   }
 
-  return response
+  // IMPORTANT: return supabaseResponse (not a new NextResponse) so cookies propagate
+  return supabaseResponse
 }
 
 export const config = {
